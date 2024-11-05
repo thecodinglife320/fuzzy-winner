@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Dollar2EuroActivity">
 
     <TextView
-        android:id="@+id/dollars_tv"
+        android:id="@+id/result_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -17,17 +17,16 @@
         app:layout_constraintTop_toBottomOf="@+id/dollars_edt" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/convert_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="#9CCC65"
-        android:onClick="convertCurrency"
         android:text="@string/convert_str"
         android:textColor="#3E2723"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dollars_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/result_tv" />
 
     <EditText
         android:id="@+id/dollars_edt"

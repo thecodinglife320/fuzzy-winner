@@ -5,42 +5,45 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Dollar2EuroActivity">
-
-    <TextView
-        android:id="@+id/result_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dollars_edt" />
+    android:background="#F0F4C3"
+    tools:context=".fragment.FirstFragment">
 
     <Button
-        android:id="@+id/convert_btn"
+        android:id="@+id/change_text_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#9CCC65"
-        android:text="@string/convert_str"
+        android:text="@string/change_text"
         android:textColor="#3E2723"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <EditText
-        android:id="@+id/dollars_edt"
+        android:id="@+id/text_edt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="@string/dollars_hint"
+        android:hint="@string/enter_text"
         android:importantForAutofill="no"
-        android:inputType="number|numberDecimal"
+        android:inputType="text"
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_edt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

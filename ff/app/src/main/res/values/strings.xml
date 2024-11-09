@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">FF</string>
-    <string name="convert_str">Convert</string>
-    <string name="dollars_hint">dollars</string>
-    <string name="no_value_string">No Value</string>
-    <string name="press_me">Press Me</string>
-    <string name="nhieu">GestureOverlayView là một lớp trùng lên trong suốt có thể được đặt trên phía trên của các view khác. Điều này dẫn đến câu hỏi về việc liệu các sự kiện bị chặn bởi lớp trùng đó có nên được chuyển tiếp cho các view dưới khi một cử chỉ đã được nhận diện hay không. Điều này được điều khiển thông qua thuộc tính android:eventsInterceptionEnabled của trường hợp GestureOverlayView. Khi được đặt thành true, các sự kiện cử chỉ không được chuyển tiếp cho các view dưới khi một cử chỉ đã được nhận diện. Điều này có thể là một cài đặt đặc biệt hữu ích khi các cử chỉ được thực hiện trên một view có thể được cấu hình để cuộn khi phản ứng với một số cử chỉ cụ thể. Đặt thuộc tính này thành true sẽ tránh cử chỉ cũng được hiểu như là hướng dẫn cho view dưới để cuộn theo một hướng nhất định.</string>
+    <string name="change_text">Change text</string>
+    <string name="enter_text">Enter text</string>
 </resources>

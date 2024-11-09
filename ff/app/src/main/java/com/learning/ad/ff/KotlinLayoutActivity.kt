@@ -21,7 +21,7 @@ class KotlinLayoutActivity : AppCompatActivity() {
       val myEdt = EditText(this)
       myEdt.id = R.id.myEditText
       myEdt.width=convertToPx(32)
-      myButton.text = getString(R.string.press_me)
+//      myButton.text = getString(R.string.press_me)
       myButton.setBackgroundColor(Color.YELLOW)
       myButton.id = R.id.myButton
       //

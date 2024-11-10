@@ -1,13 +1,13 @@
 package com.learning.ad.ff.viewmodel
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 
-class ConvertCurrencyViewModel:ViewModel() {
+class ConvertCurrencyViewModel : ViewModel() {
    private val rate = 0.74f
-   var result= 0.0f
+   private val _result = MutableLiveData(0f)
+   val result: LiveData<Float> get() = _result
 
-   fun convert(dollar:String): Float {
-      result = dollar.toFloat()*rate
-      return result
+   fun convert(dollar: String) {
+      _result.value = dollar.toFloat() * rate
    }
 }

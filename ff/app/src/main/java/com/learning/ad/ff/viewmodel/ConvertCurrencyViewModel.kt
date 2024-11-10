@@ -4,10 +4,10 @@ import androidx.lifecycle.*
 
 class ConvertCurrencyViewModel : ViewModel() {
    private val rate = 0.74f
-   private val _result = MutableLiveData(0f)
-   val result: LiveData<Float> get() = _result
-
-   fun convert(dollar: String) {
-      _result.value = dollar.toFloat() * rate
+   var dollarValue = MutableLiveData<String>()
+   var result = MutableLiveData<Float>()
+   fun convertValue() {
+      result.value = (if (dollarValue.value.isNullOrEmpty()) 0f else dollarValue.value!!.toFloat() * rate)
+      dollarValue.value=""
    }
 }

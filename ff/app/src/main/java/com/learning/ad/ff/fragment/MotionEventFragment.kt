@@ -1,17 +1,15 @@
 package com.learning.ad.ff.fragment
 
 import android.annotation.*
-import android.net.*
 import android.os.*
+import android.util.*
 import android.view.*
 import android.view.MotionEvent.*
 import androidx.fragment.app.*
 import com.learning.ad.ff.databinding.*
+import com.learning.ad.ff.observer.*
 
 class MotionEventFragment : Fragment() {
-   interface OnFragmentInteractionListener {
-      fun onFragmentInteraction(uri: Uri)
-   }
    private var _binding: FragmentMotionEventBinding? = null
    private val binding get() = _binding!!
    override fun onCreateView(
@@ -20,6 +18,7 @@ class MotionEventFragment : Fragment() {
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentMotionEventBinding.inflate(inflater,container,false)
+      Log.d(TAG,"onCreateView")
       return binding.root
    }
    @SuppressLint("ClickableViewAccessibility")
@@ -28,6 +27,7 @@ class MotionEventFragment : Fragment() {
          handleTouch(m)
          true
       }
+      //Log.d(TAG,"onViewCreated")
    }
    private fun handleTouch(m: MotionEvent) {
       for (i in 0 until m.pointerCount){
@@ -60,5 +60,6 @@ class MotionEventFragment : Fragment() {
          val args = MotionEventFragmentArgs.fromBundle(it)
          binding.textView.text = args.message
       }
+      //Log.d(TAG,"onStart")
    }
 }

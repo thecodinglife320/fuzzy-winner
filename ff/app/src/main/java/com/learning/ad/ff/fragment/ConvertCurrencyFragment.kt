@@ -13,7 +13,10 @@ class ConvertCurrencyFragment : Fragment() {
    private lateinit var viewModel: ConvertCurrencyViewModel
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-      viewModel = ViewModelProvider(this)[ConvertCurrencyViewModel::class.java]
+      activity?.application?.let {
+         val factory = SavedStateViewModelFactory(it, this)
+         viewModel = ViewModelProvider(this, factory)[ConvertCurrencyViewModel::class.java]
+      }
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,

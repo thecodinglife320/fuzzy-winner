@@ -1,23 +1,34 @@
-package com.learning.ad.ff
+package com.learning.ad.ff.fragment
 
+import android.annotation.*
+import android.net.*
 import android.os.*
 import android.view.*
 import android.view.MotionEvent.*
-import androidx.appcompat.app.*
+import androidx.fragment.app.*
 import com.learning.ad.ff.databinding.*
 
-class MotionEventActivity : AppCompatActivity() {
-   private lateinit var binding:ActivityMotionEventBinding
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-      binding = ActivityMotionEventBinding.inflate(layoutInflater)
-      setContentView(binding.root)
+class MotionEventFragment : Fragment() {
+   interface OnFragmentInteractionListener {
+      fun onFragmentInteraction(uri: Uri)
+   }
+   private var _binding: FragmentMotionEventBinding? = null
+   private val binding get() = _binding!!
+   override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
+      _binding = FragmentMotionEventBinding.inflate(inflater,container,false)
+      return binding.root
+   }
+   @SuppressLint("ClickableViewAccessibility")
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       binding.root.setOnTouchListener {_,m: MotionEvent ->
          handleTouch(m)
          true
       }
    }
-
    private fun handleTouch(m: MotionEvent) {
       for (i in 0 until m.pointerCount){
          val x = m.getX(i)
@@ -40,6 +51,14 @@ class MotionEventActivity : AppCompatActivity() {
            "Y: $y \n"
          if ((id==0)) binding.textView.text=touchStatus
          else binding.textView2.text=touchStatus
+      }
+   }
+
+   override fun onStart() {
+      super.onStart()
+      arguments?.let {
+         val args = MotionEventFragmentArgs.fromBundle(it)
+         binding.textView.text = args.message
       }
    }
 }

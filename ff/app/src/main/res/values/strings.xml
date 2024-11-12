@@ -2,7 +2,12 @@
     <string name="app_name">FF</string>
     <string name="change_text">Change text</string>
     <string name="enter_text">Enter text</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="convert">Convert</string>
     <string name="dollar">dollar</string>
+    <string name="sonic">Sonic</string>
+    <string-array name="fragments">
+        <item>Bạn chọn một fragment đi</item>
+        <item>MotionEventFragment</item>
+        <item>MotionLayoutFragment</item>
+    </string-array>
 </resources>

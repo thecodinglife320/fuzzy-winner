@@ -2,12 +2,10 @@ package com.learning.ad.ff.fragment
 
 import android.annotation.*
 import android.os.*
-import android.util.*
 import android.view.*
 import android.view.MotionEvent.*
 import androidx.fragment.app.*
 import com.learning.ad.ff.databinding.*
-import com.learning.ad.ff.observer.*
 
 class MotionEventFragment : Fragment() {
    private var _binding: FragmentMotionEventBinding? = null
@@ -18,7 +16,6 @@ class MotionEventFragment : Fragment() {
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentMotionEventBinding.inflate(inflater,container,false)
-      Log.d(TAG,"onCreateView")
       return binding.root
    }
    @SuppressLint("ClickableViewAccessibility")
@@ -52,14 +49,5 @@ class MotionEventFragment : Fragment() {
          if ((id==0)) binding.textView.text=touchStatus
          else binding.textView2.text=touchStatus
       }
-   }
-
-   override fun onStart() {
-      super.onStart()
-      arguments?.let {
-         val args = MotionEventFragmentArgs.fromBundle(it)
-         binding.textView.text = args.message
-      }
-      //Log.d(TAG,"onStart")
    }
 }

@@ -17,9 +17,9 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
 
    override fun onButtonClick(fontSize: Int, text: String) { (supportFragmentManager.findFragmentById(R.id.second_fragment) as SecondFragment).changeTextProperties(fontSize, text) }
 
-   override fun goToMotionEventFragment(message: String) {
+   override fun goToMotionEventFragment() {
       val action = MainFragmentDirections
-         .actionMainFragmentToMotionEventFragment(message)
+         .actionMainFragmentToMotionEventFragment()
       findNavController(R.id.activity_main_nav_host_fragment).navigate(action)
    }
 

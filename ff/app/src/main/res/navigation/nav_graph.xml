@@ -21,12 +21,7 @@
         android:id="@+id/motionEventFragment"
         android:name="com.learning.ad.ff.fragment.MotionEventFragment"
         android:label="fragment_motion_event"
-        tools:layout="@layout/fragment_motion_event" >
-        <argument
-            android:name="message"
-            app:argType="string"
-            android:defaultValue="No message" />
-    </fragment>
+        tools:layout="@layout/fragment_motion_event" />
     <fragment
         android:id="@+id/motionLayoutFragment"
         android:name="com.learning.ad.ff.fragment.MotionLayoutFragment"

@@ -22,4 +22,9 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
          .actionMainFragmentToMotionEventFragment(message)
       findNavController(R.id.activity_main_nav_host_fragment).navigate(action)
    }
+
+   override fun goToMotionLayoutFragment() {
+      val action=MainFragmentDirections.actionMainFragmentToMotionLayoutFragment()
+      findNavController(R.id.activity_main_nav_host_fragment).navigate(action)
+   }
 }

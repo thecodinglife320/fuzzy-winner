@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_motionEventFragment"
             app:destination="@id/motionEventFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_motionLayoutFragment"
+            app:destination="@id/motionLayoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -24,4 +27,9 @@
             app:argType="string"
             android:defaultValue="No message" />
     </fragment>
+    <fragment
+        android:id="@+id/motionLayoutFragment"
+        android:name="com.learning.ad.ff.fragment.MotionLayoutFragment"
+        android:label="fragment_motion_layout"
+        tools:layout="@layout/fragment_motion_layout" />
 </navigation>

@@ -12,6 +12,7 @@ class MainFragment : Fragment() {
    private var listener: MainFragmentListener? = null
    interface MainFragmentListener{
       fun goToMotionEventFragment(message: String)
+      fun goToMotionLayoutFragment()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,

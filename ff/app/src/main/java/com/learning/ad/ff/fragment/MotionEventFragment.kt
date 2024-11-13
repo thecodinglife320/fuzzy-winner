@@ -4,7 +4,9 @@ import android.annotation.*
 import android.os.*
 import android.view.*
 import android.view.MotionEvent.*
+import android.widget.ScrollView
 import androidx.fragment.app.*
+import com.learning.ad.ff.*
 import com.learning.ad.ff.databinding.*
 
 class MotionEventFragment : Fragment() {
@@ -21,6 +23,7 @@ class MotionEventFragment : Fragment() {
    @SuppressLint("ClickableViewAccessibility")
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       binding.root.setOnTouchListener {_,m: MotionEvent ->
+         requireActivity().findViewById<ScrollView>(R.id.activity_sv).requestDisallowInterceptTouchEvent(true)
          handleTouch(m)
          true
       }

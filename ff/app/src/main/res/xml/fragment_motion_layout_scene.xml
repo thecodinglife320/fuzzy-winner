@@ -5,12 +5,12 @@
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            motion:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
-            android:id="@+id/my_btn"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" >
+            android:id="@+id/my_btn"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
             <CustomAttribute
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="#FFCDD2" />
@@ -20,14 +20,13 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:layout_marginTop="8dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            android:layout_width="78dp"
+            android:layout_marginEnd="8dp"
             android:id="@+id/my_btn"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_editor_absoluteX="8dp"
-            android:layout_marginEnd="8dp" >
+            motion:layout_constraintTop_toTopOf="parent">
             <CustomAttribute
                 motion:attributeName="backgroundColor"
                 motion:customColorValue="#B2EBF2" />
@@ -36,7 +35,7 @@
     <Transition
         motion:constraintSetStart="@+id/start"
         motion:constraintSetEnd="@+id/end"
-        motion:duration="1000">
+        motion:duration="2000">
         <OnClick motion:targetId="@id/my_btn"
             motion:clickAction="toggle" />
         <KeyFrameSet >
@@ -44,6 +43,24 @@
                 motion:motionTarget="@+id/my_btn"
                 motion:framePosition="50"
                 android:rotation="180" />
+            <KeyPosition
+                motion:motionTarget="@+id/my_btn"
+                motion:framePosition="25"
+                motion:keyPositionType="pathRelative"
+                motion:percentX="0.25"
+                motion:percentY="0.5" />
+            <KeyPosition
+                motion:motionTarget="@+id/my_btn"
+                motion:framePosition="50"
+                motion:keyPositionType="pathRelative"
+                motion:percentX="0.5"
+                motion:percentY="0" />
+            <KeyPosition
+                motion:motionTarget="@+id/my_btn"
+                motion:framePosition="75"
+                motion:keyPositionType="pathRelative"
+                motion:percentX="0.75"
+                motion:percentY="0.8" />
         </KeyFrameSet>
     </Transition>
 </MotionScene>

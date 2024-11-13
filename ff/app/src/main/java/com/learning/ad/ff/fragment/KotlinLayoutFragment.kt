@@ -1,54 +1,56 @@
-package com.learning.ad.ff
+package com.learning.ad.ff.fragment
 
-import android.graphics.*
 import android.os.*
 import android.util.*
+import android.view.*
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.*
 import androidx.constraintlayout.widget.ConstraintSet.*
+import androidx.fragment.app.*
+import com.learning.ad.ff.R
 
-class KotlinLayoutActivity : AppCompatActivity() {
-   override fun onCreate(savedInstanceState: Bundle?) {
+class KotlinLayoutFragment : Fragment() {
+   override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
       super.onCreate(savedInstanceState)
-      configureLayout()
+      return configureLayout()
    }
 
-   private fun configureLayout() {
-      val myButton = Button(this)
-      val myLayout = ConstraintLayout(this)
+   private fun configureLayout():View {
+      val myButton = Button(context)
+      val myLayout = ConstraintLayout(requireContext())
       val set = ConstraintSet()
-      val myEdt = EditText(this)
+      val myEdt = EditText(context)
       myEdt.id = R.id.myEditText
-      myEdt.width=convertToPx(32)
-//      myButton.text = getString(R.string.press_me)
-      myButton.setBackgroundColor(Color.YELLOW)
+      myEdt.width= 100.convertToPx()
       myButton.id = R.id.myButton
-      //
-      //myLayout.setBackgroundColor(Color.BLUE)
+
       myLayout.addView(myButton)
       myLayout.addView(myEdt)
-      setContentView(myLayout)
-      //
+
       set.constrainWidth(myButton.id, WRAP_CONTENT)
       set.constrainHeight(myButton.id, WRAP_CONTENT)
       set.connect(myButton.id, START, PARENT_ID, START)
       set.connect(myButton.id, END, PARENT_ID, END)
       set.connect(myButton.id, TOP, PARENT_ID, TOP)
       set.connect(myButton.id, BOTTOM, PARENT_ID, BOTTOM)
-      //
+
       set.constrainWidth(myEdt.id, WRAP_CONTENT)
       set.constrainHeight(myEdt.id, WRAP_CONTENT)
       set.connect(myEdt.id, START, PARENT_ID, START)
       set.connect(myEdt.id, END, PARENT_ID, END)
-      set.connect(myEdt.id, BOTTOM, myButton.id, TOP,convertToPx(8))
+      set.connect(myEdt.id, BOTTOM, myButton.id, TOP)
       set.applyTo(myLayout)
+      return myLayout
    }
-   private fun convertToPx(value: Int): Int {
+   private fun Int.convertToPx(): Int {
       val r = resources
       return TypedValue.applyDimension(
          TypedValue.COMPLEX_UNIT_DIP,
-         value.toFloat(),
+         toFloat(),
          r.displayMetrics
       ).toInt()
    }

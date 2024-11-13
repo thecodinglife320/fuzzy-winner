@@ -1,28 +1,40 @@
-package com.learning.ad.ff
+package com.learning.ad.ff.fragment
 
 import android.os.*
 import android.view.*
 import android.view.GestureDetector.*
-import androidx.appcompat.app.*
 import androidx.core.view.*
+import androidx.fragment.app.*
 import com.learning.ad.ff.databinding.*
 
-class CommonGesturesActivity : AppCompatActivity(), OnGestureListener, OnDoubleTapListener{
-   private lateinit var binding:ActivityCommonGesturesBinding
+class CommonGesturesFragment : Fragment(), OnGestureListener, OnDoubleTapListener{
+   private var _binding:FragmentCommonGesturesBinding?=null
+   private val binding get() = _binding!!
    private var gDetector: GestureDetectorCompat? = null
-   override fun onCreate(savedInstanceState: Bundle?) {
+   override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
       super.onCreate(savedInstanceState)
-      this.gDetector = GestureDetectorCompat(this, this)
-      gDetector?.setOnDoubleTapListener(this)
-      binding = ActivityCommonGesturesBinding.inflate(layoutInflater)
-      setContentView(binding.root)
+      _binding = FragmentCommonGesturesBinding.inflate(inflater,container,false)
+      return binding.root
       }
 
-   override fun onTouchEvent(event: MotionEvent): Boolean {
-      this.gDetector?.onTouchEvent(event)
-      return super.onTouchEvent(event)
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+      super.onViewCreated(view, savedInstanceState)
+      this.gDetector = GestureDetectorCompat(requireContext(), this)
+      gDetector?.setOnDoubleTapListener(this)
+      binding.root.setOnTouchListener { _, event ->
+         gDetector?.onTouchEvent(event)
+         true
+      }
    }
 
+   override fun onDestroyView() {
+      super.onDestroyView()
+      _binding=null
+   }
    override fun onDown(e: MotionEvent): Boolean {
       binding.gestureStatusTv.text="onDown"
       return true

@@ -9,5 +9,8 @@
         <item>Bạn chọn một fragment đi</item>
         <item>MotionEventFragment</item>
         <item>MotionLayoutFragment</item>
+        <item>KotlinLayoutFragment</item>
+        <item>CommonGesturesFragment</item>
+        <item>CustomGestureFragment</item>
     </string-array>
 </resources>

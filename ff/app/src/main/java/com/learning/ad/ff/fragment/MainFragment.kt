@@ -15,6 +15,9 @@ class MainFragment : Fragment() {
    interface MainFragmentListener{
       fun goToMotionEventFragment()
       fun goToMotionLayoutFragment()
+      fun goToKotlinLayoutFragment()
+      fun goToCommonGestureFragment()
+      fun goToCustomGestureFragment()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +40,9 @@ class MainFragment : Fragment() {
             when(position){
                1-> listener?.goToMotionEventFragment()
                2-> listener?.goToMotionLayoutFragment()
+               3->listener?.goToKotlinLayoutFragment()
+               4->listener?.goToCommonGestureFragment()
+               5->listener?.goToCustomGestureFragment()
             }
             binding.spinner.setSelection(0)
          }

@@ -27,4 +27,18 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
       val action=MainFragmentDirections.actionMainFragmentToMotionLayoutFragment()
       findNavController(R.id.activity_main_nav_host_fragment).navigate(action)
    }
+
+   override fun goToKotlinLayoutFragment() {
+      val action=MainFragmentDirections.actionMainFragmentToKotlinLayoutFragment()
+      findNavController(R.id.activity_main_nav_host_fragment).navigate(action)
+   }
+
+   override fun goToCommonGestureFragment() {
+      val action=MainFragmentDirections.actionMainFragmentToCommonGesturesFragment()
+      findNavController(R.id.activity_main_nav_host_fragment).navigate(action)
+   }
+
+   override fun goToCustomGestureFragment() {
+      findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToCustomGestureFragment())
+   }
 }

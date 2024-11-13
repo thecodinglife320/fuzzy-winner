@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_mainFragment_to_motionLayoutFragment"
             app:destination="@id/motionLayoutFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_kotlinLayoutFragment"
+            app:destination="@id/kotlinLayoutFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_commonGesturesFragment"
+            app:destination="@id/commonGesturesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_customGestureFragment"
+            app:destination="@id/customGestureFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -27,4 +36,18 @@
         android:name="com.learning.ad.ff.fragment.MotionLayoutFragment"
         android:label="fragment_motion_layout"
         tools:layout="@layout/fragment_motion_layout" />
+    <fragment
+        android:id="@+id/kotlinLayoutFragment"
+        android:name="com.learning.ad.ff.fragment.KotlinLayoutFragment"
+        android:label="KotlinLayoutFragment" />
+    <fragment
+        android:id="@+id/commonGesturesFragment"
+        android:name="com.learning.ad.ff.fragment.CommonGesturesFragment"
+        android:label="fragment_common_gestures"
+        tools:layout="@layout/fragment_common_gestures" />
+    <fragment
+        android:id="@+id/customGestureFragment"
+        android:name="com.learning.ad.ff.fragment.CustomGestureFragment"
+        android:label="fragment_custom_gesture"
+        tools:layout="@layout/fragment_custom_gesture" />
 </navigation>

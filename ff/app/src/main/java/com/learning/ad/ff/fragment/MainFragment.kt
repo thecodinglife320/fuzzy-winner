@@ -5,6 +5,7 @@ import android.os.*
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.*
+import com.google.android.material.snackbar.*
 import com.learning.ad.ff.*
 import com.learning.ad.ff.databinding.*
 
@@ -18,6 +19,7 @@ class MainFragment : Fragment() {
       fun goToKotlinLayoutFragment()
       fun goToCommonGestureFragment()
       fun goToCustomGestureFragment()
+      fun goToTabLayoutFragment()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +45,19 @@ class MainFragment : Fragment() {
                3->listener?.goToKotlinLayoutFragment()
                4->listener?.goToCommonGestureFragment()
                5->listener?.goToCustomGestureFragment()
+               6->listener?.goToTabLayoutFragment()
             }
             binding.spinner.setSelection(0)
          }
 
          override fun onNothingSelected(parent: AdapterView<*>?) {
          }
+      }
+      binding.fab.setOnClickListener { _ ->
+         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            .setAction("Action"
+            ) { Toast.makeText(context, "Lan Anh", Toast.LENGTH_SHORT).show() }
+            .setAnchorView(R.id.fab).show()
       }
    }
    override fun onDestroyView() {

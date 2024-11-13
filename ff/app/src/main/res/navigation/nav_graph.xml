@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_mainFragment_to_customGestureFragment"
             app:destination="@id/customGestureFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_tabLayoutFragment"
+            app:destination="@id/tabLayoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -50,4 +53,9 @@
         android:name="com.learning.ad.ff.fragment.CustomGestureFragment"
         android:label="fragment_custom_gesture"
         tools:layout="@layout/fragment_custom_gesture" />
+    <fragment
+        android:id="@+id/tabLayoutFragment"
+        android:name="com.learning.ad.ff.fragment.TabLayoutFragment"
+        android:label="fragment_tab_layout"
+        tools:layout="@layout/fragment_tab_layout" />
 </navigation>

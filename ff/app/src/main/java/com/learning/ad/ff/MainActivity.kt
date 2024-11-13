@@ -3,15 +3,18 @@ package com.learning.ad.ff
 import android.os.*
 import androidx.fragment.app.*
 import androidx.navigation.*
+import com.learning.ad.ff.databinding.*
 import com.learning.ad.ff.fragment.*
 import com.learning.ad.ff.fragment.FirstFragment.*
 import com.learning.ad.ff.lifecycleowner.*
 
 class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.MainFragmentListener {
    private lateinit var lifecycleOwner: MainActivityLOwner
+   private lateinit var binding: ActivityMainBinding
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-      setContentView(R.layout.activity_main)
+      binding = ActivityMainBinding.inflate(layoutInflater)
+      setContentView(binding.root)
       lifecycleOwner = MainActivityLOwner()
    }
 
@@ -40,5 +43,9 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
 
    override fun goToCustomGestureFragment() {
       findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToCustomGestureFragment())
+   }
+
+   override fun goToTabLayoutFragment() {
+      findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToTabLayoutFragment())
    }
 }

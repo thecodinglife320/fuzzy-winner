@@ -9,6 +9,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.View.OnClickListener
+import android.widget.Toast
 import com.learning.ad.materialguidelines.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
+                .setAction("Action"
+                ) { Toast.makeText(this@MainActivity, "Lan Anh", Toast.LENGTH_SHORT).show() }
                 .setAnchorView(R.id.fab).show()
         }
     }

@@ -35,13 +35,12 @@
     <Transition
         motion:constraintSetStart="@+id/start"
         motion:constraintSetEnd="@+id/end"
-        motion:duration="2000">
+        motion:duration="3000">
         <OnClick motion:targetId="@id/my_btn"
             motion:clickAction="toggle" />
         <KeyFrameSet >
             <KeyAttribute
                 motion:motionTarget="@+id/my_btn"
-                motion:framePosition="50"
                 android:rotation="180" />
             <KeyPosition
                 motion:motionTarget="@+id/my_btn"

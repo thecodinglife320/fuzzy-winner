@@ -1,18 +1,13 @@
 package com.learning.ad.ff.fragment
 
 import android.os.*
-import android.util.*
 import android.view.*
-import android.widget.ScrollView
 import androidx.fragment.app.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.recyclerview.widget.*
 import com.learning.ad.ff.*
 import com.learning.ad.ff.adapter.*
 import com.learning.ad.ff.databinding.*
 import com.learning.ad.ff.model.*
-import com.learning.ad.ff.observer.*
 
 class CardDemoFragment : Fragment() {
    private var _binding:FragmentCardDemoBinding?=null
@@ -31,7 +26,6 @@ class CardDemoFragment : Fragment() {
       }
       binding.androidBugRv.adapter = AndroidBugAdapter(bugDroids)
       binding.androidBugRv.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
-      requireActivity().findViewById<ScrollView>(R.id.activity_sv).requestDisallowInterceptTouchEvent(true)
       return binding.root
    }
 

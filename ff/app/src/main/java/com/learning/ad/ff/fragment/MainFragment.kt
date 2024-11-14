@@ -20,6 +20,7 @@ class MainFragment : Fragment() {
       fun goToCommonGestureFragment()
       fun goToCustomGestureFragment()
       fun goToTabLayoutFragment()
+      fun goToCardDemoFragment()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +47,7 @@ class MainFragment : Fragment() {
                4->listener?.goToCommonGestureFragment()
                5->listener?.goToCustomGestureFragment()
                6->listener?.goToTabLayoutFragment()
+               7->listener?.goToCardDemoFragment()
             }
             binding.spinner.setSelection(0)
          }
@@ -55,8 +57,7 @@ class MainFragment : Fragment() {
       }
       binding.fab.setOnClickListener { _ ->
          Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action"
-            ) { Toast.makeText(context, "Lan Anh", Toast.LENGTH_SHORT).show() }
+            .setAction("Action") { Toast.makeText(context, "Do something", Toast.LENGTH_SHORT).show() }
             .setAnchorView(R.id.fab).show()
       }
    }

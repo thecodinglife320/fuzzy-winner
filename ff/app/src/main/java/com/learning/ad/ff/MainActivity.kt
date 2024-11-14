@@ -48,4 +48,8 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
    override fun goToTabLayoutFragment() {
       findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToTabLayoutFragment())
    }
+
+   override fun goToCardDemoFragment() {
+      findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToCardDemoFragment())
+   }
 }

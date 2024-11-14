@@ -17,7 +17,16 @@
         <item>CommonGesturesFragment</item>
         <item>CustomGestureFragment</item>
         <item>TabLayoutFragment</item>
+        <item>CardDemoFragment</item>
     </string-array>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="android_bug_data">
+        <item>android_image_1|BugDroid1|Jetpack Compose</item>
+        <item>android_image_2|BugDroid2|Data Binding</item>
+        <item>android_image_3|BugDroid3|View Binding</item>
+        <item>android_image_4|BugDroid4|Live Data</item>
+        <item>android_image_5|BugDroid5|View Model</item>
+        <item>android_image_6|BugDroid6|Navigation Component</item>
+        <item>android_image_7|BugDroid7|Material Design</item>
+        <item>android_image_8|BugDroid8|Room Database</item>
+    </string-array>
 </resources>

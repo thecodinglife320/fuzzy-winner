@@ -15,6 +15,8 @@ class TabPagerAdapter(fa:FragmentActivity,private var tabCount:Int): FragmentSta
          1-> Tab2Fragment()
          2-> Tab3Fragment()
          3-> Tab4Fragment()
+         4-> Tab4Fragment()
+         5-> Tab4Fragment()
          else -> Tab1Fragment()
       }
    }

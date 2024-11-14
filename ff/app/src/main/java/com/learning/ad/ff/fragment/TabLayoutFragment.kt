@@ -15,13 +15,13 @@ class TabLayoutFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         _binding = FragmentTabLayoutBinding.inflate(inflater,container,false)
-        repeat(4){
+        repeat(6){
             binding.tabLayout.addTab(binding.tabLayout.newTab())
         }
         val adapter = TabPagerAdapter(requireActivity(), binding.tabLayout.tabCount)
         binding.viewPager.adapter= adapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = "Tab ${(position + 1)}"
+            tab.text = "Tab ${(position + 1)} fragment"
         }.attach()
         return binding.root
     }

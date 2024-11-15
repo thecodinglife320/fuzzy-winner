@@ -1,5 +1,6 @@
 package com.learning.ad.ff.fragment
 
+import android.annotation.*
 import android.os.*
 import android.view.*
 import androidx.fragment.app.*
@@ -12,6 +13,7 @@ import com.learning.ad.ff.model.*
 class CardDemoFragment : Fragment() {
    private var _binding:FragmentCardDemoBinding?=null
    private val binding get() = _binding!!
+   @SuppressLint("DiscouragedApi")
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?

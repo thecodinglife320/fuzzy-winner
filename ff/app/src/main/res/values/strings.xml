@@ -9,6 +9,8 @@
     <string name="tab2_fragment">Tab2 Fragment</string>
     <string name="tab3_fragment">Tab3 Fragment</string>
     <string name="tab4_fragment">Tab4 Fragment</string>
+    <string name="show_web_page">Show web page</string>
+    <string name="enable_link">Enable link</string>
     <string-array name="fragments">
         <item>Bạn chọn một fragment đi</item>
         <item>MotionEventFragment</item>

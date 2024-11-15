@@ -1,15 +1,21 @@
 package com.learning.ad.ff.fragment
 
+import android.app.*
 import android.content.*
 import android.os.*
+import android.util.*
 import android.view.*
 import android.widget.*
-import androidx.fragment.app.*
+import androidx.activity.result.*
+import androidx.activity.result.contract.*
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.*
 import com.learning.ad.ff.*
 import com.learning.ad.ff.databinding.*
+import com.learning.ad.ff.observer.*
 
 class MainFragment : Fragment() {
+   private lateinit var launcher: ActivityResultLauncher<Intent>
    private var _binding: FragmentMainBinding? = null
    private val binding get() = _binding!!
    private var listener: MainFragmentListener? = null
@@ -21,6 +27,7 @@ class MainFragment : Fragment() {
       fun goToCustomGestureFragment()
       fun goToTabLayoutFragment()
       fun goToCardDemoFragment()
+      fun intentToSecondActivity()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -55,9 +62,12 @@ class MainFragment : Fragment() {
          override fun onNothingSelected(parent: AdapterView<*>?) {
          }
       }
+      val intentToSecondActivity = View.OnClickListener { _ ->
+         listener?.intentToSecondActivity()
+      }
       binding.fab.setOnClickListener { _ ->
          Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action") { Toast.makeText(context, "Do something", Toast.LENGTH_SHORT).show() }
+            .setAction("Intent to SecondActivity",intentToSecondActivity)
             .setAnchorView(R.id.fab).show()
       }
    }

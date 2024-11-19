@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="https" />
-                <data android:host="https://github.com>"/>
+                <data android:host="github.com"/>
+                <data android:host="youtube.com" />
             </intent-filter>
         </activity>
         <activity

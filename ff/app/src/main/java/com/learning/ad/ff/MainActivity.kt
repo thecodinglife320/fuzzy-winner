@@ -33,6 +33,7 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
             }
       }
    }
+
    override fun onButtonClick(fontSize: Int, text: String) { (supportFragmentManager.findFragmentById(R.id.second_fragment) as SecondFragment).changeTextProperties(fontSize, text) }
    override fun goToMotionEventFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToMotionEventFragment())
    override fun goToMotionLayoutFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToMotionLayoutFragment())
@@ -47,4 +48,5 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
       //launcher.launch(intent)
       startActivity(intent)
    }
+   override fun goToCoroutineDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToCoroutineDemoFragment())
 }

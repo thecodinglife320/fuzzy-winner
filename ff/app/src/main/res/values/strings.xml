@@ -11,6 +11,7 @@
     <string name="tab4_fragment">Tab4 Fragment</string>
     <string name="show_web_page">Show web page</string>
     <string name="enable_link">Enable link</string>
+    <string name="launch_coroutine">Launch coroutine</string>
     <string-array name="fragments">
         <item>Bạn chọn một fragment đi</item>
         <item>MotionEventFragment</item>
@@ -20,6 +21,7 @@
         <item>CustomGestureFragment</item>
         <item>TabLayoutFragment</item>
         <item>CardDemoFragment</item>
+        <item>CoroutineDemo</item>
     </string-array>
     <string-array name="android_bug_data">
         <item>android_image_1|BugDroid1|Jetpack Compose</item>

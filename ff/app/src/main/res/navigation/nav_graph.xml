@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_mainFragment_to_cardDemoFragment"
             app:destination="@id/cardDemoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_coroutineDemoFragment"
+            app:destination="@id/coroutineDemoFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -66,4 +69,9 @@
         android:name="com.learning.ad.ff.fragment.CardDemoFragment"
         android:label="fragment_card_demo"
         tools:layout="@layout/fragment_card_demo" />
+    <fragment
+        android:id="@+id/coroutineDemoFragment"
+        android:name="com.learning.ad.ff.fragment.CoroutineDemoFragment"
+        android:label="fragment_coroutine_demo"
+        tools:layout="@layout/fragment_coroutine_demo" />
 </navigation>

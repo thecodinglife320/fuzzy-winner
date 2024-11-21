@@ -1,21 +1,15 @@
 package com.learning.ad.ff.fragment
 
-import android.app.*
 import android.content.*
 import android.os.*
-import android.util.*
 import android.view.*
 import android.widget.*
-import androidx.activity.result.*
-import androidx.activity.result.contract.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.*
 import com.learning.ad.ff.*
 import com.learning.ad.ff.databinding.*
-import com.learning.ad.ff.observer.*
 
 class MainFragment : Fragment() {
-   private lateinit var launcher: ActivityResultLauncher<Intent>
    private var _binding: FragmentMainBinding? = null
    private val binding get() = _binding!!
    private var listener: MainFragmentListener? = null

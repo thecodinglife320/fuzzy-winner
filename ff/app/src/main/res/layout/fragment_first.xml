@@ -46,4 +46,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_edt" />
 
+    <Button
+        android:id="@+id/get_time_from_service_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#D4E157"
+        android:text="@string/get_time_from_service"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/change_text_btn"
+        app:layout_constraintTop_toBottomOf="@+id/change_text_btn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

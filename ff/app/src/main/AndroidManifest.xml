@@ -17,12 +17,12 @@
         <service
             android:name=".BoundService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false" />
 
         <receiver
             android:name=".receiver.MyReceiver"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".WebViewActivity"

@@ -17,6 +17,7 @@ class FirstFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
    private var listener: FirstFragmentListener? = null
    interface FirstFragmentListener{
       fun onButtonClick(fontSize: Int, text: String)
+      fun showTime():String?
    }
 
    override fun onAttach(context: Context) {
@@ -41,6 +42,9 @@ class FirstFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
       binding.seekBar.setOnSeekBarChangeListener(this)
       binding.changeTextBtn.setOnClickListener {
          listener?.onButtonClick(seekValue,binding.textEdt.text.toString())
+      }
+      binding.getTimeFromServiceBtn.setOnClickListener {
+         binding.textEdt.setText(listener?.showTime().toString())
       }
    }
    override fun onDestroyView() {

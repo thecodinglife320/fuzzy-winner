@@ -15,6 +15,21 @@ import com.learning.ad.ff.lifecycleowner.*
 import com.learning.ad.ff.observer.*
 
 class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.MainFragmentListener {
+   var myService: BoundService? = null
+   var isBound = false
+   private val myConnection = object : ServiceConnection{
+      override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+         val binder = service as BoundService.MyLocalBinder
+         myService = binder.getService()
+         isBound = true
+         Log.d(TAG, "$name successfully bind to service")
+      }
+
+      override fun onServiceDisconnected(name: ComponentName?) {
+         isBound = false
+      }
+
+   }
    private lateinit var launcher: ActivityResultLauncher<Intent>
    private lateinit var lifecycleOwner: MainActivityLOwner
    private lateinit var binding: ActivityMainBinding
@@ -32,9 +47,13 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
                Log.d(TAG, it)
             }
       }
+      val intent = Intent(this, BoundService::class.java)
+      bindService(intent, myConnection, Context.BIND_AUTO_CREATE)
    }
 
    override fun onButtonClick(fontSize: Int, text: String) { (supportFragmentManager.findFragmentById(R.id.second_fragment) as SecondFragment).changeTextProperties(fontSize, text) }
+   override fun showTime(): String? = myService?.getCurrentTime()
+
    override fun goToMotionEventFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToMotionEventFragment())
    override fun goToMotionLayoutFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToMotionLayoutFragment())
    override fun goToKotlinLayoutFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToKotlinLayoutFragment())

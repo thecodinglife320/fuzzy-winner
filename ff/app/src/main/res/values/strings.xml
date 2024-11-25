@@ -13,6 +13,7 @@
     <string name="enable_link">Enable link</string>
     <string name="launch_coroutine">Launch coroutine</string>
     <string name="get_time_from_service">Get time from service</string>
+    <string name="send_message">Send message</string>
     <string-array name="fragments">
         <item>Bạn chọn một fragment đi</item>
         <item>MotionEventFragment</item>

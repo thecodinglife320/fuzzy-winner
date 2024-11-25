@@ -13,16 +13,20 @@ import com.learning.ad.ff.fragment.*
 import com.learning.ad.ff.fragment.FirstFragment.*
 import com.learning.ad.ff.lifecycleowner.*
 import com.learning.ad.ff.observer.*
+import com.learning.ad.ff.service.*
 
 class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.MainFragmentListener {
    var myService: BoundService? = null
+   var remoteService: Messenger?=null
    var isBound = false
    private val myConnection = object : ServiceConnection{
       override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-         val binder = service as BoundService.MyLocalBinder
-         myService = binder.getService()
+         when(name?.shortClassName){
+            ".service.RemoteService"->remoteService = Messenger(service)
+            ".service.BoundService"->myService = (service as BoundService.MyLocalBinder).getService()
+         }
          isBound = true
-         Log.d(TAG, "$name successfully bind to service")
+         Log.d(TAG, "${name?.shortClassName} successfully bind to activity")
       }
 
       override fun onServiceDisconnected(name: ComponentName?) {
@@ -48,11 +52,26 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
             }
       }
       val intent = Intent(this, BoundService::class.java)
-      bindService(intent, myConnection, Context.BIND_AUTO_CREATE)
+      val intent1 = Intent(this, RemoteService::class.java)
+      bindService(intent1, myConnection, Context.BIND_AUTO_CREATE)
    }
 
+   override fun onDestroy() {
+      super.onDestroy()
+      if (isBound) unbindService(myConnection)
+   }
    override fun onButtonClick(fontSize: Int, text: String) { (supportFragmentManager.findFragmentById(R.id.second_fragment) as SecondFragment).changeTextProperties(fontSize, text) }
    override fun showTime(): String? = myService?.getCurrentTime()
+   override fun sendMessage() {
+      if (!isBound) return
+      val msg = Message.obtain()
+      msg.data.putString("MyString", "Hello RemoteService")
+      try {
+         remoteService?.send(msg)
+      }catch (e:RemoteException){
+         e.printStackTrace()
+      }
+   }
 
    override fun goToMotionEventFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToMotionEventFragment())
    override fun goToMotionLayoutFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToMotionLayoutFragment())

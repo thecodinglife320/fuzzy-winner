@@ -53,7 +53,7 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
       }
       val intent = Intent(this, BoundService::class.java)
       val intent1 = Intent(this, RemoteService::class.java)
-      bindService(intent1, myConnection, Context.BIND_AUTO_CREATE)
+      //bindService(intent1, myConnection, Context.BIND_AUTO_CREATE)
    }
 
    override fun onDestroy() {
@@ -87,4 +87,6 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
       startActivity(intent)
    }
    override fun goToCoroutineDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToCoroutineDemoFragment())
+   override fun goToFlowDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToFlowDemoFragment())
+   override fun goToSharedFlowDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToSharedFlowDemoFragment())
 }

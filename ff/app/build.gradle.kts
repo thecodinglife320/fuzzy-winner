@@ -50,8 +50,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.roomruntime)
     implementation(libs.androidx.navigation.fragment)
-   implementation(libs.androidx.legacy.support.v4)
-   testImplementation(libs.junit)
+    implementation(libs.androidx.legacy.support.v4)
+    //implementation(libs.androidx.lifecycle.runtime.ktx)
+    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

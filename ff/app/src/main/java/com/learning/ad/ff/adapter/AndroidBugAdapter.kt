@@ -1,15 +1,10 @@
 package com.learning.ad.ff.adapter
 
-import android.util.Log
 import android.view.*
-import android.view.View.OnClickListener
-import android.widget.*
 import androidx.recyclerview.widget.RecyclerView.*
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.google.android.material.snackbar.*
 import com.learning.ad.ff.databinding.*
 import com.learning.ad.ff.model.*
-import com.learning.ad.ff.observer.*
 
 class AndroidBugAdapter(private val bubDroids: ArrayList<BugDroid>): Adapter<AndroidBugAdapter.AndroidBugViewHolder>() {
 

@@ -23,6 +23,8 @@ class MainFragment : Fragment() {
       fun goToCardDemoFragment()
       fun intentToSecondActivity()
       fun goToCoroutineDemoFragment()
+      fun goToFlowDemoFragment()
+      fun goToSharedFlowDemoFragment()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +53,8 @@ class MainFragment : Fragment() {
                6->listener?.goToTabLayoutFragment()
                7->listener?.goToCardDemoFragment()
                8->listener?.goToCoroutineDemoFragment()
+               9->listener?.goToFlowDemoFragment()
+               10->listener?.goToSharedFlowDemoFragment()
             }
             binding.spinner.setSelection(0)
          }

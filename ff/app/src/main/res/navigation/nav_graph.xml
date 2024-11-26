@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_mainFragment_to_coroutineDemoFragment"
             app:destination="@id/coroutineDemoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_flowDemoFragment"
+            app:destination="@id/flowDemoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sharedFlowDemoFragment"
+            app:destination="@id/sharedFlowDemoFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -74,4 +80,14 @@
         android:name="com.learning.ad.ff.fragment.CoroutineDemoFragment"
         android:label="fragment_coroutine_demo"
         tools:layout="@layout/fragment_coroutine_demo" />
+    <fragment
+        android:id="@+id/flowDemoFragment"
+        android:name="com.learning.ad.ff.fragment.FlowDemoFragment"
+        android:label="fragment_flow_demo"
+        tools:layout="@layout/fragment_flow_demo" />
+    <fragment
+        android:id="@+id/sharedFlowDemoFragment"
+        android:name="com.learning.ad.ff.fragment.SharedFlowDemoFragment"
+        android:label="fragment_shared_flow_demo"
+        tools:layout="@layout/fragment_shared_flow_demo" />
 </navigation>

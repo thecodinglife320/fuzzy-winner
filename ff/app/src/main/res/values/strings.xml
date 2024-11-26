@@ -24,6 +24,8 @@
         <item>TabLayoutFragment</item>
         <item>CardDemoFragment</item>
         <item>CoroutineDemo</item>
+        <item>FlowDemoFragment</item>
+        <item>SharedFlowDemoFragment</item>
     </string-array>
     <string-array name="android_bug_data">
         <item>android_image_1|BugDroid1|Jetpack Compose</item>
@@ -35,4 +37,7 @@
         <item>android_image_7|BugDroid7|Material Design</item>
         <item>android_image_8|BugDroid8|Room Database</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Start</string>
 </resources>

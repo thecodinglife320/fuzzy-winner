@@ -15,7 +15,7 @@ class SharedFlowViewModel: ViewModel() {
    private fun sharedFlowInit() {
       viewModelScope.launch {
          for (i in 1..1000) {
-            Log.d(TAG,i.toString())
+            Log.d(TAG, "Emitting $i")
             delay(2000)
             _sharedFlow.emit(i)
          }

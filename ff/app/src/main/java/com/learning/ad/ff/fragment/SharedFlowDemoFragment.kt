@@ -8,7 +8,7 @@ import androidx.lifecycle.*
 import androidx.recyclerview.widget.*
 import com.learning.ad.ff.adapter.*
 import com.learning.ad.ff.databinding.*
-import com.learning.ad.ff.service.*
+import com.learning.ad.ff.observer.*
 import com.learning.ad.ff.viewmodel.*
 import kotlinx.coroutines.*
 
@@ -28,10 +28,13 @@ class SharedFlowDemoFragment : Fragment() {
       binding.rv.layoutManager = LinearLayoutManager(requireContext())
       binding.rv.adapter = adapter
       lifecycleScope.launch {
-         viewModel.sharedFlow.collect { value ->
-            itemList.add(value.toString())
-            adapter.notifyItemInserted(itemList.lastIndex)
-            binding.rv.smoothScrollToPosition(adapter.itemCount)
+         repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewModel.sharedFlow.collect { value ->
+               Log.d(TAG,"Collecting $value")
+               itemList.add(value.toString())
+               adapter.notifyItemInserted(itemList.lastIndex)
+               binding.rv.smoothScrollToPosition(adapter.itemCount)
+            }
          }
       }
    }
@@ -42,7 +45,6 @@ class SharedFlowDemoFragment : Fragment() {
    ): View {
       _binding = FragmentSharedFlowDemoBinding.inflate(layoutInflater,container,false)
       collectFlow()
-      // Inflate the layout for this fragment
       return binding.root
    }
 

@@ -77,7 +77,7 @@ class FlowDemoFragment : Fragment() {
       _stateFlow.value += 1
    }
 
-   fun handleFlow2() {
+   private fun handleFlow2() {
       var counter = 1
       lifecycleScope.launch {
          while (counter < 6) {

@@ -21,4 +21,9 @@ class SharedFlowViewModel: ViewModel() {
          }
       }
    }
+
+   override fun onCleared() {
+      super.onCleared()
+      Log.d(TAG, "Destroy")
+   }
 }

@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_mainFragment_to_sharedFlowDemoFragment"
             app:destination="@id/sharedFlowDemoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sqlDemoFragment"
+            app:destination="@id/sqlDemoFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -90,4 +93,9 @@
         android:name="com.learning.ad.ff.fragment.SharedFlowDemoFragment"
         android:label="fragment_shared_flow_demo"
         tools:layout="@layout/fragment_shared_flow_demo" />
+    <fragment
+        android:id="@+id/sqlDemoFragment"
+        android:name="com.learning.ad.ff.fragment.SqlDemoFragment"
+        android:label="fragment_sql_demo"
+        tools:layout="@layout/fragment_sql_demo" />
 </navigation>

@@ -25,6 +25,7 @@ class MainFragment : Fragment() {
       fun goToCoroutineDemoFragment()
       fun goToFlowDemoFragment()
       fun goToSharedFlowDemoFragment()
+      fun goToSqlDemoFragment()
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +56,7 @@ class MainFragment : Fragment() {
                8->listener?.goToCoroutineDemoFragment()
                9->listener?.goToFlowDemoFragment()
                10->listener?.goToSharedFlowDemoFragment()
+               11->listener?.goToSqlDemoFragment()
             }
             binding.spinner.setSelection(0)
          }

@@ -89,4 +89,5 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
    override fun goToCoroutineDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToCoroutineDemoFragment())
    override fun goToFlowDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToFlowDemoFragment())
    override fun goToSharedFlowDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToSharedFlowDemoFragment())
+   override fun goToSqlDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToSqlDemoFragment())
 }

@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FF"
         tools:targetApi="31">
+        <activity
+            android:name=".RetroAchievementActivity"
+            android:exported="false" />
+
         <provider
             android:name=".provider.MyContentProvider"
             android:authorities="com.learning.ad.ff.provider.MyContentProvider"

@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_mainFragment_to_sqlDemoFragment"
             app:destination="@id/sqlDemoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_retroAchievementActivity"
+            app:destination="@id/retroAchievementActivity" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -98,4 +101,13 @@
         android:name="com.learning.ad.ff.fragment.SqlDemoFragment"
         android:label="fragment_sql_demo"
         tools:layout="@layout/fragment_sql_demo" />
+    <activity
+        android:id="@+id/retroAchievementActivity"
+        android:name="com.learning.ad.ff.RetroAchievementActivity"
+        android:label="activity_retro_achievement"
+        tools:layout="@layout/activity_retro_achievement" >
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </activity>
 </navigation>

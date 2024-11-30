@@ -15,6 +15,7 @@ import com.learning.ad.ff.lifecycleowner.*
 import com.learning.ad.ff.observer.*
 import com.learning.ad.ff.service.*
 
+@Suppress("UNUSED_VARIABLE")
 class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.MainFragmentListener {
    var myService: BoundService? = null
    var remoteService: Messenger?=null
@@ -90,4 +91,5 @@ class MainActivity : FragmentActivity(), FirstFragmentListener,MainFragment.Main
    override fun goToFlowDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToFlowDemoFragment())
    override fun goToSharedFlowDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToSharedFlowDemoFragment())
    override fun goToSqlDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToSqlDemoFragment())
+   override fun intentToRetroAchievementActivity(userName: String) = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToRetroAchievementActivity(userName))
 }

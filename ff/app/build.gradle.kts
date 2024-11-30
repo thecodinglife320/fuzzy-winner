@@ -51,8 +51,11 @@ dependencies {
     implementation(libs.androidx.roomruntime)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.legacy.support.v4)
-    //implementation(libs.androidx.lifecycle.runtime.ktx)
-    testImplementation(libs.junit)
+    implementation(libs.api.kotlin)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+   implementation(libs.androidx.navigation.ui.ktx)
+   testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -4,15 +4,20 @@ import android.content.*
 import android.os.*
 import android.view.*
 import android.widget.*
-import androidx.fragment.app.Fragment
+import androidx.core.widget.*
+import androidx.fragment.app.*
+import androidx.lifecycle.*
 import com.google.android.material.snackbar.*
 import com.learning.ad.ff.*
 import com.learning.ad.ff.databinding.*
+import com.learning.ad.ff.viewmodel.*
+import kotlinx.coroutines.*
 
 class MainFragment : Fragment() {
    private var _binding: FragmentMainBinding? = null
    private val binding get() = _binding!!
    private var listener: MainFragmentListener? = null
+   private lateinit var viewModel: MainViewModel
    interface MainFragmentListener{
       fun goToMotionEventFragment()
       fun goToMotionLayoutFragment()
@@ -26,6 +31,18 @@ class MainFragment : Fragment() {
       fun goToFlowDemoFragment()
       fun goToSharedFlowDemoFragment()
       fun goToSqlDemoFragment()
+      fun intentToRetroAchievementActivity(userName:String)
+   }
+
+   override fun onCreate(savedInstanceState: Bundle?) {
+      super.onCreate(savedInstanceState)
+      viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+      //collect flow
+      lifecycleScope.launch {
+         viewModel.userInput.collect{
+            if (it == "longplay123") listener?.intentToRetroAchievementActivity(it)
+         }
+      }
    }
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +55,9 @@ class MainFragment : Fragment() {
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
+      binding.userNameEdt.doAfterTextChanged { editable->
+         viewModel.updateUserInput(editable.toString())
+      }
       binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
          override fun onItemSelected(
             parent: AdapterView<*>?,

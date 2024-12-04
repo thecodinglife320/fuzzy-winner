@@ -1,11 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FF</string>
     <string name="change_text">Change text</string>
     <string name="enter_text">Enter text</string>
     <string name="convert">Convert</string>
     <string name="dollar">dollar</string>
     <string name="sonic">Sonic</string>
-    <string name="tab1_fragment">Tab1 Fragment</string>
+    <string name="tab1_fragment" tools:ignore="Typos">Tab1 Fragment</string>
     <string name="tab2_fragment">Tab2 Fragment</string>
     <string name="tab3_fragment">Tab3 Fragment</string>
     <string name="tab4_fragment">Tab4 Fragment</string>
@@ -27,9 +27,10 @@
         <item>FlowDemoFragment</item>
         <item>SharedFlowDemoFragment</item>
         <item>SqlDemoFragment</item>
+        <item>RoomDemoFragment</item>
     </string-array>
     <string-array name="android_bug_data">
-        <item>android_image_1|BugDroid1|Jetpack Compose</item>
+        <item tools:ignore="Typos">android_image_1|BugDroid1|Jetpack Compose</item>
         <item>android_image_2|BugDroid2|Data Binding</item>
         <item>android_image_3|BugDroid3|View Binding</item>
         <item>android_image_4|BugDroid4|Live Data</item>
@@ -50,4 +51,13 @@
     <string name="user">User</string>
     <string name="game">Game</string>
     <string name="my_retro_achievement">My Retro Achievement</string>
+    <string name="product_id">Product ID</string>
+    <string name="not_assigned">Not Assigned</string>
+    <string name="product_name">Product Name</string>
+    <string name="produce_quantity">Product Quantity</string>
+    <string name="product_name1">Product name: %s</string>
+    <string name="product_quantity1">Product Quantity: %d</string>
+    <string name="name_notify">Vui long nhap ten khi them san pham</string>
+    <string name="quantity_notify">Vui long nhap so luong khi them san pham</string>
+    <string name="select_product_notify">Vui long chon mot product</string>
 </resources>

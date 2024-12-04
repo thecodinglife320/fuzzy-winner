@@ -32,6 +32,7 @@ class MainFragment : Fragment() {
       fun goToSharedFlowDemoFragment()
       fun goToSqlDemoFragment()
       fun intentToRetroAchievementActivity(userName:String)
+      fun goToRoomDemoFragment()
    }
 
    override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +78,7 @@ class MainFragment : Fragment() {
                9->listener?.goToFlowDemoFragment()
                10->listener?.goToSharedFlowDemoFragment()
                11->listener?.goToSqlDemoFragment()
+               12->listener?.goToRoomDemoFragment()
             }
             binding.spinner.setSelection(0)
          }

@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_mainFragment_to_roomDemoFragment"
             app:destination="@id/roomDemoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_videoPlayBackFragment"
+            app:destination="@id/videoPlayBackFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -118,4 +121,9 @@
         android:name="com.learning.ad.ff.fragment.RoomDemoFragment"
         android:label="fragment_room_demo"
         tools:layout="@layout/fragment_room_demo" />
+    <fragment
+        android:id="@+id/videoPlayBackFragment"
+        android:name="com.learning.ad.ff.fragment.VideoPlayBackFragment"
+        android:label="fragment_video_play_back"
+        tools:layout="@layout/fragment_video_play_back" />
 </navigation>

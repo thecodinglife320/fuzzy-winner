@@ -33,6 +33,7 @@ class MainFragment : Fragment() {
       fun goToSqlDemoFragment()
       fun intentToRetroAchievementActivity(userName:String)
       fun goToRoomDemoFragment()
+      fun goToVideoPlayBackFragment()
    }
 
    override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,6 +80,7 @@ class MainFragment : Fragment() {
                10->listener?.goToSharedFlowDemoFragment()
                11->listener?.goToSqlDemoFragment()
                12->listener?.goToRoomDemoFragment()
+               13->listener?.goToVideoPlayBackFragment()
             }
             binding.spinner.setSelection(0)
          }

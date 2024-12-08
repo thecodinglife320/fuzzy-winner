@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_mainFragment_to_videoPlayBackFragment"
             app:destination="@id/videoPlayBackFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_permissionDemoFragment"
+            app:destination="@id/permissionDemoFragment" />
     </fragment>
     <fragment
         android:id="@+id/motionEventFragment"
@@ -126,4 +129,9 @@
         android:name="com.learning.ad.ff.fragment.VideoPlayBackFragment"
         android:label="fragment_video_play_back"
         tools:layout="@layout/fragment_video_play_back" />
+    <fragment
+        android:id="@+id/permissionDemoFragment"
+        android:name="com.learning.ad.ff.fragment.PermissionDemoFragment"
+        android:label="fragment_permission_demo"
+        tools:layout="@layout/fragment_permission_demo" />
 </navigation>

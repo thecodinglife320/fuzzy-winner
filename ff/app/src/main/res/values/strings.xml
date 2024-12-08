@@ -29,6 +29,7 @@
         <item>SqlDemoFragment</item>
         <item>RoomDemoFragment</item>
         <item>ViewPlayBackFragment</item>
+        <item>PermissionDemoFragment</item>
     </string-array>
     <string-array name="android_bug_data">
         <item tools:ignore="Typos">android_image_1|BugDroid1|Jetpack Compose</item>
@@ -61,4 +62,11 @@
     <string name="name_notify">Vui long nhap ten khi them san pham</string>
     <string name="quantity_notify">Vui long nhap so luong khi them san pham</string>
     <string name="select_product_notify">Vui long chon mot product</string>
+    <string name="title_video">Forbidden Color by Ryuichi Sakamoto</string>
+    <string name="enter_pip_mode">Enter pip mode</string>
+    <string name="play">Play</string>
+    <string name="record">Record</string>
+    <string name="stop">Stop</string>
+    <string name="notify_permission">Ứng dụng cần quyền ghi âm để hoạt động đúng cách. Vui lòng vào Cài đặt để cấp quyền.</string>
+    <string name="attemp_to_request">Cấp quyền cần thiết</string>
 </resources>

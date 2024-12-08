@@ -34,6 +34,7 @@ class MainFragment : Fragment() {
       fun intentToRetroAchievementActivity(userName:String)
       fun goToRoomDemoFragment()
       fun goToVideoPlayBackFragment()
+      fun goToPermissionDemoFragment()
    }
 
    override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +82,7 @@ class MainFragment : Fragment() {
                11->listener?.goToSqlDemoFragment()
                12->listener?.goToRoomDemoFragment()
                13->listener?.goToVideoPlayBackFragment()
+               14->listener?.goToPermissionDemoFragment()
             }
             binding.spinner.setSelection(0)
          }

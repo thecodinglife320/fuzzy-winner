@@ -104,4 +104,5 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener,MainFragment.Mai
     override fun intentToRetroAchievementActivity(userName: String) = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToRetroAchievementActivity(userName))
     override fun goToRoomDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToRoomDemoFragment())
     override fun goToVideoPlayBackFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToVideoPlayBackFragment())
+    override fun goToPermissionDemoFragment() =findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToPermissionDemoFragment())
 }

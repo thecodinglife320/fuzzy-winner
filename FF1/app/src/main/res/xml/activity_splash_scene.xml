@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/imageView2" motion:layout_constraintEnd_toEndOf="parent" android:layout_width="200dp" android:layout_height="200dp" android:rotationX="0" android:rotationY="0" motion:layout_constraintBottom_toTopOf="@+id/textView2" android:rotation="0" motion:layout_constraintTop_toTopOf="parent" motion:layout_constraintHorizontal_bias="0.5" motion:layout_constraintStart_toStartOf="parent"/>
+        <Constraint android:id="@+id/textView2">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/blue">
+            </CustomAttribute>
+        </Constraint>
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@+id/textView2">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="#EF5350">
+            </CustomAttribute>
+        </Constraint>
+    </ConstraintSet>
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetStart="@+id/start"
+        motion:constraintSetEnd="@+id/end"
+        motion:duration="2000"/>
+</MotionScene>

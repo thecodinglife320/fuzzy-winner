@@ -1,6 +1,4 @@
-package com.learning.ad.ff1
-
-import com.learning.ad.ff1.data.State
+package com.learning.ad.ff1.data
 
 fun getStateData(): List<State> {
    val states = mutableListOf<State>()

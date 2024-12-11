@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.learning.ad.ff1.adapter.StateAdapter
+import com.learning.ad.ff1.data.getStateData
 import com.learning.ad.ff1.databinding.ActivityStateTriviaBinding
 
 class StateTriviaActivity : AppCompatActivity() {

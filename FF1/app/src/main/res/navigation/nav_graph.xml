@@ -3,26 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/introFragment">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.learning.ad.ff1.FirstFragment"
+        android:id="@+id/introFragment"
+        android:name="com.learning.ad.ff1.ui.IntroFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        tools:layout="@layout/fragment_intro">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_introFragment_to_seatSelectFragment"
+            app:destination="@id/seatSelectFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.learning.ad.ff1.SecondFragment"
+        android:id="@+id/daySelectFragment"
+        android:name="com.learning.ad.ff1.ui.DaySelectFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        tools:layout="@layout/fragment_day_select">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_daySelectFragment_to_timeSelectFragment"
+            app:destination="@id/timeSelectFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/timeSelectFragment"
+        android:name="com.learning.ad.ff1.ui.TimeSelectFragment"
+        android:label="@string/third_fragment_label"
+        tools:layout="@layout/fragment_time_select">
+        <action
+            android:id="@+id/action_timeSelectFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seatSelectFragment"
+        android:name="com.learning.ad.ff1.ui.SeatSelectFragment"
+        android:label="@string/fourth_fragment_label"
+        tools:layout="@layout/fragment_seat_select">
+        <action
+            android:id="@+id/action_seatSelectFragment_to_daySelectFragment"
+            app:destination="@id/daySelectFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.learning.ad.ff1.ui.PaymentFragment"
+        android:label="@string/sixth_fragment_label"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_paymentFragment_to_confirmFragment"
+            app:destination="@id/confirmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmFragment"
+        android:name="com.learning.ad.ff1.ui.ConfirmFragment"
+        android:label="@string/fifth_fragment_label"
+        tools:layout="@layout/fragment_confirm">
+        <action
+            android:id="@+id/action_confirmFragment_to_receiptFragment"
+            app:destination="@id/receiptFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiptFragment"
+        android:name="com.learning.ad.ff1.ui.ReceiptFragment"
+        android:label="@string/seventh_fragment_label"
+        tools:layout="@layout/fragment_receipt" />
 </navigation>

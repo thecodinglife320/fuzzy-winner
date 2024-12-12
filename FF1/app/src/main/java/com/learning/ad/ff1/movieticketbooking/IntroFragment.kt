@@ -1,4 +1,4 @@
-package com.learning.ad.ff1.ui
+package com.learning.ad.ff1.movieticketbooking
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.learning.ad.ff1.MovieViewModel
+import com.learning.ad.ff1.viewmodel.MovieViewModel
 import com.learning.ad.ff1.R
 import com.learning.ad.ff1.databinding.FragmentIntroBinding
 

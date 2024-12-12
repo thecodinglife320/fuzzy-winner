@@ -5,13 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.learning.ad.ff1.MovieViewModel" />
+            type="com.learning.ad.ff1.viewmodel.MovieViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.DaySelectFragment">
+        tools:context=".movieticketbooking.DaySelectFragment">
 
         <TextView
             android:id="@+id/select_time"

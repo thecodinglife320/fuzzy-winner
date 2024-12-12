@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_fragment_label">Search</string>
+    <string name="result_fragment_label">Result</string>
+    <string name="instructions">Enter any book name to search</string>
+    <string name="input_hint">Book title or keywords</string>
+</resources>

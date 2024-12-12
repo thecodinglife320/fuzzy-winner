@@ -5,12 +5,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.learning.ad.ff1.MovieViewModel" />
+            type="com.learning.ad.ff1.viewmodel.MovieViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.IntroFragment">
+        tools:context=".movieticketbooking.IntroFragment">
         <ImageView
             android:id="@+id/movie_img"
             android:layout_width="200dp"

@@ -1,4 +1,4 @@
-package com.learning.ad.ff1
+package com.learning.ad.ff1.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

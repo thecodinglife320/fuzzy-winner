@@ -1,4 +1,4 @@
-package com.learning.ad.ff1.ui
+package com.learning.ad.ff1.movieticketbooking
 
 import android.os.Bundle
 import android.util.Log
@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.learning.ad.ff1.MovieViewModel
+import com.learning.ad.ff1.viewmodel.MovieViewModel
 import com.learning.ad.ff1.R
 import com.learning.ad.ff1.databinding.FragmentDaySelectBinding
 
 class DaySelectFragment : Fragment() {
    private var _binding: FragmentDaySelectBinding? = null
    private val binding get() = _binding!!
-   private val viewModel:MovieViewModel by activityViewModels()
+   private val viewModel: MovieViewModel by activityViewModels()
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?

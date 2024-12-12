@@ -1,4 +1,4 @@
-package com.learning.ad.ff1.ui
+package com.learning.ad.ff1.movieticketbooking
 
 import android.os.Bundle
 import android.view.LayoutInflater

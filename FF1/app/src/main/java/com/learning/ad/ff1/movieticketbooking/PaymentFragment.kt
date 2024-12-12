@@ -1,4 +1,4 @@
-package com.learning.ad.ff1.ui
+package com.learning.ad.ff1.movieticketbooking
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.learning.ad.ff1.MovieViewModel
+import com.learning.ad.ff1.viewmodel.MovieViewModel
 import com.learning.ad.ff1.R
 import com.learning.ad.ff1.databinding.FragmentPaymentBinding
 

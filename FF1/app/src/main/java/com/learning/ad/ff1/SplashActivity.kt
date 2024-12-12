@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
       executor.submit {
          Thread.sleep(2000)
          runOnUiThread {
-            val intent = Intent(this, MovieActivity::class.java)
+            val intent = Intent(this, BookFinderActivity::class.java)
             startActivity(intent)
             finish()
          }

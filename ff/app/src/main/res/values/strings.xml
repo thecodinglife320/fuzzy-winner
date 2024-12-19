@@ -15,7 +15,6 @@
     <string name="get_time_from_service">Get time from service</string>
     <string name="send_message">Send message</string>
     <string-array name="fragments">
-        <item>Bạn chọn một fragment đi</item>
         <item>MotionEventFragment</item>
         <item>MotionLayoutFragment</item>
         <item>KotlinLayoutFragment</item>
@@ -69,4 +68,5 @@
     <string name="stop">Stop</string>
     <string name="notify_permission">Ứng dụng cần quyền ghi âm để hoạt động đúng cách. Vui lòng vào Cài đặt để cấp quyền.</string>
     <string name="attemp_to_request">Cấp quyền cần thiết</string>
+    <string name="select_fragment">Enter fragment name</string>
 </resources>

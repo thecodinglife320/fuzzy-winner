@@ -8,20 +8,30 @@
     android:padding="8dp"
     tools:context=".fragment.MainFragment">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_height="wrap_content"
-        android:minHeight="48dp" />
+        android:layout_width="match_parent"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <AutoCompleteTextView
+            android:hint="@string/select_fragment"
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            app:simpleItems="@array/fragments"
+            tools:ignore="VisualLintTextFieldSize" />
+
+</com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/second_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/gamepad_24"
         android:text="@string/app_name" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/user_name_edt"
+        android:id="@+id/user_name_tf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/user_name_retroachievement"
@@ -29,6 +39,7 @@
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_name_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="VisualLintTextFieldSize" />

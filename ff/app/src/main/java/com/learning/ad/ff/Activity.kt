@@ -1,29 +1,34 @@
 package com.learning.ad.ff
 
 import android.app.Activity
-import android.content.ComponentName
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
+import android.net.*
 import android.os.Bundle
 import android.os.IBinder
 import android.os.Message
 import android.os.Messenger
 import android.os.RemoteException
+import android.provider.*
 import android.util.Log
+import android.view.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.*
 import androidx.navigation.findNavController
-import com.learning.ad.ff.databinding.ActivityMainBinding
+import androidx.navigation.fragment.*
+import androidx.navigation.ui.*
+import com.learning.ad.ff.databinding.*
+import com.learning.ad.ff.fragment.*
 import com.learning.ad.ff.fragment.FirstFragment.FirstFragmentListener
-import com.learning.ad.ff.fragment.MainFragment
-import com.learning.ad.ff.fragment.MainFragmentDirections
-import com.learning.ad.ff.fragment.SecondFragment
 import com.learning.ad.ff.lifecycleowner.MainActivityLOwner
 import com.learning.ad.ff.observer.TAG
+import com.learning.ad.ff.receiver.*
 import com.learning.ad.ff.service.BoundService
 import com.learning.ad.ff.service.RemoteService
+import com.learning.ad.ff.viewmodel.*
+import java.net.*
 
 @Suppress("UNUSED_VARIABLE")
 class MainActivity : AppCompatActivity(), FirstFragmentListener,MainFragment.MainFragmentListener {
@@ -105,4 +110,100 @@ class MainActivity : AppCompatActivity(), FirstFragmentListener,MainFragment.Mai
     override fun goToRoomDemoFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToRoomDemoFragment())
     override fun goToVideoPlayBackFragment() = findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToVideoPlayBackFragment())
     override fun goToPermissionDemoFragment() =findNavController(R.id.activity_main_nav_host_fragment).navigate(MainFragmentDirections.actionMainFragmentToPermissionDemoFragment())
+}
+class RetroAchievementActivity : AppCompatActivity(), UserFragment.UserFragmentListener{
+    private lateinit var userName:String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = ActivityRetroAchievementBinding.inflate(layoutInflater)
+        userName = RetroAchievementActivityArgs.fromBundle(intent.extras!!).userName
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        //cau hinh AppBar
+        val builder = AppBarConfiguration
+            .Builder(navHostFragment.navController.graph)
+            .setOpenableLayout(binding.drawerLayout)
+        binding.toolbar.setupWithNavController(navHostFragment.navController,builder.build())
+        binding.navDrawer.setupWithNavController(navHostFragment.navController)
+
+
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_retro_achievment_drawer, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+    }
+    override fun fetchUserProfile() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        val backStackEntry = navController.getBackStackEntry(R.id.userFragment)
+        val viewModel = ViewModelProvider(backStackEntry)[UserViewModel::class.java]
+        viewModel.fetchProfileUser(userName)
+    }
+}
+class SecondActivity : AppCompatActivity() {
+    private var receiver: BroadcastReceiver? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = ActivitySecondBinding.inflate(layoutInflater)
+        //val extras = intent.extras ?: return
+        binding.showWebPageBtn.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://vietcodedi.com")))
+        }
+
+        binding.enableLinkBtn.setOnClickListener {
+            val intent = Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS)
+            intent.data = Uri.parse("package:$packageName")
+            startActivity(intent)
+        }
+        binding.button.setOnClickListener {
+            val intent = Intent()
+            intent.action = packageName
+            intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
+            sendBroadcast(intent)
+        }
+        val filter = IntentFilter()
+        filter.addAction(packageName)
+        filter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED")
+        filter.addAction("android.intent.action.ACTION_POWER_CONNECTED")
+        receiver = MyReceiver()
+        registerReceiver(receiver, filter, RECEIVER_EXPORTED)
+        setContentView(binding.root)
+    }
+    override fun finish() {
+        val data = Intent()
+        data.putExtra("return", "returnString")
+        setResult(RESULT_OK, data)
+        super.finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
+}
+class WebViewActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityWebViewBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityWebViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        handleIntent()
+    }
+    private fun handleIntent() {
+        val intent = this.intent
+        val data = intent.data
+        var url: URL? = null
+        try {
+            url = URL(data?.scheme, data?.host, data?.path)
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+        binding.webView.loadUrl(url.toString())
+    }
 }

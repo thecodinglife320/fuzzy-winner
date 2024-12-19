@@ -1,45 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
     tools:context=".fragment.MainFragment">
 
-    <Spinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:minHeight="48dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="true"
-        android:importantForAccessibility="no"
-        android:src="@drawable/sonic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner" />
+        android:drawableEnd="@drawable/gamepad_24"
+        android:text="@string/app_name" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/user_name_edt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:autofillHints=""
-        android:ems="10"
         android:hint="@string/user_name_retroachievement"
-        android:inputType="text"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toStartOf="@+id/fab"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="VisualLintTextFieldSize" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

@@ -3,16 +3,13 @@ package com.learning.ad.ff.fragment
 import android.content.*
 import android.os.*
 import android.view.*
-import android.widget.*
 import androidx.fragment.app.*
+import com.google.android.material.slider.*
 import com.learning.ad.ff.databinding.*
-import java.lang.ClassCastException
 
-class FirstFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
-
+class FirstFragment : Fragment(){
    private var _binding: FragmentFirstBinding? = null
    private val binding get() = _binding!!
-
    private var seekValue = 10
    private var listener: FirstFragmentListener? = null
    interface FirstFragmentListener{
@@ -40,7 +37,14 @@ class FirstFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
-      binding.seekBar.setOnSeekBarChangeListener(this)
+      binding.seekBar.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+         override fun onStartTrackingTouch(slider: Slider) {}
+         override fun onStopTrackingTouch(slider: Slider) {}
+      })
+      binding.seekBar.addOnChangeListener { _, value, _ ->
+         println(value)
+         seekValue = value.toInt()
+      }
       binding.changeTextBtn.setOnClickListener {
          listener?.onButtonClick(seekValue,binding.textEdt.text.toString())
       }
@@ -53,10 +57,24 @@ class FirstFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
       super.onDestroyView()
       _binding = null
    }
-
-   override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-      seekValue = progress
+}
+class SecondFragment : Fragment() {
+   private var _binding: FragmentSecondBinding? = null
+   private val binding get() = _binding!!
+   override fun onCreateView(
+      inflater: LayoutInflater, container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
+      _binding = FragmentSecondBinding.inflate(layoutInflater,container,false)
+      return binding.root
    }
-   override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-   override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+
+   override fun onDestroyView() {
+      super.onDestroyView()
+      _binding=null
+   }
+   fun changeTextProperties(fontSize: Int, text: String) {
+      binding.textTv.textSize = fontSize.toFloat()
+      binding.textTv.text = text
+   }
 }

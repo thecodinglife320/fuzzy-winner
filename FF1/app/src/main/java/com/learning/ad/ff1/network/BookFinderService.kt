@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 // Base URL for Books API.
-private const val BASE_URL = "https://www.googleapis.com/books/v1/"
+const val BASE_URL = "https://www.googleapis.com/books/v1/"
 
 // Parameter for the search string.
 private const val QUERY_PARAM = "q"
@@ -25,7 +25,7 @@ private val moshi = Moshi.Builder()
    .build()
 
 // Retrofit object that generates the implementation of the BookFinderApiService interface.
-private val retrofit = Retrofit.Builder()
+private val retrofitBook = Retrofit.Builder()
    .addConverterFactory(MoshiConverterFactory.create(moshi))
    .baseUrl(BASE_URL)
    .build()
@@ -41,5 +41,5 @@ interface BookFinderApiService {
 }
 
 object BookFinderApi {
-   val retrofitService: BookFinderApiService by lazy { retrofit.create(BookFinderApiService::class.java) }
+   val retrofitService: BookFinderApiService by lazy { retrofitBook.create(BookFinderApiService::class.java) }
 }

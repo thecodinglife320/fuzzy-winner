@@ -31,4 +31,6 @@
     <string name="pay_to_book">Pay to book</string>
     <string name="total_amount">Total Amount</string>
     <string name="status_confirm">Your booking is confirm</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="light_theme">Light theme</string>
 </resources>

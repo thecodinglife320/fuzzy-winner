@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navigation_my_note" android:icon="@drawable/baseline_bolt_24"
+        android:title="@string/my_note" />
+
+    <item android:id="@+id/navigation_add_note" android:icon="@drawable/baseline_sync_24"
+        android:title="@string/add_note" />
+</menu>

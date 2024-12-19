@@ -55,4 +55,14 @@ dependencies {
     implementation(libs.moshi.kotlin)
     // Retrofit with Moshi Converter
     implementation(libs.converter.moshi)
+
+    //room
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    //coroutine
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 }

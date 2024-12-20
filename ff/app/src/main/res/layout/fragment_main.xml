@@ -12,14 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
         <AutoCompleteTextView
-            android:hint="@string/select_fragment"
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/select_fragment"
             android:inputType="text"
             app:simpleItems="@array/fragments"
-            tools:ignore="VisualLintTextFieldSize" />
+            tools:ignore="VisualLintTextFieldSize,SpeakableTextPresentCheck" />
 
 </com.google.android.material.textfield.TextInputLayout>
 

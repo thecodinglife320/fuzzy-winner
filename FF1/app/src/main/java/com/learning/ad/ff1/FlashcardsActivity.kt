@@ -164,8 +164,6 @@ class EditNoteFragment:BottomSheetDialogFragment(){
    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
       _binding = FragmentEditNoteBinding.inflate(inflater, container, false)
       binding.viewmodel = viewModel
-//      lifecycle.coroutineScope.launch { viewModel.getNote()
-//         .collect { note = it } }
       binding.lifecycleOwner = viewLifecycleOwner
       return binding.root
    }
@@ -181,7 +179,6 @@ class EditNoteFragment:BottomSheetDialogFragment(){
          viewModel.noteTitle.value = note.title
          viewModel.noteContent.value = note.content
       }
-
    }
 }
 class ViewTransformer : ViewPager2.PageTransformer {
@@ -254,8 +251,6 @@ class NoteViewModel(private val dao: NoteDao): ViewModel() {
       note.title = noteTitle.value!!
       note.content = noteContent.value!!
       viewModelScope.launch { dao.update(note) }
-      noteTitle.value =""
-      noteContent.value=""
    }
    fun deleteNote(note: Note)= viewModelScope.launch { dao.delete(note) }
 }

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="book"
-            type="com.learning.ad.ff1.network.Book" />
+            type="com.learning.ad.ff1.Book" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

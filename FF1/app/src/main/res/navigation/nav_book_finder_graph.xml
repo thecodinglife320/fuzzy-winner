@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.learning.ad.ff1.bookfinder.SearchFragment"
+        android:name="com.learning.ad.ff1.SearchFragment"
         android:label="@string/search_fragment_label"
         tools:layout="@layout/fragment_search">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.learning.ad.ff1.bookfinder.ResultFragment"
+        android:name="com.learning.ad.ff1.ResultFragment"
         android:label="@string/result_fragment_label"
         tools:layout="@layout/fragment_result" />
 </navigation>

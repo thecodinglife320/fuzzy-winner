@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.learning.ad.ff1.viewmodel.NoteViewModel" />
+            type="com.learning.ad.ff1.NoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,41 +14,66 @@
         android:padding="8dp"
         tools:context=".flashcard.AddNoteFragment">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_tf"
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_title"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/content_tf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/baseline_bolt_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title_edt"
+                android:text="@={viewModel.noteTitle}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                tools:ignore="VisualLintTextFieldSize" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/content_tf"
+            android:layout_width="344dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@+id/save_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_tf"
+            app:startIconDrawable="@drawable/baseline_bolt_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/content_edt"
+                android:text="@={viewModel.noteContent}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_enter"
+                android:inputType="text"
+                tools:ignore="VisualLintTextFieldSize" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:fontFamily="serif-monospace"
             android:importantForAutofill="no"
-            android:onClick="@{()->viewModel.addNote()}"
             android:text="@string/save"
             android:textSize="20sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/content_tf"
             tools:ignore="RtlHardcoded" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/title_tf"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_title"
-            app:endIconMode="clear_text"
-            app:layout_constraintBottom_toTopOf="@+id/save_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:startIconDrawable="@drawable/baseline_bolt_24">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/title_edt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:text="abc"
-                tools:ignore="VisualLintTextFieldSize" />
-        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

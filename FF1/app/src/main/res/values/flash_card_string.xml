@@ -10,4 +10,6 @@
     <string name="save">Save</string>
     <string name="hint_enter">Enter content for the note</string>
     <string name="hint_title">Title (for the note)</string>
+    <string name="update_note">Update Note</string>
+    <string name="note_id">Note Id</string>
 </resources>

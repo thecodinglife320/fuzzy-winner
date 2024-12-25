@@ -6,12 +6,29 @@
     app:startDestination="@id/navigation_my_note">
     <fragment
         android:id="@+id/navigation_my_note"
-        android:name="com.learning.ad.ff1.flashcard.MyNoteFragment"
+        android:name="com.learning.ad.ff1.MyNoteFragment"
         android:label="@string/my_note"
-        tools:layout="@layout/fragment_my_note" />
+        tools:layout="@layout/fragment_my_note" >
+        <action
+            android:id="@+id/action_navigation_my_note_to_viewNoteFragment"
+            app:destination="@id/viewNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_add_note"
-        android:name="com.learning.ad.ff1.flashcard.AddNoteFragment"
+        android:name="com.learning.ad.ff1.AddNoteFragment"
         android:label="@string/add_note"
-        tools:layout="@layout/fragment_add_note" />
+        tools:layout="@layout/fragment_add_note" >
+    </fragment>
+    <dialog
+        android:id="@+id/viewNoteFragment"
+        android:name="com.learning.ad.ff1.ViewNoteFragment"
+        android:label="ViewNoteFragment" >
+        <action
+            android:id="@+id/action_viewNoteFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/editNoteFragment"
+        android:name="com.learning.ad.ff1.EditNoteFragment"
+        android:label="EditNoteFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.learning.ad.ff1.network
+package com.learning.ad.ff1
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -43,3 +43,14 @@ interface BookFinderApiService {
 object BookFinderApi {
    val retrofitService: BookFinderApiService by lazy { retrofitBook.create(BookFinderApiService::class.java) }
 }
+class BookResponse(val totalItems: Int, val items: List<Book>)
+data class Book(
+   val volumeInfo: VolumeInfo,
+)
+data class VolumeInfo(
+   val title: String = "Unknown",
+   val authors: List<String> = listOf("Unknown"),
+   val publisher: String = "Unknown",
+   val description: String = "No description available",
+   val infoLink: String = "",
+)

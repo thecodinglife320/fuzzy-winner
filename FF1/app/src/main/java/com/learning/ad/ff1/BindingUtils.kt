@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.learning.ad.ff1.viewmodel.BookApiStatus
 
 @BindingAdapter("bookApiStatus")
 fun ProgressBar.setProgressBarState(state: BookApiStatus?) {

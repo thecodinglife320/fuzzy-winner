@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.learning.ad.ff1.viewmodel.MovieViewModel" />
+            type="com.learning.ad.ff1.MovieViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
       executor.submit {
          Thread.sleep(2000)
          runOnUiThread {
-            val intent = Intent(this, FlashcardsActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
             finish()
          }

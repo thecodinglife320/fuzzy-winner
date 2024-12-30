@@ -102,7 +102,7 @@ class DisplayFragment : Fragment() {
          } else {
             if (it == PostLoadingStatus.SUCCESS) {
                binding.rvPostList.layoutManager = LinearLayoutManager(requireContext())
-               val firePostAdapter = FirePostAdapter {firePost->
+               val firePostAdapter = Adapter {firePost->
                   showPostDialog(firePost)
                }
                binding.rvPostList.adapter = firePostAdapter
@@ -329,8 +329,8 @@ class CloudAuthViewModelFactory(private val auth: FirebaseAuth) : ViewModelProvi
       throw IllegalArgumentException("Unable to construct cloud auth viewmodel")
    }
 }
-class FirePostAdapter(private val onPostClick: (FirePost) -> Unit) : ListAdapter<FirePost, FirePostAdapter.FirePostViewHolder>(PostDiffCallback()) {
-   class FirePostViewHolder(
+class Adapter(private val onPostClick: (FirePost) -> Unit) : ListAdapter<FirePost, Adapter.ViewHolder>(DiffCallback()) {
+   class ViewHolder(
       private val binding: PostCardBinding
    ) : RecyclerView.ViewHolder(binding.root) {
       fun bind(firePost: FirePost, onPostClick: (FirePost) -> Unit) {
@@ -339,15 +339,15 @@ class FirePostAdapter(private val onPostClick: (FirePost) -> Unit) : ListAdapter
          binding.executePendingBindings()
       }
    }
-   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FirePostViewHolder {
+   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
       val postCardBinding = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-      return FirePostViewHolder(postCardBinding)
+      return ViewHolder(postCardBinding)
    }
-   override fun onBindViewHolder(holder: FirePostViewHolder, position: Int) {
+   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
       val firePost = getItem(position)
       holder.bind(firePost, onPostClick)
    }
-   class PostDiffCallback : DiffUtil.ItemCallback<FirePost>() {
+   class DiffCallback : DiffUtil.ItemCallback<FirePost>() {
       override fun areItemsTheSame(oldItem: FirePost, newItem: FirePost): Boolean {
          return oldItem.title == newItem.title
       }

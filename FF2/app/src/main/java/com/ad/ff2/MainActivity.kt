@@ -6,10 +6,14 @@ package com.ad.ff2
  import androidx.activity.ComponentActivity
  import androidx.activity.compose.setContent
  import androidx.activity.enableEdgeToEdge
+ import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.foundation.layout.wrapContentSize
  import androidx.compose.runtime.Composable
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
  import androidx.compose.ui.tooling.preview.Preview
  import androidx.compose.ui.tooling.preview.Wallpapers
- import com.ad.ff2.composable.ComposeQuadrant
+ import com.ad.ff2.composable.DiceWithButtonAndImage
  import com.ad.ff2.ui.theme.FF2Theme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +23,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FF2Theme {
-                ComposeQuadrant()
+               DiceWithButtonAndImage(
+                  modifier = Modifier
+                     .fillMaxSize()
+                     .wrapContentSize(Alignment.Center)
+               )
             }
         }
     }
@@ -33,6 +41,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Preview() {
     FF2Theme {
-        ComposeQuadrant()
+       DiceWithButtonAndImage(
+          modifier = Modifier
+             .fillMaxSize()
+             .wrapContentSize(Alignment.Center)
+       )
     }
 }

@@ -18,4 +18,5 @@
     <string name="title4">Row composable</string>
     <string name="title4_desc">A layout composable that places its children in a horizontal sequence.</string>
     <string name="title_activity_business_card">BusinessCard</string>
+    <string name="roll">Roll</string>
 </resources>

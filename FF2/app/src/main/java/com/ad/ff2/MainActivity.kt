@@ -14,6 +14,7 @@ package com.ad.ff2
  import androidx.compose.ui.tooling.preview.Preview
  import androidx.compose.ui.tooling.preview.Wallpapers
  import com.ad.ff2.composable.DiceWithButtonAndImage
+ import com.ad.ff2.composable.LemonadeWithTextAndImage
  import com.ad.ff2.ui.theme.FF2Theme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FF2Theme {
-               DiceWithButtonAndImage(
+               LemonadeWithTextAndImage(
                   modifier = Modifier
                      .fillMaxSize()
                      .wrapContentSize(Alignment.Center)

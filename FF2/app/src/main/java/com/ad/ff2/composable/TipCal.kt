@@ -2,6 +2,7 @@ package com.ad.ff2.composable
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,7 +50,7 @@ fun TipTimeLayout() {
    // Screen UI state
    val amount = amountInput.toDoubleOrNull() ?: 0.0
    val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
-   val tip = calculateTip(amount, tipPercent, roundUp)
+   val tip = calculateTip1(amount, tipPercent, roundUp)
 
    Column(
       modifier = Modifier
@@ -112,7 +113,8 @@ fun TipTimeLayout() {
  * according to the local currency.
  * Example would be "$10.00".
  */
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
    amount: Double,
    tipPercent: Double = 15.0,
    roundUp: Boolean
@@ -174,4 +176,13 @@ fun TipTimeLayoutPreview() {
 
 private fun roundToNearestThousand(amount: Int): Int {
    return ((amount + 500) / 1000) * 1000
+}
+
+@VisibleForTesting
+internal fun calculateTip1(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
+   var tip = tipPercent / 100 * amount
+   if (roundUp) {
+      tip = kotlin.math.ceil(tip)
+   }
+   return NumberFormat.getCurrencyInstance().format(tip)
 }

@@ -5,8 +5,8 @@ package com.ad.ff2
  import androidx.activity.ComponentActivity
  import androidx.activity.compose.setContent
  import androidx.activity.enableEdgeToEdge
- import com.ad.ff2.gridcourse.TopicCourseLayout
- import com.ad.ff2.ui.theme.FF2Theme
+ import com.ad.ff2.ui.theme.WoofTheme
+ import com.ad.ff2.woof.WoofApp
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -14,8 +14,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            FF2Theme {
-               TopicCourseLayout()
+           WoofTheme {
+              WoofApp()
             }
         }
     }

@@ -132,3 +132,35 @@ private fun setUpEdgeToEdge(view: View, darkTheme: Boolean) {
     controller.isAppearanceLightStatusBars = !darkTheme
     controller.isAppearanceLightNavigationBars = !darkTheme
 }
+
+@Composable
+fun SuperheroesTheme(
+   darkTheme: Boolean = isSystemInDarkTheme(),
+   // Dynamic color is available on Android 12+
+   // Dynamic color in this app is turned off for learning purposes
+   dynamicColor: Boolean = false,
+   content: @Composable () -> Unit
+) {
+   val colorScheme = when {
+      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+         val context = LocalContext.current
+         if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+      }
+
+      darkTheme -> DarkColors
+      else -> LightColors
+   }
+   val view = LocalView.current
+   if (!view.isInEditMode) {
+      SideEffect {
+         setUpEdgeToEdge(view, darkTheme)
+      }
+   }
+
+   MaterialTheme(
+      colorScheme = colorScheme,
+      typography = TypographyHero,
+      shapes = ShapesHero,
+      content = content
+   )
+}

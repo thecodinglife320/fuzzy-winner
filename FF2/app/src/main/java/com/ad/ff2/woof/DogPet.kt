@@ -210,10 +210,10 @@ fun DogHobby(
 /**
  * Composable that displays what the UI of the app looks like in light theme in the design tab.
  */
-@Preview(device = "id:4.7in WXGA")
+@Preview(device = "id:4.7in WXGA", showSystemUi = true)
 @Composable
 fun WoofPreview() {
-   WoofTheme(darkTheme = false) {
+   WoofTheme(darkTheme = true) {
       WoofApp()
    }
 }

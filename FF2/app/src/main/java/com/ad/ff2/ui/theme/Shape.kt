@@ -13,3 +13,9 @@ val Shapes = Shapes(
       bottomEnd = 15.dp,
    )
 )
+
+val ShapesHero = Shapes(
+   small = RoundedCornerShape(8.dp),
+   medium = RoundedCornerShape(16.dp),
+   large = RoundedCornerShape(16.dp)
+)

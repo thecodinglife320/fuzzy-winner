@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "FF2"
 include(":app")
 include(":tipofwellness")
+include(":dessertshop")

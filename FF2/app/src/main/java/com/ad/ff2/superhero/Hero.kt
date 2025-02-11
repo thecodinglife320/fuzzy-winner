@@ -5,3 +5,5 @@ data class Hero(
    val descriptionRes: Int,
    val imageRes: Int
 )
+
+

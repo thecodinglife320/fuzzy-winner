@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.ad.dessertshop.ui.compose.DessertShopApp
 import com.ad.dessertshop.ui.theme.FF2Theme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +22,7 @@ class MainActivity : ComponentActivity() {
       enableEdgeToEdge()
       setContent {
          FF2Theme {
-            // A surface container using the 'background' color from the theme
-            //DessertShop()
+            DessertShopApp()
          }
       }
       Log.d(TAG, "onCreate Called")

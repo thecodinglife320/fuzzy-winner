@@ -62,8 +62,8 @@ class DessertShopViewModel : ViewModel() {
             Intent.EXTRA_TEXT,
             intentContext.getString(
                R.string.share_text,
-               uiStateFlow.value.dessertsSold,
-               uiStateFlow.value.revenue
+               _uiStateFlow.value.dessertsSold,
+               _uiStateFlow.value.revenue
             )
          )
          type = "text/plain"

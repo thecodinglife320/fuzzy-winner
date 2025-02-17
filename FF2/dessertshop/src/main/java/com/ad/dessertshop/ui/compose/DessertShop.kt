@@ -36,7 +36,7 @@ import com.ad.dessertshop.ui.stateholder.DessertShopViewModel
 import com.ad.dessertshop.ui.theme.FF2Theme
 
 @Composable
-fun TopAppBar(
+private fun TopAppBar(
    onShareButtonClicked: () -> Unit,
    modifier: Modifier = Modifier
 ) {

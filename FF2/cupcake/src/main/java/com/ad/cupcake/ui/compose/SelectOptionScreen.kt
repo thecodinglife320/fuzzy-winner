@@ -29,7 +29,8 @@ import com.ad.cupcake.R
 private fun ButtonSection(
    modifier: Modifier = Modifier,
    onCancelButtonClicked: () -> Unit,
-   onNextButtonClicked: () -> Unit
+   onNextButtonClicked: () -> Unit,
+   selectedValue: String
 ) {
    Row(modifier = modifier) {
 
@@ -47,6 +48,7 @@ private fun ButtonSection(
       Button(
          onClick = onNextButtonClicked,
          modifier = Modifier.weight(1f),
+         enabled = selectedValue.isNotEmpty(),
       ) {
          Text(stringResource(R.string.next))
       }
@@ -58,10 +60,10 @@ private fun Flavors_PickUpDate(
    subtotal: String,
    options: List<String>,
    modifier: Modifier = Modifier,
-   onSelectionChanged: (String) -> Unit = {}
+   onSelectionChanged: (String) -> Unit,
+   onValueChange: (String) -> Unit,
+   selectedValue: String
 ) {
-
-   var selectedValue by rememberSaveable { mutableStateOf("") }
 
    Column(modifier = modifier) {
 
@@ -74,7 +76,7 @@ private fun Flavors_PickUpDate(
                RadioButton(
                   selected = option == selectedValue,
                   onClick = {
-                     selectedValue = option
+                     onValueChange(option)
                      onSelectionChanged(option)
                   },
                   modifier.testTag(option)
@@ -85,7 +87,7 @@ private fun Flavors_PickUpDate(
       }
 
       HorizontalDivider(
-         thickness = 2.dp,
+         thickness = dimensionResource(R.dimen.thickness_divider),
          modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium))
       )
 
@@ -113,16 +115,21 @@ fun SelectOptionScreen(
    modifier: Modifier = Modifier,
 ) {
 
+   var selectedValue by rememberSaveable { mutableStateOf("") }
+
    Column(modifier) {
       Flavors_PickUpDate(
          subtotal = subtotal,
          options = options,
-         onSelectionChanged = onSelectionChanged
+         onSelectionChanged = onSelectionChanged,
+         onValueChange = { newValue -> selectedValue = newValue },
+         selectedValue = selectedValue
       )
       Spacer(Modifier.height(300.dp))
       ButtonSection(
          onCancelButtonClicked = onCancelButtonClicked,
-         onNextButtonClicked = onNextButtonClicked
+         onNextButtonClicked = onNextButtonClicked,
+         selectedValue = selectedValue
       )
    }
 }

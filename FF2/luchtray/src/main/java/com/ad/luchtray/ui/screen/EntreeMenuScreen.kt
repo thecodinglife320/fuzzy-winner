@@ -47,7 +47,7 @@ fun EntreeMenuScreen(
 
 @Preview
 @Composable
-fun EntreeMenuPreview() {
+private fun EntreeMenuPreview() {
    AppTheme(dynamicColor = false) {
       EntreeMenuScreen(
          options = DataSource.entreeMenuItems,
@@ -55,8 +55,8 @@ fun EntreeMenuPreview() {
          onNextButtonClicked = {},
          onSelectionChanged = {},
          modifier = Modifier
-             .padding(dimensionResource(R.dimen.padding_medium))
-             .verticalScroll(rememberScrollState())
+            .padding(dimensionResource(R.dimen.padding_medium))
+            .verticalScroll(rememberScrollState())
       )
    }
 }

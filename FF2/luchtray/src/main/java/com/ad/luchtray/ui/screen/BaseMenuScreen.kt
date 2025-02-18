@@ -19,6 +19,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.ad.luchtray.R
@@ -46,14 +47,14 @@ fun BaseMenuScreen(
             selectedItemName = selectedItemName,
             onClick = onClick,
             modifier = Modifier
-                .selectable(
-                    selected = selectedItemName == item.name,
-                    onClick = onClick
-                )
-                .padding(
-                    start = dimensionResource(R.dimen.padding_medium),
-                    end = dimensionResource(R.dimen.padding_medium),
-                )
+               .selectable(
+                  selected = selectedItemName == item.name,
+                  onClick = onClick
+               )
+               .padding(
+                  start = dimensionResource(R.dimen.padding_medium),
+                  end = dimensionResource(R.dimen.padding_medium),
+               )
          )
       }
 
@@ -65,8 +66,8 @@ fun BaseMenuScreen(
             onNextButtonClicked()
          },
          modifier = Modifier
-             .fillMaxWidth()
-             .padding(dimensionResource(R.dimen.padding_medium))
+            .fillMaxWidth()
+            .padding(dimensionResource(R.dimen.padding_medium))
       )
    }
 }
@@ -84,7 +85,8 @@ fun MenuItemRow(
    ) {
       RadioButton(
          selected = selectedItemName == item.name,
-         onClick = onClick
+         onClick = onClick,
+         Modifier.testTag(item.name)
       )
       Column(
          verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))

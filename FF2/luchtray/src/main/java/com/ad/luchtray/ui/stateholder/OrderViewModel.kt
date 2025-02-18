@@ -28,30 +28,30 @@ class OrderViewModel : ViewModel() {
 
    private val taxRate = 0.08
 
-   private val _uiState = MutableStateFlow(OrderUiState())
-   val uiState: StateFlow<OrderUiState> = _uiState.asStateFlow()
+   private val _uiStateFlow = MutableStateFlow(OrderUiState())
+   val uiStateFlow: StateFlow<OrderUiState> = _uiStateFlow.asStateFlow()
 
    fun updateEntree(entree: MenuItem.EntreeItem) {
-      val previousEntree = _uiState.value.entree
+      val previousEntree = _uiStateFlow.value.entree
       updateItem(entree, previousEntree)
    }
 
    fun updateSideDish(sideDish: MenuItem.SideDishItem) {
-      val previousSideDish = _uiState.value.sideDish
+      val previousSideDish = _uiStateFlow.value.sideDish
       updateItem(sideDish, previousSideDish)
    }
 
    fun updateAccompaniment(accompaniment: MenuItem.AccompanimentItem) {
-      val previousAccompaniment = _uiState.value.accompaniment
+      val previousAccompaniment = _uiStateFlow.value.accompaniment
       updateItem(accompaniment, previousAccompaniment)
    }
 
    fun resetOrder() {
-      _uiState.value = OrderUiState()
+      _uiStateFlow.value = OrderUiState()
    }
 
    private fun updateItem(newItem: MenuItem, previousItem: MenuItem?) {
-      _uiState.update { currentState ->
+      _uiStateFlow.update { currentState ->
          val previousItemPrice = previousItem?.price ?: 0.0
          // subtract previous item price in case an item of this category was already added.
          val itemTotalPrice = currentState.itemTotalPrice - previousItemPrice + newItem.price

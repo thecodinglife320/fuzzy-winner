@@ -38,13 +38,13 @@ fun StartOrderScreen(
 
 @Preview(device = "id:4.7in WXGA", showSystemUi = true)
 @Composable
-fun StartOrderPreview() {
+private fun StartOrderPreview() {
    AppTheme(darkTheme = true, dynamicColor = false) {
       StartOrderScreen(
          onStartOrderButtonClicked = {},
          modifier = Modifier
-             .padding(dimensionResource(R.dimen.padding_medium))
-             .fillMaxSize()
+            .padding(dimensionResource(R.dimen.padding_medium))
+            .fillMaxSize()
       )
    }
 }

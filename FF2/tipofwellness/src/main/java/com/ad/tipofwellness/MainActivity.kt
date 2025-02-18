@@ -111,7 +111,7 @@ fun TipItem(tip: Tip, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun ItemPreview() {
-   AppTheme(darkTheme = false) {
+   AppTheme(darkTheme = true) {
       AppLayout()
    }
 

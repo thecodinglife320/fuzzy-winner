@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ad.unscrambleword.R
 import com.ad.unscrambleword.ui.GameViewModel
-import com.ad.unscrambleword.ui.theme.FF2Theme
 
 @Composable
 fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
@@ -163,7 +162,7 @@ private fun GameLayout(
          )
          Text(
             text = currentScrambledWord,
-            style = typography.displayMedium
+            style = typography.displayMedium,
          )
          Text(
             text = stringResource(R.string.instructions),
@@ -228,10 +227,8 @@ private fun FinalScoreDialog(
    )
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 private fun GameScreenPreview() {
-   FF2Theme {
       GameScreen()
-   }
 }

@@ -1,6 +1,7 @@
 package com.ad.luchtray.model
 
 import java.text.NumberFormat
+import java.util.Locale
 
 sealed class MenuItem(
    open val name: String,
@@ -33,5 +34,5 @@ sealed class MenuItem(
     * Getter method for price.
     * Includes formatting.
     */
-   fun getFormattedPrice(): String = NumberFormat.getCurrencyInstance().format(price)
+   fun getFormattedPrice(): String = NumberFormat.getCurrencyInstance(Locale.US).format(price)
 }

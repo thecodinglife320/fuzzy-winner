@@ -31,7 +31,7 @@ fun SideDishMenuScreen(
 
 @Preview
 @Composable
-fun SideDishMenuPreview() {
+private fun SideDishMenuPreview() {
    SideDishMenuScreen(
       options = DataSource.sideDishMenuItems,
       onNextButtonClicked = {},

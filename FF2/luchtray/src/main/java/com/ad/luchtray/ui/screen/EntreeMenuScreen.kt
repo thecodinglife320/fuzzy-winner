@@ -45,10 +45,10 @@ fun EntreeMenuScreen(
    )
 }
 
-@Preview
+@Preview(device = "id:4.7in WXGA")
 @Composable
 private fun EntreeMenuPreview() {
-   AppTheme(dynamicColor = false) {
+   AppTheme {
       EntreeMenuScreen(
          options = DataSource.entreeMenuItems,
          onCancelButtonClicked = {},

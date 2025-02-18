@@ -3,6 +3,8 @@ package com.ad.luchtray.ui
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ad.luchtray.R
 import com.ad.luchtray.datasource.DataSource
 import com.ad.luchtray.ui.screen.EntreeMenuScreen
+import com.ad.luchtray.ui.screen.SideDishMenuScreen
 import com.ad.luchtray.ui.screen.StartOrderScreen
 import com.ad.luchtray.ui.stateholder.OrderViewModel
 import com.ad.luchtray.ui.theme.AppTheme
@@ -111,13 +115,20 @@ fun LunchTrayApp(
                onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
                onNextButtonClicked = { navController.navigate(LunchTrayRoute.SideDishMenu.name) },
                onSelectionChanged = { entree -> viewModel.updateEntree(entree) },
-               modifier = Modifier.fillMaxSize()
+               modifier = Modifier
+                  .padding(dimensionResource(R.dimen.padding_medium))
+                  .verticalScroll(rememberScrollState())
             )
          }
 
          //side dish menu
          composable(route = LunchTrayRoute.SideDishMenu.name) {
-
+            SideDishMenuScreen(
+               options = DataSource.sideDishMenuItems,
+               onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
+               onNextButtonClicked = { navController.navigate(LunchTrayRoute.AccompanimentMenu.name) },
+               onSelectionChanged = { sideDish -> viewModel.updateSideDish(sideDish) },
+            )
          }
 
          //Accompaniment menu
@@ -141,7 +152,7 @@ private fun cancelOrderAndNavigateToStart(
    navController.popBackStack(LunchTrayRoute.Start.name, false)
 }
 
-@Preview(showSystemUi = true)
+@Preview(showSystemUi = true, device = "id:4.7in WXGA")
 @Composable
 fun LunchTrayAppPreview() {
    AppTheme {

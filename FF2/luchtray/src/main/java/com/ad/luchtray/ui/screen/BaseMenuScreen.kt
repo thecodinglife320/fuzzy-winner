@@ -73,7 +73,7 @@ fun BaseMenuScreen(
 }
 
 @Composable
-fun MenuItemRow(
+private fun MenuItemRow(
    item: MenuItem,
    selectedItemName: String,
    onClick: () -> Unit,
@@ -93,7 +93,7 @@ fun MenuItemRow(
       ) {
          Text(
             text = item.name,
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.titleLarge
          )
          Text(
             text = item.description,
@@ -101,7 +101,7 @@ fun MenuItemRow(
          )
          Text(
             text = item.getFormattedPrice(),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
          )
          HorizontalDivider(
             thickness = dimensionResource(R.dimen.thickness_divider),
@@ -112,7 +112,7 @@ fun MenuItemRow(
 }
 
 @Composable
-fun MenuScreenButtonGroup(
+private fun MenuScreenButtonGroup(
    selectedItemName: String,
    onCancelButtonClicked: () -> Unit,
    onNextButtonClicked: () -> Unit,
@@ -123,7 +123,7 @@ fun MenuScreenButtonGroup(
       horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
    ) {
       OutlinedButton(modifier = Modifier.weight(1f), onClick = onCancelButtonClicked) {
-         Text(stringResource(R.string.cancel).uppercase())
+         Text(stringResource(R.string.cancel))
       }
       Button(
          modifier = Modifier.weight(1f),
@@ -131,7 +131,8 @@ fun MenuScreenButtonGroup(
          enabled = selectedItemName.isNotEmpty(),
          onClick = onNextButtonClicked
       ) {
-         Text(stringResource(R.string.next).uppercase())
+         Text(stringResource(R.string.next))
       }
    }
 }
+

@@ -2,7 +2,6 @@ package com.ad.luchtray
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -62,8 +61,15 @@ class LunchTrayNavigationTest {
       navController.assertCurrentRouteName(LunchTrayRoute.SideDishMenu.name)
    }
 
-   //back navigation test case section
+   @Test //pass
+   fun sideDishMenuScreen_clickNextButton_navigateToAccompanimentMenuScreen() {
+      navigateToEntreeMenu()
+      navigateToSideDishMenu()
+      navigateToAccompanimentMenu()
+      navController.assertCurrentRouteName(LunchTrayRoute.AccompanimentMenu.name)
+   }
 
+   //back navigation test case section
    @Test //pass
    fun startApp_verifyBackNavigationNotShownOnStartOrderScreen() {
       val backText = composeTestRule.activity.getString(R.string.back_button)
@@ -90,15 +96,24 @@ class LunchTrayNavigationTest {
       navController.assertCurrentRouteName(LunchTrayRoute.EntreeMenu.name)
    }
 
-   //helper functions
-   private fun clickBackButton() {
-
-      val backText = composeTestRule.activity.getString(R.string.back_button)
-
-      composeTestRule.onNodeWithContentDescription(backText)
-         .performClick()
+   @Test //pass
+   fun accompanimentMenuScreen_clickBackButton_navigateToSideDishMenuScreen() {
+      navigateToEntreeMenu()
+      navigateToSideDishMenu()
+      navigateToAccompanimentMenu()
+      clickBackButton()
+      navController.assertCurrentRouteName(LunchTrayRoute.SideDishMenu.name)
    }
 
+   //cancel order test case section
+   @Test //pass
+   fun cancel_navigatesToStartOrder() {
+      navigateToEntreeMenu()
+      clickCancelButton()
+      navController.assertCurrentRouteName(LunchTrayRoute.Start.name)
+   }
+
+   //helper functions
    private fun navigateToEntreeMenu() {
       composeTestRule.onNodeWithStringId(R.string.start_order)
          .performClick()
@@ -109,13 +124,31 @@ class LunchTrayNavigationTest {
       composeTestRule.onNodeWithTag(DataSource.entreeMenuItems[0].name)
          .performClick()
 
-      //cuộn xuống để hiển thị nút next
+      clickNextButton()
+   }
+
+   private fun navigateToAccompanimentMenu() {
+      composeTestRule.onNodeWithTag(DataSource.sideDishMenuItems[0].name)
+         .performClick()
+
+      clickNextButton()
+   }
+
+   private fun clickCancelButton() {
+      composeTestRule.onNodeWithStringId(R.string.cancel)
+         .performScrollTo()
+         .performClick()
+   }
+
+   private fun clickNextButton() {
       composeTestRule.onNodeWithStringId(R.string.next)
          .performScrollTo()
-         .assertIsDisplayed()
+         .performClick()
+   }
 
-      //nhấn nút next
-      composeTestRule.onNodeWithStringId(R.string.next)
+   private fun clickBackButton() {
+      val backText = composeTestRule.activity.getString(R.string.back_button)
+      composeTestRule.onNodeWithContentDescription(backText)
          .performClick()
    }
 }

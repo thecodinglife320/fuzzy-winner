@@ -15,6 +15,7 @@
  */
 package com.ad.luchtray.ui.stateholder
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.ad.luchtray.model.MenuItem
 import com.ad.luchtray.model.OrderUiState
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.text.NumberFormat
+import java.util.Locale
 
 class OrderViewModel : ViewModel() {
 
@@ -68,8 +70,26 @@ class OrderViewModel : ViewModel() {
          )
       }
    }
+
+   fun saveOrderToFile(context: Context) {
+      val order = _uiStateFlow.value
+      val stringBuilder = StringBuilder()
+
+      stringBuilder.apply {
+         appendLine("Order Summary")
+         appendLine("Entree: ${order.entree?.name}")
+         appendLine("Side Dish: ${order.sideDish?.name}")
+         appendLine("Accompaniment: ${order.accompaniment?.name}")
+         appendLine("Total: ${order.orderTotalPrice.formatPrice()}")
+         appendLine("*********************************************")
+      }
+
+      context.openFileOutput("order.txt", Context.MODE_APPEND).use { output ->
+         output.write(stringBuilder.toString().toByteArray())
+      }
+   }
 }
 
 fun Double.formatPrice(): String {
-   return NumberFormat.getCurrencyInstance().format(this)
+   return NumberFormat.getCurrencyInstance(Locale.US).format(this)
 }

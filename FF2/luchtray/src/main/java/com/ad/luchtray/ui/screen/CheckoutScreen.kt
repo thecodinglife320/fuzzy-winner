@@ -24,7 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -55,15 +55,16 @@ fun CheckoutScreen(
    ) {
       Text(
          text = stringResource(R.string.order_summary),
-         fontWeight = FontWeight.Bold
+         fontWeight = FontWeight.Bold,
+         style = MaterialTheme.typography.titleLarge
       )
       ItemSummary(item = orderUiState.entree, modifier = Modifier.fillMaxWidth())
       ItemSummary(item = orderUiState.sideDish, modifier = Modifier.fillMaxWidth())
       ItemSummary(item = orderUiState.accompaniment, modifier = Modifier.fillMaxWidth())
 
-      Divider(
-         thickness = dimensionResource(R.dimen.thickness_divider),
-         modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_small))
+      HorizontalDivider(
+         modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_small)),
+         thickness = dimensionResource(R.dimen.thickness_divider)
       )
 
       OrderSubCost(
@@ -112,8 +113,15 @@ fun ItemSummary(
       modifier = modifier,
       horizontalArrangement = Arrangement.SpaceBetween
    ) {
-      Text(item?.name ?: "", color = MaterialTheme.colorScheme.primary)
-      Text(item?.getFormattedPrice() ?: "")
+      Text(
+         item?.name ?: "",
+         color = MaterialTheme.colorScheme.primary,
+         style = MaterialTheme.typography.bodyLarge
+      )
+      Text(
+         item?.getFormattedPrice() ?: "",
+         style = MaterialTheme.typography.bodyLarge
+      )
    }
 }
 
@@ -129,7 +137,7 @@ fun OrderSubCost(
    )
 }
 
-@Preview(showSystemUi = true)
+@Preview(showSystemUi = true, device = "id:4.7in WXGA")
 @Composable
 fun CheckoutScreenPreview() {
    AppTheme(darkTheme = false) {

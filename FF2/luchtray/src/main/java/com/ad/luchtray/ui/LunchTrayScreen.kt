@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +32,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ad.luchtray.R
 import com.ad.luchtray.datasource.DataSource
 import com.ad.luchtray.ui.screen.AccompanimentMenuScreen
+import com.ad.luchtray.ui.screen.CheckoutScreen
 import com.ad.luchtray.ui.screen.EntreeMenuScreen
 import com.ad.luchtray.ui.screen.SideDishMenuScreen
 import com.ad.luchtray.ui.screen.StartOrderScreen
@@ -151,6 +153,15 @@ fun LunchTrayApp(
          //checkout
          composable(route = LunchTrayRoute.Checkout.name) {
 
+            val context = LocalContext.current
+            CheckoutScreen(
+               orderUiState = uiState,
+               onNextButtonClicked = { viewModel.saveOrderToFile(context) },
+               onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
+               modifier = Modifier
+                  .padding(dimensionResource(R.dimen.padding_medium))
+                  .verticalScroll(rememberScrollState())
+            )
          }
       }
    }

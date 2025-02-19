@@ -46,7 +46,7 @@ fun AccompanimentMenuScreen(
 
 @Preview
 @Composable
-fun AccompanimentMenuPreview() {
+private fun AccompanimentMenuPreview() {
    AccompanimentMenuScreen(
       options = DataSource.accompanimentMenuItems,
       onNextButtonClicked = {},

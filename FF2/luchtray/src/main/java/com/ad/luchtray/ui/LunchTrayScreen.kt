@@ -30,6 +30,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ad.luchtray.R
 import com.ad.luchtray.datasource.DataSource
+import com.ad.luchtray.ui.screen.AccompanimentMenuScreen
 import com.ad.luchtray.ui.screen.EntreeMenuScreen
 import com.ad.luchtray.ui.screen.SideDishMenuScreen
 import com.ad.luchtray.ui.screen.StartOrderScreen
@@ -128,12 +129,23 @@ fun LunchTrayApp(
                onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
                onNextButtonClicked = { navController.navigate(LunchTrayRoute.AccompanimentMenu.name) },
                onSelectionChanged = { sideDish -> viewModel.updateSideDish(sideDish) },
+               modifier = Modifier
+                  .padding(dimensionResource(R.dimen.padding_medium))
+                  .verticalScroll(rememberScrollState())
             )
          }
 
          //Accompaniment menu
          composable(route = LunchTrayRoute.AccompanimentMenu.name) {
-
+            AccompanimentMenuScreen(
+               options = DataSource.accompanimentMenuItems,
+               onCancelButtonClicked = { cancelOrderAndNavigateToStart(viewModel, navController) },
+               onNextButtonClicked = { navController.navigate(LunchTrayRoute.Checkout.name) },
+               onSelectionChanged = { accompaniment -> viewModel.updateAccompaniment(accompaniment) },
+               modifier = Modifier
+                  .padding(dimensionResource(R.dimen.padding_medium))
+                  .verticalScroll(rememberScrollState())
+            )
          }
 
          //checkout

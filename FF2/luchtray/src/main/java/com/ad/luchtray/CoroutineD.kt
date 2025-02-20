@@ -6,7 +6,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-@OptIn(ExperimentalStdlibApi::class)
 fun main() {
    var job: Job
    runBlocking {
@@ -20,7 +19,7 @@ fun main() {
             }
          }
 
-         launch() {
+         launch {
             delay(1000)
             println("20 results found.")
          }

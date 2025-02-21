@@ -40,13 +40,11 @@ class MarsViewModel(
       getMarsPhotos()
    }
 
-   private fun getMarsPhotos() {
+   fun getMarsPhotos() {
       viewModelScope.launch {
          marsUiState = try {
 
-            val listResult = marsPhotosRepository.getMarsPhotos()
-
-            MarsUiState.Success("Success: ${listResult.size} Mars photos retrieved")
+            MarsUiState.Success(marsPhotosRepository.getMarsPhotos())
 
          } catch (e: Exception) {
             Log.d("MarsViewModel", "Failure: ${e.cause}")

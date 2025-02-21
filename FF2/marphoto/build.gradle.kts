@@ -81,6 +81,9 @@ dependencies {
    //retrofit converter
    implementation(libs.converter.gson)
 
+   //coil
+   implementation(libs.coil.compose)
+
    //testing
    testImplementation(libs.junit.junit)
    testImplementation(libs.kotlinx.coroutines.test)

@@ -23,7 +23,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -34,7 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.marsphotos.R
 import com.example.marsphotos.ui.screens.HomeScreen
-import com.example.marsphotos.ui.screens.MarsViewModel
+import com.example.marsphotos.ui.stateholder.MarsViewModel
 
 @Composable
 fun MarsPhotosApp() {
@@ -43,15 +42,12 @@ fun MarsPhotosApp() {
       modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
       topBar = { MarsTopAppBar(scrollBehavior = scrollBehavior) }
    ) {
-      Surface(
+      val marsViewModel: MarsViewModel = viewModel(factory = MarsViewModel.Factory)
+      HomeScreen(
+         marsUiState = marsViewModel.marsUiState,
+         contentPadding = it,
          modifier = Modifier.fillMaxSize()
-      ) {
-         val marsViewModel: MarsViewModel = viewModel()
-         HomeScreen(
-            marsUiState = marsViewModel.marsUiState,
-            contentPadding = it,
-         )
-      }
+      )
    }
 }
 

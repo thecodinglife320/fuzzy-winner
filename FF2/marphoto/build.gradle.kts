@@ -75,6 +75,12 @@ dependencies {
    implementation(libs.androidx.lifecycle.runtime.ktx)
    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
+   //network
+   implementation(libs.retrofit)
+
+   //retrofit converter
+   implementation(libs.converter.gson)
+
    debugImplementation(libs.ui.test.manifest)
    debugImplementation(libs.ui.tooling)
 }

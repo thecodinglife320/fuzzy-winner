@@ -52,7 +52,7 @@ dependencies {
    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
    //testing
-   testImplementation(libs.junit)
+   testImplementation(libs.junit.junit)
    testImplementation(libs.junit.junit)
    testImplementation(libs.androidx.ui.android)
 

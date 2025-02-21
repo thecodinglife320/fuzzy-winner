@@ -52,7 +52,7 @@ dependencies {
    implementation(libs.androidx.material3)
 
    //testing
-   testImplementation(libs.junit)
+   testImplementation(libs.junit.junit)
    testImplementation(libs.junit.junit)
 
    androidTestImplementation(libs.androidx.junit)

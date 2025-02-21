@@ -81,6 +81,10 @@ dependencies {
    //retrofit converter
    implementation(libs.converter.gson)
 
+   //testing
+   testImplementation(libs.junit.junit)
+   testImplementation(libs.kotlinx.coroutines.test)
+
    debugImplementation(libs.ui.test.manifest)
    debugImplementation(libs.ui.tooling)
 }

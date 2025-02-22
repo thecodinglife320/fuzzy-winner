@@ -100,14 +100,6 @@ fun TipItem(tip: Tip, modifier: Modifier = Modifier) {
    }
 }
 
-//@Preview(showBackground = true, showSystemUi = true, device = "id:4.7in WXGA")
-//@Composable
-//fun GreetingPreview() {
-//   AppTheme {
-//      TipItem(Tip(R.string.tip1_title, R.string.tip1_desc, R.drawable.pic1,1))
-//   }
-//}
-
 @Preview
 @Composable
 fun ItemPreview() {

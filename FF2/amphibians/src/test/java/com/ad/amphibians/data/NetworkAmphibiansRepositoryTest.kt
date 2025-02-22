@@ -7,6 +7,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class NetworkAmphibiansRepositoryTest {
+
    @Test
    fun networkAmphibiansRepository_getAmphibians_verifyPhotoList() =
       runTest {

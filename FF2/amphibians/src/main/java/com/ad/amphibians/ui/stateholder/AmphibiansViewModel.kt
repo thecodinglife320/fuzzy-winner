@@ -24,7 +24,7 @@ class AmphibiansViewModel(
       getAmphibians()
    }
 
-   private fun getAmphibians() {
+   fun getAmphibians() {
       viewModelScope.launch {
          amphibiansUiState = try {
 

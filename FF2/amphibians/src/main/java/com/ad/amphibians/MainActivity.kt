@@ -5,7 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.ad.amphibians.ui.theme.FF2Theme
+import com.ad.amphibians.ui.AmphibiansApp
+import com.ad.amphibians.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -13,7 +14,8 @@ class MainActivity : ComponentActivity() {
       super.onCreate(savedInstanceState)
       enableEdgeToEdge()
       setContent {
-         FF2Theme {
+         AppTheme {
+            AmphibiansApp()
          }
       }
    }

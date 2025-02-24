@@ -18,7 +18,7 @@ package com.example.inventory
 
 import android.app.Application
 import com.example.inventory.data.AppContainer
-import com.example.inventory.data.AppDataContainer
+import com.example.inventory.data.OfflineDataContainer
 
 class InventoryApplication : Application() {
 
@@ -29,6 +29,6 @@ class InventoryApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        container = AppDataContainer(this)
+        container = OfflineDataContainer(this)
     }
 }

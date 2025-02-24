@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.inventory.ui.item
+package com.example.inventory.ui.item.detail
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -55,6 +55,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.inventory.InventoryTopAppBar
 import com.example.inventory.R
 import com.example.inventory.data.Item
+import com.example.inventory.ui.item.entry.formatedPrice
+import com.example.inventory.ui.item.entry.toItem
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 
@@ -237,7 +239,12 @@ fun ItemDetailsScreenPreview() {
         ItemDetailsBody(
             ItemDetailsUiState(
                 outOfStock = true,
-                itemDetails = ItemDetails(1, "Pen", "$100", "10")
+                itemDetails = com.example.inventory.ui.item.entry.ItemDetails(
+                    1,
+                    "Pen",
+                    "$100",
+                    "10"
+                )
             ),
             onSellItem = {},
             onDelete = {}

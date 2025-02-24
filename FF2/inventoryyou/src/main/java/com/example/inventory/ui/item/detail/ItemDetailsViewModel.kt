@@ -14,33 +14,31 @@
  * limitations under the License.
  */
 
-package com.example.inventory.ui.item
+package com.example.inventory.ui.item.detail
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.inventory.data.ItemsRepository
+import com.example.inventory.ui.item.entry.ItemDetails
 
 /**
- * ViewModel to retrieve and update an item from the [ItemsRepository]'s data source.
+ * ViewModel to retrieve, update and delete an item from the [ItemsRepository]'s data source.
  */
-class ItemEditViewModel(
+class ItemDetailsViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    /**
-     * Holds current item ui state
-     */
-    var itemUiState by mutableStateOf(ItemUiState())
-        private set
+    private val itemId: Int = checkNotNull(savedStateHandle[ItemDetailsDestination.itemIdArg])
 
-    private val itemId: Int = checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
-
-    private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
-        return with(uiState) {
-            name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
-        }
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
     }
 }
+
+/**
+ * UI state for ItemDetailsScreen
+ */
+data class ItemDetailsUiState(
+    val outOfStock: Boolean = true,
+    val itemDetails: ItemDetails = ItemDetails(),
+)

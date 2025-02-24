@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 
-package com.example.inventory.ui.item
+package com.example.inventory.ui.item.entry
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.inventory.data.Item
+import com.example.inventory.data.ItemsRepository
 import java.text.NumberFormat
+import java.util.Locale
 
 /**
  * ViewModel to validate and insert items in the Room database.
  */
-class ItemEntryViewModel : ViewModel() {
+class ItemEntryViewModel(
+    private val itemsRepository: ItemsRepository,
+) : ViewModel() {
 
     /**
      * Holds current item ui state
@@ -43,10 +47,21 @@ class ItemEntryViewModel : ViewModel() {
             ItemUiState(itemDetails = itemDetails, isEntryValid = validateInput(itemDetails))
     }
 
-    private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
-        return with(uiState) {
+    private fun validateInput(itemDetails: ItemDetails = itemUiState.itemDetails): Boolean {
+
+        val emptyCheck = with(itemDetails) {
             name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
         }
+
+        val positiveCheck = with(itemDetails.toItem()) {
+            price > 0 && quantity > 0
+        }
+
+        return positiveCheck && emptyCheck
+    }
+
+    suspend fun saveItem() {
+        if (validateInput()) itemsRepository.insertItem(itemUiState.itemDetails.toItem())
     }
 }
 
@@ -58,6 +73,7 @@ data class ItemUiState(
     val isEntryValid: Boolean = false,
 )
 
+//model when interact with app
 data class ItemDetails(
     val id: Int = 0,
     val name: String = "",
@@ -78,7 +94,7 @@ fun ItemDetails.toItem(): Item = Item(
 )
 
 fun Item.formatedPrice(): String {
-    return NumberFormat.getCurrencyInstance().format(price)
+    return NumberFormat.getCurrencyInstance(Locale.US).format(price)
 }
 
 /**

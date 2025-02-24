@@ -25,7 +25,7 @@ class BookShelfViewModel(
       searchBooks()
    }
 
-   private fun searchBooks(searchTerm: String = "jetpack compose") {
+   fun searchBooks(searchTerm: String = "jetpack compose") {
 
       val books = mutableListOf<Book>()
 
@@ -38,6 +38,7 @@ class BookShelfViewModel(
 
             BookShelfUiState.Success(books)
          } catch (e: Exception) {
+            println(e.message)
             BookShelfUiState.Error
          }
       }

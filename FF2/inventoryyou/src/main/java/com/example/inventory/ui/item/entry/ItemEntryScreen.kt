@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -128,7 +129,7 @@ private fun ItemInputForm(
     itemDetails: ItemDetails,
     modifier: Modifier = Modifier,
     onValueChange: (ItemDetails) -> Unit = {},
-    enabled: Boolean = true,
+    enabled: Boolean = true
 ) {
     Column(
         modifier = modifier,
@@ -145,12 +146,18 @@ private fun ItemInputForm(
             ),
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Next
+            )
         )
         OutlinedTextField(
             value = itemDetails.price,
             onValueChange = { priceInput -> onValueChange(itemDetails.copy(price = priceInput)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Decimal,
+                imeAction = ImeAction.Next
+            ),
             label = { Text(stringResource(R.string.item_price_req)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -160,12 +167,15 @@ private fun ItemInputForm(
             leadingIcon = { Text(text = Currency.getInstance(Locale.US).symbol) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
         )
         OutlinedTextField(
             value = itemDetails.quantity,
             onValueChange = { quantityInput -> onValueChange(itemDetails.copy(quantity = quantityInput)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
             label = { Text(stringResource(R.string.quantity_req)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,

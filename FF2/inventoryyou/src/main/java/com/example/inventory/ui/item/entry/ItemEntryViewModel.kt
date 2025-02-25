@@ -29,56 +29,56 @@ import java.util.Locale
  * ViewModel to validate and insert items in the Room database.
  */
 open class ItemEntryViewModel(
-    private val itemsRepository: ItemsRepository,
+   protected val itemsRepository: ItemsRepository,
 ) : ViewModel() {
 
-    /**
-     * Holds current item ui state
-     */
-    var itemUiState by mutableStateOf(ItemUiState())
-        private set
+   /**
+    * Holds current item ui state
+    */
+   var itemUiState by mutableStateOf(ItemUiState())
+      protected set
 
-    /**
-     * Updates the [itemUiState] with the value provided in the argument. This method also triggers
-     * a validation for input values.
-     */
-    fun updateUiState(itemDetails: ItemDetails) {
-        itemUiState =
-            ItemUiState(itemDetails = itemDetails, isEntryValid = validateInput(itemDetails))
-    }
+   /**
+    * Updates the [itemUiState] with the value provided in the argument. This method also triggers
+    * a validation for input values.
+    */
+   fun updateUiState(itemDetails: ItemDetails) {
+      itemUiState =
+         ItemUiState(itemDetails = itemDetails, isEntryValid = validateInput(itemDetails))
+   }
 
-    private fun validateInput(itemDetails: ItemDetails = itemUiState.itemDetails): Boolean {
+   protected fun validateInput(itemDetails: ItemDetails = itemUiState.itemDetails): Boolean {
 
-        val emptyCheck = with(itemDetails) {
-            name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
-        }
+      val emptyCheck = with(itemDetails) {
+         name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
+      }
 
-        val positiveCheck = with(itemDetails.toItem()) {
-            price > 0 && quantity > 0
-        }
+      val positiveCheck = with(itemDetails.toItem()) {
+         price > 0 && quantity > 0
+      }
 
-        return positiveCheck && emptyCheck
-    }
+      return positiveCheck && emptyCheck
+   }
 
-    suspend fun saveItem() {
-        if (validateInput()) itemsRepository.insertItem(itemUiState.itemDetails.toItem())
-    }
+   open suspend fun saveItem() {
+      if (validateInput()) itemsRepository.insertItem(itemUiState.itemDetails.toItem())
+   }
 }
 
 /**
  * Represents Ui State for an Item.
  */
 data class ItemUiState(
-    val itemDetails: ItemDetails = ItemDetails(),
-    val isEntryValid: Boolean = false,
+   val itemDetails: ItemDetails = ItemDetails(),
+   val isEntryValid: Boolean = false,
 )
 
 //model when interact with app
 data class ItemDetails(
-    val id: Int = 0,
-    val name: String = "",
-    val price: String = "",
-    val quantity: String = "",
+   val id: Int = 0,
+   val name: String = "",
+   val price: String = "",
+   val quantity: String = "",
 )
 
 /**
@@ -87,30 +87,30 @@ data class ItemDetails(
  * [ItemDetails.quantity] is not a valid [Int], then the quantity will be set to 0
  */
 fun ItemDetails.toItem(): Item = Item(
-    id = id,
-    name = name,
-    price = price.toDoubleOrNull() ?: 0.0,
-    quantity = quantity.toIntOrNull() ?: 0
+   id = id,
+   name = name,
+   price = price.toDoubleOrNull() ?: 0.0,
+   quantity = quantity.toIntOrNull() ?: 0
 )
 
 fun Item.formatedPrice(): String {
-    return NumberFormat.getCurrencyInstance(Locale.US).format(price)
+   return NumberFormat.getCurrencyInstance(Locale.US).format(price)
 }
 
 /**
  * Extension function to convert [Item] to [ItemUiState]
  */
 fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
-    itemDetails = this.toItemDetails(),
-    isEntryValid = isEntryValid
+   itemDetails = this.toItemDetails(),
+   isEntryValid = isEntryValid
 )
 
 /**
  * Extension function to convert [Item] to [ItemDetails]
  */
 fun Item.toItemDetails(): ItemDetails = ItemDetails(
-    id = id,
-    name = name,
-    price = price.toString(),
-    quantity = quantity.toString()
+   id = id,
+   name = name,
+   price = price.toString(),
+   quantity = quantity.toString()
 )

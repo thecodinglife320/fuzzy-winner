@@ -3,8 +3,6 @@ package com.ad.ff2
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
-import com.ad.ff2.composable.TipTimeLayout
-import com.ad.ff2.ui.theme.FF2Theme
 import org.junit.Rule
 import org.junit.Test
 import java.text.NumberFormat
@@ -16,9 +14,6 @@ class TipUITests {
    @Test
    fun calculate_20_percent_tip() {
       composeTestRule.setContent {
-         FF2Theme {
-            TipTimeLayout()
-         }
       }
 
       composeTestRule.onNodeWithText("Bill Amount")

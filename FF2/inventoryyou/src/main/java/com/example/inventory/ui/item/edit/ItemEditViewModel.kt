@@ -17,8 +17,14 @@
 package com.example.inventory.ui.item.edit
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.example.inventory.data.ItemsRepository
 import com.example.inventory.ui.item.entry.ItemEntryViewModel
+import com.example.inventory.ui.item.entry.toItem
+import com.example.inventory.ui.item.entry.toItemUiState
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 /**
  * ViewModel to retrieve and update an item from the [ItemsRepository]'s data source.
@@ -31,12 +37,19 @@ class ItemEditViewModel(
     private val itemId: Int = checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
 
     init {
-//        viewModelScope.launch {
-////            itemUiState = itemsRepository.getItemStream(itemId)
-////                .filterNotNull()
-////                .first()
-////                .toItemUiState(true)
-//        }
+        viewModelScope.launch {
+            itemUiState = itemsRepository.getItemStream(itemId)
+                .filterNotNull()
+                .first()
+                .toItemUiState(true)
+        }
     }
 
+    override suspend fun saveItem() {
+        if (validateInput(itemUiState.itemDetails)) {
+            itemsRepository.updateItem(itemUiState.itemDetails.toItem())
+        }
+    }
 }
+
+

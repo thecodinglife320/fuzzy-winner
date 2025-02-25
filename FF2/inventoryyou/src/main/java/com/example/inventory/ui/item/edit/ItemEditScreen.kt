@@ -64,7 +64,9 @@ fun ItemEditScreen(
         ItemEntryBody(
             itemUiState = viewModel.itemUiState,
             onItemValueChange = { },
-            onSaveClick = { },
+            onSaveClick = {
+                navigateBack()
+            },
             modifier = Modifier
                 .padding(
                     start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),

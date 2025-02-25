@@ -28,7 +28,7 @@ import java.util.Locale
 /**
  * ViewModel to validate and insert items in the Room database.
  */
-class ItemEntryViewModel(
+open class ItemEntryViewModel(
     private val itemsRepository: ItemsRepository,
 ) : ViewModel() {
 

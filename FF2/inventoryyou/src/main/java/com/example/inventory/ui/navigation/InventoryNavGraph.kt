@@ -72,9 +72,11 @@ fun InventoryNavHost(
         }
         composable(
             route = ItemEditDestination.routeWithArgs,
-            arguments = listOf(navArgument(ItemEditDestination.itemIdArg) {
-                type = NavType.IntType
-            })
+            arguments = listOf(
+                navArgument(ItemEditDestination.itemIdArg) {
+                    type = NavType.IntType
+                }
+            )
         ) {
             ItemEditScreen(
                 navigateBack = { navController.popBackStack() },

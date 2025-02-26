@@ -17,41 +17,51 @@ package com.example.busschedule.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.busschedule.data.BusSchedule
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
+import com.example.busschedule.BusScheduleApplication
+import com.example.busschedule.data.BusScheduleDao
+import com.example.busschedule.data.model.BusSchedule
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
-class BusScheduleViewModel : ViewModel() {
+class FullScheduleViewModel(
+   private val scheduleDao: BusScheduleDao
+) : ViewModel() {
 
-   // Get example bus schedule
-   fun getFullSchedule(): Flow<List<BusSchedule>> = flowOf(
-      listOf(
-         BusSchedule(
-            1,
-            "Example Street",
-            0
+   val fullScheduleUiStateFlow =
+      scheduleDao.getFullSchedule()
+         .map {
+            FullScheduleUiState(it)
+         }
+         .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+            initialValue = FullScheduleUiState()
          )
-      )
-   )
-
-   // Get example bus schedule by stop
-   fun getScheduleFor(stopName: String): Flow<List<BusSchedule>> = flowOf(
-      listOf(
-         BusSchedule(
-            1,
-            "Example Street",
-            0
-         )
-      )
-   )
 
    companion object {
       val factory: ViewModelProvider.Factory = viewModelFactory {
          initializer {
-            BusScheduleViewModel()
+            FullScheduleViewModel(
+               scheduleDao = busScheduleApplication().container.busScheduleDao
+            )
          }
       }
+      private const val TIMEOUT_MILLIS = 5_000L
    }
+
 }
+
+fun CreationExtras.busScheduleApplication(): BusScheduleApplication =
+   (this[AndroidViewModelFactory.APPLICATION_KEY] as BusScheduleApplication)
+
+/**
+ * Ui State for FullScheduleScreen
+ */
+data class FullScheduleUiState(val scheduleList: List<BusSchedule> = listOf())
+

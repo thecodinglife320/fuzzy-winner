@@ -17,6 +17,9 @@ package com.example.busschedule.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @Entity(tableName = "Schedule")
 data class BusSchedule(
@@ -35,11 +38,11 @@ data class BusScheduleDetail(
 fun BusSchedule.toBusScheduleDetail(): BusScheduleDetail = BusScheduleDetail(
    id = id,
    stopName = stop_name,
-   arrivalTimeInMillis = arrival_time.toString()
+   arrivalTimeInMillis = this.formatedTime()
 )
 
-/**
- * Ui State for RouteScheduleScreen
- */
-data class RouteScheduleUiState(val itemList: List<BusScheduleDetail> = listOf())
+fun BusSchedule.formatedTime(): String {
+   return SimpleDateFormat("h:mm a", Locale.getDefault())
+      .format(Date(arrival_time.toLong() * 1000))
+}
 

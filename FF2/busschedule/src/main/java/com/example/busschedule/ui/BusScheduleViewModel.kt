@@ -26,6 +26,7 @@ import com.example.busschedule.BusScheduleApplication
 import com.example.busschedule.data.BusScheduleDao
 import com.example.busschedule.data.model.BusSchedule
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
@@ -33,8 +34,10 @@ class FullScheduleViewModel(
    private val scheduleDao: BusScheduleDao
 ) : ViewModel() {
 
-   val fullScheduleUiStateFlow =
-      scheduleDao.getFullSchedule()
+   lateinit var fullScheduleUiStateFlow: StateFlow<FullScheduleUiState>
+
+   fun getFullSchedule() {
+      fullScheduleUiStateFlow = scheduleDao.getFullSchedule()
          .map {
             FullScheduleUiState(it)
          }
@@ -43,6 +46,20 @@ class FullScheduleViewModel(
             started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
             initialValue = FullScheduleUiState()
          )
+   }
+
+   fun getScheduleFor(stopName: String) {
+      fullScheduleUiStateFlow =
+         scheduleDao.getScheduleFor(stopName)
+            .map {
+               FullScheduleUiState(it)
+            }
+            .stateIn(
+               scope = viewModelScope,
+               started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
+               initialValue = FullScheduleUiState()
+            )
+   }
 
    companion object {
       val factory: ViewModelProvider.Factory = viewModelFactory {

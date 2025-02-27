@@ -1,5 +1,6 @@
 package com.example.busschedule.ui.schedule.full
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,29 +14,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.busschedule.BusScheduleTopAppBar
-import com.example.busschedule.R
 import com.example.busschedule.data.model.toBusScheduleDetail
 import com.example.busschedule.ui.FullScheduleViewModel
 import com.example.busschedule.ui.navigation.NavigationDestination
 
 object FullScheduleDestination : NavigationDestination {
    override val route = "full_schedule"
-   override val titleRes = R.string.app_name
 }
 
 @Composable
 fun FullScheduleScreen(
+   onScheduleClick: ((String) -> Unit)? = null,
+   topAppBarText: String,
    navigateUp: () -> Unit,
    canNavigateBack: Boolean,
-   viewModel: FullScheduleViewModel = viewModel(
-      factory = FullScheduleViewModel.factory
-   )
+   isRouteSchedule: Boolean,
+   viewModel: FullScheduleViewModel
 ) {
 
    val fullScheduleUiState by viewModel.fullScheduleUiStateFlow.collectAsState()
@@ -43,7 +40,7 @@ fun FullScheduleScreen(
    Scaffold(
       topBar = {
          BusScheduleTopAppBar(
-            title = stringResource(FullScheduleDestination.titleRes),
+            title = topAppBarText,
             canNavigateBack = canNavigateBack,
             navigateUp = navigateUp,
          )
@@ -58,6 +55,8 @@ fun FullScheduleScreen(
                   run {
                      val scheduleDetail = schedule.toBusScheduleDetail()
                      ScheduleItem(
+                        isRouteSchedule = isRouteSchedule,
+                        onScheduleClick = onScheduleClick,
                         stopName = scheduleDetail.stopName,
                         arrivalTime = scheduleDetail.arrivalTimeInMillis,
                         modifier = Modifier
@@ -76,14 +75,17 @@ fun FullScheduleScreen(
 fun ScheduleItem(
    stopName: String,
    arrivalTime: String,
-   modifier: Modifier = Modifier
+   modifier: Modifier = Modifier,
+   onScheduleClick: ((String) -> Unit)? = null,
+   isRouteSchedule: Boolean
 ) {
    Row(
-      modifier = modifier,
+      modifier = modifier
+         .clickable { onScheduleClick?.invoke(stopName) },
       horizontalArrangement = Arrangement.SpaceBetween
    ) {
       Text(
-         text = stopName,
+         text = if (isRouteSchedule) "---" else stopName,
          modifier = Modifier.weight(1f)
       )
       Text(
@@ -92,12 +94,5 @@ fun ScheduleItem(
          textAlign = TextAlign.End
       )
    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun FullScheduleScreenPreview() {
-   //FullScheduleScreen()
 }
 

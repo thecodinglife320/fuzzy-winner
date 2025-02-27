@@ -110,7 +110,7 @@
 //         }
 //         val busRouteArgument = "busRoute"
 //         composable(
-//            route = BusScheduleScreens.RouteSchedule.name + "/{$busRouteArgument}",
+//            route = "${BusScheduleScreens.RouteSchedule.name}/{$busRouteArgument}",
 //            arguments = listOf(navArgument(busRouteArgument) { type = NavType.StringType })
 //         ) { backStackEntry ->
 //            val stopName = backStackEntry.arguments?.getString(busRouteArgument)

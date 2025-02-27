@@ -42,6 +42,7 @@ android {
 dependencies {
 
    implementation(libs.androidx.core.ktx)
+   implementation("androidx.appcompat:appcompat:1.6.1")
    implementation(libs.androidx.lifecycle.runtime.ktx)
    implementation(libs.androidx.activity.compose)
    implementation(platform(libs.androidx.compose.bom))
@@ -56,4 +57,7 @@ dependencies {
    androidTestImplementation(libs.androidx.ui.test.junit4)
    debugImplementation(libs.androidx.compose.ui.ui.tooling)
    debugImplementation(libs.androidx.ui.test.manifest)
+
+   implementation(libs.core)
+   implementation(libs.custom.ui)
 }

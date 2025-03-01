@@ -2,6 +2,11 @@ plugins {
    alias(libs.plugins.android.application)
    alias(libs.plugins.kotlin.android)
    alias(libs.plugins.kotlin.compose)
+   alias(libs.plugins.google.hilt)
+   alias(libs.plugins.google.services)
+   alias(libs.plugins.google.ksp)
+   alias(libs.plugins.firebase.crashlytics)
+   alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -49,6 +54,9 @@ dependencies {
    implementation(libs.androidx.ui.graphics)
    implementation(libs.androidx.compose.ui.ui.tooling.preview)
    implementation(libs.androidx.compose.material3.material3)
+   implementation(libs.firebase.firestore.ktx)
+   implementation(libs.androidx.constraintlayout.compose)
+   implementation(libs.kotlinx.serialization.json)
    testImplementation(libs.junit.junit)
    androidTestImplementation(libs.androidx.junit)
    androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +64,14 @@ dependencies {
    androidTestImplementation(libs.androidx.ui.test.junit4)
    debugImplementation(libs.androidx.compose.ui.ui.tooling)
    debugImplementation(libs.androidx.ui.test.manifest)
+
+   //Firebase service
+   implementation(platform(libs.firebase.bom))
+   implementation(libs.firebase.auth)
+   implementation(libs.firebase.crashlytics)
+
+   //hilt
+   implementation(libs.hilt.android)
+   ksp(libs.hilt.android.compiler)
+   implementation(libs.androidx.hilt.navigation.compose)
 }

@@ -17,7 +17,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
+   alias(libs.plugins.google.ksp)
     id("org.jetbrains.kotlin.plugin.compose")
 }
 

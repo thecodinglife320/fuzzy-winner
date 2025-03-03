@@ -19,6 +19,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ad.monngonmoingay.data.model.ErrorMessage
+import com.ad.monngonmoingay.ui.home.HomeDestination
+import com.ad.monngonmoingay.ui.home.HomeScreen
 import com.ad.monngonmoingay.ui.login.SignInDestination
 import com.ad.monngonmoingay.ui.login.SignInScreen
 import com.ad.monngonmoingay.ui.signup.SignUpDestination
@@ -49,12 +51,16 @@ class MainActivity : ComponentActivity() {
                ) { innerPadding ->
                   NavHost(
                      navController = navController,
-                     startDestination = SignInDestination.ROUTE,
+                     startDestination = HomeDestination.ROUTE,
                      modifier = Modifier.padding(innerPadding)
                   ) {
                      composable(SignInDestination.ROUTE) {
                         SignInScreen(
-                           openHomeScreen = { println("openHomeScreen") },
+                           openHomeScreen = {
+                              navController.navigate(HomeDestination.ROUTE) {
+                                 launchSingleTop = true
+                              }
+                           },
                            openSignUpScreen = {
                               navController.navigate(SignUpDestination.ROUTE) {
                                  launchSingleTop = true
@@ -68,13 +74,22 @@ class MainActivity : ComponentActivity() {
                      }
                      composable(SignUpDestination.ROUTE) {
                         SignUpScreen(
-                           openHomeScreen = { println("openHomeScreen") },
+                           openHomeScreen = {
+                              navController.navigate(HomeDestination.ROUTE) {
+                                 launchSingleTop = true
+                              }
+                           },
                            showErrorSnackBar = { errorMessage ->
                               val message = getErrorMessage(errorMessage)
                               scope.launch {
                                  snackBarHostState.showSnackbar(message)
                               }
                            },
+                        )
+                     }
+                     composable(HomeDestination.ROUTE) {
+                        HomeScreen(
+                           openSettingsScreen = {},
                         )
                      }
                   }

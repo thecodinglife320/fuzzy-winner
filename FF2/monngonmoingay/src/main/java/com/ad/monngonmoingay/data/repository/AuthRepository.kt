@@ -10,7 +10,7 @@ class AuthRepository @Inject constructor(
    private val authRemoteDataSource: AuthRemoteDataSource
 ) {
    val currentUserIdFlow = authRemoteDataSource.currentUserIdFlow
-   val currentUserFlow = authRemoteDataSource.currentUser
+   val currentUser = authRemoteDataSource.currentUser
 
    suspend fun createGuestAccount() = authRemoteDataSource.createGuestAccount()
 

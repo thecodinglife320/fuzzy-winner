@@ -5,14 +5,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,7 +24,6 @@ import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.Category
 import com.ad.monngonmoingay.data.model.MainIngredient
 import com.ad.monngonmoingay.data.model.Origin
-import com.ad.monngonmoingay.ui.shared.CenterTopAppBar
 import com.ad.monngonmoingay.ui.shared.LoadingIndicator
 import com.ad.monngonmoingay.ui.theme.FF2Theme
 
@@ -40,7 +33,6 @@ object HomeDestination {
 
 @Composable
 fun HomeScreen(
-   openSettingsScreen: () -> Unit,
    viewModel: HomeViewModel = hiltViewModel(),
 ) {
 
@@ -52,7 +44,6 @@ fun HomeScreen(
       LoadingIndicator()
    } else {
       HomeScreenContent(
-         openSettingsScreen,
          origins = origins,
          mainIngredients = mainIngredients,
       )
@@ -64,41 +55,24 @@ fun HomeScreen(
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 fun HomeScreenContent(
-   openSettingsScreen: () -> Unit,
    origins: List<Origin>,
    mainIngredients: List<MainIngredient>,
 ) {
-   val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-
-   Scaffold(
-      topBar = {
-         CenterTopAppBar(
-            title = stringResource(R.string.app_name),
-            icon = Icons.Filled.Settings,
-            iconDescription = "Settings screen icon",
-            action = openSettingsScreen,
-            scrollBehavior = scrollBehavior
+   Column {
+      Text(
+         stringResource(R.string.main_ingredient),
+         modifier = Modifier.padding(start = dimensionResource(R.dimen.small_pading))
+      )
+      CategoryRow(categories = mainIngredients)
+      Text(
+         stringResource(R.string.origin_category), modifier = Modifier.padding(
+            start = dimensionResource(R.dimen.small_pading),
+            top = dimensionResource(R.dimen.small_pading)
          )
-      },
-      content = {
-         Column(Modifier.padding(it)) {
-            Text(
-               stringResource(R.string.main_ingredient),
-               modifier = Modifier.padding(start = dimensionResource(R.dimen.small_pading))
-            )
-            CategoryRow(categories = mainIngredients)
-            Text(
-               stringResource(R.string.origin_category), modifier = Modifier.padding(
-                  start = dimensionResource(R.dimen.small_pading),
-                  top = dimensionResource(R.dimen.small_pading)
-               )
-            )
-            CategoryRow(categories = origins)
-         }
-      },
-   )
+      )
+      CategoryRow(categories = origins)
+   }
 }
 
 @Composable
@@ -137,6 +111,6 @@ fun CategoryRow(categories: List<Category>) {
 @Preview(showSystemUi = true)
 fun HomeScreenPreview() {
    FF2Theme(darkTheme = false) {
-      HomeScreen(openSettingsScreen = {})
+      HomeScreen()
    }
 }

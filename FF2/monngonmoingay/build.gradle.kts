@@ -57,11 +57,15 @@ dependencies {
    implementation(libs.firebase.firestore.ktx)
    implementation(libs.androidx.constraintlayout.compose)
    implementation(libs.kotlinx.serialization.json)
+
    testImplementation(libs.junit.junit)
+   testImplementation(libs.mockk)
+
    androidTestImplementation(libs.androidx.junit)
    androidTestImplementation(libs.androidx.espresso.core)
    androidTestImplementation(platform(libs.androidx.compose.bom))
    androidTestImplementation(libs.androidx.ui.test.junit4)
+
    debugImplementation(libs.androidx.compose.ui.ui.tooling)
    debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -75,5 +79,6 @@ dependencies {
    ksp(libs.hilt.android.compiler)
    implementation(libs.androidx.hilt.navigation.compose)
 
+   //coil
    implementation(libs.coil.compose)
 }

@@ -9,18 +9,20 @@ import javax.inject.Inject
 class AuthRepository @Inject constructor(
    private val authRemoteDataSource: AuthRemoteDataSource
 ) {
-   val currentUserIdFlow = authRemoteDataSource.currentUserIdFlow
-   val currentUser = authRemoteDataSource.currentUser
+   val currentUserIdFlow = authRemoteDataSource.currentUserId
+   val currentUser
+      get() = authRemoteDataSource.currentUser
 
    suspend fun createGuestAccount() = authRemoteDataSource.createGuestAccount()
 
-   suspend fun signIn(email: String, password: String) =
+   suspend fun signIn(email: String, password: String) {
       authRemoteDataSource.signIn(email, password)
+   }
 
    fun signOut() = authRemoteDataSource.signOut()
 
    suspend fun deleteAccount() = authRemoteDataSource.deleteAccount()
 
    suspend fun signUp(email: String, password: String) =
-      authRemoteDataSource.linkAccount(email, password)
+      authRemoteDataSource.signUp(email, password)
 }

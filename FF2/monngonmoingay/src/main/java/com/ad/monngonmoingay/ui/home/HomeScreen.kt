@@ -36,13 +36,15 @@ fun HomeScreen(
    viewModel: HomeViewModel = hiltViewModel(),
 ) {
 
-   val isLoadingUser by viewModel.isLoadingUserFlow.collectAsStateWithLifecycle()
-   val mainIngredients by viewModel.mainIngredientsFlow.collectAsStateWithLifecycle(emptyList())
-   val origins by viewModel.originsFlow.collectAsStateWithLifecycle(emptyList())
+   val isLoadingUser by viewModel.isLoadingUser.collectAsStateWithLifecycle()
 
    if (isLoadingUser) {
       LoadingIndicator()
    } else {
+      val mainIngredients: List<MainIngredient> by viewModel.mainIngredients.collectAsStateWithLifecycle(
+         emptyList()
+      )
+      val origins by viewModel.origins.collectAsStateWithLifecycle(emptyList())
       HomeScreenContent(
          origins = origins,
          mainIngredients = mainIngredients,

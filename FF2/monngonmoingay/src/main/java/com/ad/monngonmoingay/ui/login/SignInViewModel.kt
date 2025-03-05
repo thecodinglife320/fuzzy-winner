@@ -14,10 +14,10 @@ class SignInViewModel @Inject constructor(
    private val authRepository: AuthRepository
 ) : MainViewModel() {
 
-   private val _shouldRestartAppFlow = MutableStateFlow(false)
+   private val _shouldRestartApp = MutableStateFlow(false)
 
-   val shouldRestartAppFLow: StateFlow<Boolean>
-      get() = _shouldRestartAppFlow.asStateFlow()
+   val shouldRestartApp: StateFlow<Boolean>
+      get() = _shouldRestartApp.asStateFlow()
 
    fun signIn(
       email: String,
@@ -28,7 +28,7 @@ class SignInViewModel @Inject constructor(
          showErrorSnackBar,
          block = {
             authRepository.signIn(email, password)
-            _shouldRestartAppFlow.value = true
+            _shouldRestartApp.value = true
          }
       )
    }

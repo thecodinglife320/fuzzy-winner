@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,7 +37,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.shared.StandardButton
-import com.ad.monngonmoingay.ui.theme.DarkBlue
 import com.ad.monngonmoingay.ui.theme.FF2Theme
 
 object SignInDestination {
@@ -44,14 +45,15 @@ object SignInDestination {
 
 @Composable
 fun SignInScreen(
-   openHomeScreen: () -> Unit,
+   restartApp: () -> Unit,
    openSignUpScreen: () -> Unit,
    showErrorSnackBar: (ErrorMessage) -> Unit,
    viewModel: SignInViewModel = hiltViewModel()
 ) {
-   val shouldRestartApp by viewModel.shouldRestartAppFLow.collectAsStateWithLifecycle()
+   val shouldRestartApp by viewModel.shouldRestartApp.collectAsStateWithLifecycle()
 
-   if (shouldRestartApp) openHomeScreen()
+   if (shouldRestartApp)
+      restartApp()
    else SignInScreenContent(
       openSignUpScreen = openSignUpScreen,
       signIn = viewModel::signIn,
@@ -123,7 +125,10 @@ fun SignInScreenContent(
                   .padding(horizontal = 24.dp),
                value = email,
                onValueChange = { userInput -> email = userInput },
-               label = { Text(stringResource(R.string.email)) }
+               label = { Text(stringResource(R.string.email)) },
+               keyboardOptions = KeyboardOptions.Default.copy(
+                  imeAction = ImeAction.Next
+               )
             )
 
             Spacer(Modifier.size(16.dp))
@@ -135,7 +140,10 @@ fun SignInScreenContent(
                value = password,
                onValueChange = { password = it },
                label = { Text(stringResource(R.string.password)) },
-               visualTransformation = PasswordVisualTransformation()
+               visualTransformation = PasswordVisualTransformation(),
+               keyboardOptions = KeyboardOptions.Default.copy(
+                  imeAction = ImeAction.Done
+               )
             )
 
             Spacer(Modifier.size(32.dp))
@@ -168,7 +176,6 @@ fun SignInScreenContent(
                   text = stringResource(R.string.sign_up_text),
                   textAlign = TextAlign.Center,
                   fontSize = 16.sp,
-                  color = DarkBlue
                )
             }
 

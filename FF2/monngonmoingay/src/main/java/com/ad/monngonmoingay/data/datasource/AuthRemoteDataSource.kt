@@ -19,7 +19,7 @@ class AuthRemoteDataSource @Inject constructor(
    val currentUser: FirebaseUser?
       get() = auth.currentUser
 
-   val currentUserIdFlow: Flow<String?>
+   val currentUserId: Flow<String?>
       get() = callbackFlow {
          val listener = FirebaseAuth.AuthStateListener { _ ->
             this.trySend(currentUser?.uid)
@@ -33,13 +33,15 @@ class AuthRemoteDataSource @Inject constructor(
    }
 
    suspend fun signIn(email: String, password: String) {
+      if (auth.currentUser!!.isAnonymous)
+         auth.currentUser!!.delete()
       auth.signInWithEmailAndPassword(email, password).await()
    }
 
-   suspend fun linkAccount(email: String, password: String) {
+   suspend fun signUp(email: String, password: String) {
       val credential = EmailAuthProvider.getCredential(email, password)
-      println(auth.currentUser ?: "no user")
       auth.currentUser!!.linkWithCredential(credential).await()
+      signIn(email, password)
    }
 
    fun signOut() {

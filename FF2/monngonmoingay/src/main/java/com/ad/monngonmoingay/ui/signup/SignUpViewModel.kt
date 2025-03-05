@@ -14,9 +14,9 @@ class SignUpViewModel @Inject constructor(
    private val authRepository: AuthRepository
 ) : MainViewModel() {
 
-   private val _shouldRestartAppFlow = MutableStateFlow(false)
-   val shouldRestartAppFlow
-      get() = _shouldRestartAppFlow.asStateFlow()
+   private val _shouldRestartApp = MutableStateFlow(false)
+   val shouldRestartApp
+      get() = _shouldRestartApp.asStateFlow()
 
    fun signUp(
       email: String,
@@ -43,7 +43,7 @@ class SignUpViewModel @Inject constructor(
          showErrorSnackBar = showErrorSnackBar,
          block = {
             authRepository.signUp(email, password)
-            _shouldRestartAppFlow.value = true
+            _shouldRestartApp.value = true
          }
       )
    }

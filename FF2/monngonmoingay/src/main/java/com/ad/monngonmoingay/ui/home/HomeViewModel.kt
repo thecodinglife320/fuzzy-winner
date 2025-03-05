@@ -17,26 +17,25 @@ class HomeViewModel @Inject constructor(
    private val recipeRepository: RecipeRepository
 ) : MainViewModel() {
 
-   private val _isLoadingUserFlow = MutableStateFlow(true)
+   private val _isLoadingUser = MutableStateFlow(true)
 
-   val isLoadingUserFlow
-      get() = _isLoadingUserFlow.asStateFlow()
+   val isLoadingUser
+      get() = _isLoadingUser.asStateFlow()
 
-   //lateinit var recipesFlow: Flow<List<Recipe>>
-   lateinit var originsFlow: Flow<List<Origin>>
-   lateinit var mainIngredientsFlow: Flow<List<MainIngredient>>
+   lateinit var origins: Flow<List<Origin>>
+   lateinit var mainIngredients: Flow<List<MainIngredient>>
 
    init {
       launchCatching {
-         originsFlow = recipeRepository.origins
-         mainIngredientsFlow = recipeRepository.mainIngredients
+         origins = recipeRepository.origins
+         mainIngredients = recipeRepository.mainIngredients
       }
    }
 
    fun loadCurrentUser() {
       launchCatching {
          if (authRepository.currentUser == null) authRepository.createGuestAccount()
-         _isLoadingUserFlow.value = false
+         _isLoadingUser.value = false
       }
    }
 }

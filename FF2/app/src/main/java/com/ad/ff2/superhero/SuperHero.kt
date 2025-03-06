@@ -3,7 +3,6 @@ package com.ad.ff2.superhero
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.Spring.DampingRatioLowBouncy
 import androidx.compose.animation.core.Spring.StiffnessVeryLow
@@ -58,7 +57,6 @@ fun HeroApp() {
    }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HeroesList(
    heroes: List<Hero>,

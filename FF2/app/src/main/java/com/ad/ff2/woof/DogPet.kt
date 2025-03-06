@@ -213,7 +213,7 @@ fun DogHobby(
 @Preview(device = "id:4.7in WXGA", showSystemUi = true)
 @Composable
 fun WoofPreview() {
-   WoofTheme(darkTheme = true) {
+   WoofTheme(darkTheme = false) {
       WoofApp()
    }
 }

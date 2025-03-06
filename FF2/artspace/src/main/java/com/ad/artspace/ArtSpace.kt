@@ -1,5 +1,6 @@
-package com.ad.ff2.composable
+package com.ad.artspace
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -33,7 +35,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ad.ff2.R
+import com.ad.artspace.ui.theme.AppTheme
 
 object ArtSpace {
    val imageResourceIds = arrayOf(
@@ -56,6 +58,7 @@ object ArtSpace {
    )
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ArtSpaceLayout() {
 
@@ -74,17 +77,23 @@ fun ArtSpaceLayout() {
          .safeDrawingPadding()
          .verticalScroll(rememberScrollState()),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.Center
+      verticalArrangement = Arrangement.Top
    ) {
+
       ArtSpaceImage(painter = image)
+
       ArtSpaceDescription(
          imageName = imageName,
          artistName = artistName,
          Modifier
             .fillMaxWidth()
             .wrapContentWidth(Alignment.Start)
-            .padding(top = 16.dp, start = 16.dp)
+            .padding(
+               top = 16.dp,
+               start = 16.dp
+            )
       )
+
       ArtSpaceButtons(
          previous = {
             step--
@@ -103,13 +112,19 @@ fun ArtSpaceLayout() {
 
 @Composable
 private fun ArtSpaceImage(painter: Painter, modifier: Modifier = Modifier) {
-   Surface(shadowElevation = 24.dp) {
+   Surface(
+      modifier = modifier
+         .clip(shape = MaterialTheme.shapes.small)
+         .padding(top = 32.dp)
+   ) {
       Image(
          painter = painter,
          contentDescription = null,
          modifier = modifier
-            .fillMaxWidth(),
-         contentScale = ContentScale.FillWidth
+            .fillMaxWidth()
+         //.height(400.dp)
+         ,
+         contentScale = ContentScale.Crop
       )
    }
 }
@@ -140,14 +155,19 @@ private fun ArtSpaceDescription(
       buildAnnotatedString {
          withStyle(
             style = SpanStyle(
-               color = Color.Red,
+               //color = Color.Red,
                fontWeight = FontWeight.Bold,
                fontSize = 20.sp
             )
          ) {
             append("$imageName\n")
          }
-         withStyle(style = SpanStyle(color = Color.Blue, fontStyle = FontStyle.Italic)) {
+         withStyle(
+            style = SpanStyle(
+               //color = Color.Blue,
+               fontStyle = FontStyle.Italic
+            )
+         ) {
             append(artistName)
          }
       },
@@ -155,8 +175,10 @@ private fun ArtSpaceDescription(
    )
 }
 
-@Preview(showBackground = true, showSystemUi = true, device = "id:4.65in 720p (Galaxy Nexus)")
+@Preview(device = "id:4.7in WXGA", showSystemUi = true)
 @Composable
-fun ArtSpaceLayoutPreview() {
-   ArtSpaceLayout()
+fun artSpacePreview() {
+   AppTheme(darkTheme = false) {
+      ArtSpaceLayout()
+   }
 }

@@ -5,7 +5,7 @@ package com.ad.ff2
  import androidx.activity.ComponentActivity
  import androidx.activity.compose.setContent
  import androidx.activity.enableEdgeToEdge
- import com.ad.ff2.superhero.HeroApp
+ import com.ad.ff2.composable.ArtSpaceLayout
  import com.ad.ff2.ui.theme.SuperheroesTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
            SuperheroesTheme {
-              HeroApp()
+              ArtSpaceLayout()
             }
         }
     }

@@ -39,7 +39,7 @@ fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
             contentDescription = stringResource(affirmation.stringResourceId),
             modifier = Modifier
                .fillMaxWidth()
-               .height(194.dp),
+               .height(200.dp),
             contentScale = ContentScale.Crop
          )
          Text(
@@ -88,7 +88,7 @@ fun AffirmationsLayout() {
 }
 
 @Composable
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, device = "id:4.7in WXGA")
 fun AffirmationsLayoutPreview() {
    AffirmationsLayout()
 }

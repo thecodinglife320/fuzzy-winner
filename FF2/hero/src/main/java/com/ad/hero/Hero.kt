@@ -1,4 +1,4 @@
-package com.ad.ff2.superhero
+package com.ad.hero
 
 data class Hero(
    val nameRes: Int,

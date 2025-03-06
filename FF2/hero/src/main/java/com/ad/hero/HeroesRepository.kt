@@ -1,6 +1,4 @@
-package com.ad.ff2.superhero
-
-import com.ad.ff2.R
+package com.ad.hero
 
 object HeroesRepository {
    val heroes = listOf(

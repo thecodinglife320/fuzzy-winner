@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-   namespace = "com.ad.artspace"
+   namespace = "com.ad.hero"
    compileSdk = 35
 
    defaultConfig {
-      applicationId = "com.ad.artspace"
+      applicationId = "com.ad.hero"
       minSdk = 26
       targetSdk = 35
       versionCode = 1
@@ -25,7 +25,6 @@ android {
             getDefaultProguardFile("proguard-android-optimize.txt"),
             "proguard-rules.pro"
          )
-         signingConfig = signingConfigs.getByName("debug")
       }
    }
    compileOptions {

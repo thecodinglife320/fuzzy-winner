@@ -1,6 +1,4 @@
-package com.ad.ff2.gridcourse
-
-import com.ad.ff2.R
+package com.ad.course
 
 object DataSource {
    val topics = listOf(

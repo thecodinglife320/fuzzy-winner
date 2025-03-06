@@ -1,34 +1,22 @@
-package com.ad.ff2.composable
+package com.ad.affirmation
 
-import Datasource
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ad.ff2.Affirmation
 
 @Composable
 fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
@@ -60,35 +48,8 @@ fun AffirmationList(
       items(affirmationList) { affirmation ->
          AffirmationCard(
             affirmation,
-            modifier.padding(8.dp)
+            Modifier.padding(8.dp)
          )
       }
    }
-}
-
-@Composable
-fun AffirmationsLayout() {
-   val layoutDirection = LocalLayoutDirection.current
-   Surface(
-      modifier = Modifier
-         .fillMaxSize()
-         .statusBarsPadding()
-         .padding(
-            start = WindowInsets.safeDrawing.asPaddingValues()
-               .calculateStartPadding(layoutDirection),
-            end = WindowInsets.safeDrawing.asPaddingValues()
-               .calculateEndPadding(layoutDirection),
-         ),
-      shadowElevation = 10.dp
-   ) {
-      AffirmationList(
-         affirmationList = Datasource().loadAffirmations(),
-      )
-   }
-}
-
-@Composable
-@Preview(showBackground = true, showSystemUi = true, device = "id:4.7in WXGA")
-fun AffirmationsLayoutPreview() {
-   AffirmationsLayout()
 }

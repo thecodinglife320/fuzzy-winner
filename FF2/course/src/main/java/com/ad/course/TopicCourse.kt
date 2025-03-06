@@ -1,18 +1,11 @@
-package com.ad.ff2.gridcourse
+package com.ad.course
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -20,22 +13,19 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.ad.ff2.R
 
 @Composable
 fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
@@ -101,35 +91,25 @@ fun TopicCardGrid(
    }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopicCourseLayout() {
-   val layoutDirection = LocalLayoutDirection.current
-   Column(
-      modifier = Modifier
-         .fillMaxSize()
-         .statusBarsPadding()
-         .padding(
-            start = WindowInsets.safeDrawing.asPaddingValues()
-               .calculateStartPadding(layoutDirection),
-            end = WindowInsets.safeDrawing.asPaddingValues()
-               .calculateEndPadding(layoutDirection),
-         ),
-      horizontalAlignment = Alignment.CenterHorizontally
-   ) {
-      Text(
-         "Topics",
-         style = MaterialTheme.typography.bodyLarge,
-         fontWeight = FontWeight.SemiBold,
-         fontSize = 20.sp
-      )
-      TopicCardGrid(
-         topics = DataSource.topics,
-      )
+fun AppBar(modifier: Modifier = Modifier) {
+   CenterAlignedTopAppBar(
+      title = {
+         Text(text = stringResource(id = R.string.app_name))
+      },
+      modifier = modifier
+   )
+}
+
+@Preview
+@Composable
+fun TopicCourseLayoutPreview() {
+   Column() {
+      AppBar()
+      TopicCardGrid(DataSource.topics)
    }
 }
 
-@Preview(device = "id:4.7in WXGA", showSystemUi = true)
-@Composable
-fun TopicCourseLayoutPreview() {
-   TopicCourseLayout()
-}
+
+

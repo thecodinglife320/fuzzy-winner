@@ -1,4 +1,4 @@
-package com.ad.ff2.gridcourse
+package com.ad.course
 
 data class Topic(
    val name: Int,

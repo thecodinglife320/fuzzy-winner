@@ -1,8 +1,7 @@
-package com.ad.ff2.composable
+package com.ad.tipcalculator
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,14 +32,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ad.ff2.R
-import java.text.NumberFormat
-import java.util.Locale
 
 @Composable
-fun TipTimeLayout() {
+fun TipTimeLayout(calcTip: (Double, Double, Boolean) -> String, modifier: Modifier = Modifier) {
 
    // UI element state
    var amountInput by remember { mutableStateOf("") }
@@ -50,10 +45,10 @@ fun TipTimeLayout() {
    // Screen UI state
    val amount = amountInput.toDoubleOrNull() ?: 0.0
    val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
-   val tip = calculateTip1(amount, tipPercent, roundUp)
+   val tip = calcTip(amount, tipPercent, roundUp)
 
    Column(
-      modifier = Modifier
+      modifier = modifier
          .statusBarsPadding()
          .padding(horizontal = 20.dp)
          .safeDrawingPadding()
@@ -61,12 +56,7 @@ fun TipTimeLayout() {
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center
    ) {
-      Text(
-         text = stringResource(R.string.calculate_tip),
-         modifier = Modifier
-            .padding(bottom = 16.dp, top = 40.dp)
-            .align(alignment = Alignment.Start)
-      )
+
       EditNumberField(
          label = R.string.bill_amount,
          value = amountInput,
@@ -106,22 +96,6 @@ fun TipTimeLayout() {
       )
       Spacer(modifier = Modifier.height(150.dp))
    }
-}
-
-/**
- * Calculates the tip based on the user input and format the tip amount
- * according to the local currency.
- * Example would be "$10.00".
- */
-@VisibleForTesting
-internal fun calculateTip(
-   amount: Double,
-   tipPercent: Double = 15.0,
-   roundUp: Boolean
-): String {
-   var tip = (tipPercent / 100 * amount).toInt()
-   if (roundUp) tip = roundToNearestThousand(tip)
-   return NumberFormat.getCurrencyInstance(Locale("vi", "VN")).format(tip)
 }
 
 @Composable
@@ -168,21 +142,3 @@ fun RoundTheTipRow(
    }
 }
 
-@Preview(showBackground = true, showSystemUi = true, device = "id:4.7in WXGA")
-@Composable
-fun TipTimeLayoutPreview() {
-   TipTimeLayout()
-}
-
-private fun roundToNearestThousand(amount: Int): Int {
-   return ((amount + 500) / 1000) * 1000
-}
-
-@VisibleForTesting
-internal fun calculateTip1(amount: Double, tipPercent: Double = 15.0, roundUp: Boolean): String {
-   var tip = tipPercent / 100 * amount
-   if (roundUp) {
-      tip = kotlin.math.ceil(tip)
-   }
-   return NumberFormat.getCurrencyInstance().format(tip)
-}

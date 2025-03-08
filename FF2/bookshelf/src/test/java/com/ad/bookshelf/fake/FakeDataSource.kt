@@ -12,10 +12,19 @@ object FakeBookShelfDataSource {
       items = listOf(Item("1"), Item("2"))
    )
 
-   val book = Book(volumeInfo = VolumeInfo(imageLinks = ImageLinks("thumbnail_url")))
+   val book = Book(
+      volumeInfo = VolumeInfo(imageLinks = ImageLinks("thumbnail_url")),
+      id = "1"
+   )
 
    val books = listOf(
-      Book(volumeInfo = VolumeInfo(imageLinks = ImageLinks("thumbnail_url"))),
-      Book(volumeInfo = VolumeInfo(imageLinks = ImageLinks("thumbnail_url")))
+      Book(
+         volumeInfo = VolumeInfo(imageLinks = ImageLinks("thumbnail_url")),
+         id = "1"
+      ),
+      Book(
+         volumeInfo = VolumeInfo(imageLinks = ImageLinks("thumbnail_url")),
+         id = "1"
+      )
    )
 }

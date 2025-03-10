@@ -25,7 +25,7 @@ import com.ad.monngonmoingay.data.model.Category
 import com.ad.monngonmoingay.data.model.MainIngredient
 import com.ad.monngonmoingay.data.model.Origin
 import com.ad.monngonmoingay.ui.shared.LoadingIndicator
-import com.ad.monngonmoingay.ui.theme.FF2Theme
+import com.ad.monngonmoingay.ui.theme.AppTheme
 
 object HomeDestination {
    const val ROUTE = "HomeScreen"
@@ -41,6 +41,7 @@ fun HomeScreen(
    if (isLoadingUser) {
       LoadingIndicator()
    } else {
+
       val mainIngredients: List<MainIngredient> by viewModel.mainIngredients.collectAsStateWithLifecycle(
          emptyList()
       )
@@ -112,7 +113,7 @@ fun CategoryRow(categories: List<Category>) {
 @Composable
 @Preview(showSystemUi = true)
 fun HomeScreenPreview() {
-   FF2Theme(darkTheme = false) {
+   AppTheme(darkTheme = false) {
       HomeScreen()
    }
 }

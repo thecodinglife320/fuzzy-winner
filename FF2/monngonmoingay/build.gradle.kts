@@ -57,6 +57,7 @@ dependencies {
    implementation(libs.firebase.firestore.ktx)
    implementation(libs.androidx.constraintlayout.compose)
    implementation(libs.kotlinx.serialization.json)
+   implementation(libs.androidx.ui.text.google.fonts)
 
    testImplementation(libs.junit.junit)
    testImplementation(libs.mockk)

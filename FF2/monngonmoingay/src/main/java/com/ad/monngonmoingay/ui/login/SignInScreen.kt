@@ -37,7 +37,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.shared.StandardButton
-import com.ad.monngonmoingay.ui.theme.FF2Theme
+import com.ad.monngonmoingay.ui.theme.AppTheme
 
 object SignInDestination {
    const val ROUTE = "LoginScreen"
@@ -188,7 +188,7 @@ fun SignInScreenContent(
 @Composable
 @Preview(showSystemUi = true)
 fun SignInScreenPreview() {
-   FF2Theme(darkTheme = false) {
+   AppTheme(darkTheme = false) {
       SignInScreenContent(
          openSignUpScreen = {},
          signIn = { _, _, _ -> },

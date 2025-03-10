@@ -24,7 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.ui.shared.StandardButton
-import com.ad.monngonmoingay.ui.theme.FF2Theme
+import com.ad.monngonmoingay.ui.theme.AppTheme
 
 object SettingDestination {
    const val ROUTE = "settings"
@@ -135,7 +135,7 @@ fun DeleteAccountButton(deleteAccount: () -> Unit) {
 @Composable
 @Preview(showSystemUi = true)
 fun SettingsScreenPreview() {
-   FF2Theme(darkTheme = true) {
+   AppTheme(darkTheme = true) {
       SettingsScreenContent(
          loadCurrentUser = {},
          openSignInScreen = {},

@@ -33,7 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.shared.StandardButton
-import com.ad.monngonmoingay.ui.theme.FF2Theme
+import com.ad.monngonmoingay.ui.theme.AppTheme
 
 object SignUpDestination {
    const val ROUTE = "SignUpScreen"
@@ -175,7 +175,7 @@ fun SignUpScreenContent(
 @Composable
 @Preview(showSystemUi = true)
 fun SignUpScreenPreview() {
-   FF2Theme(darkTheme = false) {
+   AppTheme(darkTheme = false) {
       SignUpScreenContent(
          signUp = { _, _, _, _ -> },
          showErrorSnackBar = {}

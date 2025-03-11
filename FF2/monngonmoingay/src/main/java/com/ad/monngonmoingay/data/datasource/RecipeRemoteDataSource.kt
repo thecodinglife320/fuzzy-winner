@@ -13,8 +13,15 @@ class RecipeRemoteDataSource @Inject constructor(
    private val firestore: FirebaseFirestore
 ) {
 
-   fun getRecipes(): Flow<List<Recipe>> {
+   fun getRecipesByOrigin(origin: String): Flow<List<Recipe>> {
       return firestore.collection(RECIPE_COLLECTION)
+         .whereEqualTo("origin_id", origin)
+         .dataObjects()
+   }
+
+   fun getRecipesByMainIngredient(mainIngredient: String): Flow<List<Recipe>> {
+      return firestore.collection(RECIPE_COLLECTION)
+         .whereEqualTo("main_ingredient_id", mainIngredient)
          .dataObjects()
    }
 

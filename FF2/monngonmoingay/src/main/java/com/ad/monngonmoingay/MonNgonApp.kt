@@ -1,5 +1,6 @@
 package com.ad.monngonmoingay
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -20,15 +21,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.home.HomeDestination
 import com.ad.monngonmoingay.ui.home.HomeScreen
 import com.ad.monngonmoingay.ui.login.SignInDestination
 import com.ad.monngonmoingay.ui.login.SignInScreen
+import com.ad.monngonmoingay.ui.recipes.RecipesDestination
+import com.ad.monngonmoingay.ui.recipes.RecipesScreen
 import com.ad.monngonmoingay.ui.setting.SettingDestination
 import com.ad.monngonmoingay.ui.setting.SettingsScreen
 import com.ad.monngonmoingay.ui.signup.SignUpDestination
@@ -42,7 +47,15 @@ fun MonNgonApp() {
    val snackBarHostState = remember { SnackbarHostState() }
    val navController = rememberNavController()
    val navBackStackEntry by navController.currentBackStackEntryAsState()
-   val currentScreen = navBackStackEntry?.destination?.route ?: HomeDestination.ROUTE
+   val categoryName =
+      navBackStackEntry?.arguments?.getString(RecipesDestination.categoryNameArg) ?: "Unknown"
+
+   val currentScreen: String = if (categoryName != "Unknown") {
+      "$categoryName food"
+   } else {
+      navBackStackEntry?.destination?.route ?: HomeDestination.ROUTE
+   }
+
    val shouldShowSettings = !(currentScreen == SignInDestination.ROUTE ||
         currentScreen == SignUpDestination.ROUTE)
 
@@ -112,7 +125,25 @@ fun MonNgonApp() {
 
          //home screen
          composable(HomeDestination.ROUTE) {
-            HomeScreen()
+            HomeScreen(
+               navigateToRecipesScreen = { categoryId, categoryName ->
+                  Log.d("HomeScreen", "navigateToRecipesScreenWithCategoryId: $categoryId")
+                  navController.navigate("${RecipesDestination.route}/$categoryId/$categoryName")
+               }
+            )
+         }
+
+         //recipes screen
+         composable(
+            route = RecipesDestination.routeWithArgs,
+            arguments = listOf(
+               navArgument(
+                  RecipesDestination.categoryIdArg,
+                  builder = { type = NavType.StringType }
+               )
+            ),
+         ) {
+            RecipesScreen()
          }
 
          //setting screen

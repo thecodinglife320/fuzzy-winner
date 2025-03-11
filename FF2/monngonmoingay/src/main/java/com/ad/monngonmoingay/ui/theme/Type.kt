@@ -4,6 +4,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.unit.sp
 import com.ad.monngonmoingay.R
 
 val provider = GoogleFont.Provider(
@@ -41,7 +42,10 @@ val AppTypography = Typography(
    titleSmall = baseline.titleSmall.copy(fontFamily = displayFontFamily),
    bodyLarge = baseline.bodyLarge.copy(fontFamily = bodyFontFamily),
    bodyMedium = baseline.bodyMedium.copy(fontFamily = bodyFontFamily),
-   bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily),
+   bodySmall = baseline.bodySmall.copy(
+      fontFamily = bodyFontFamily,
+      lineHeight = 14.sp,
+   ),
    labelLarge = baseline.labelLarge.copy(fontFamily = bodyFontFamily),
    labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
    labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),

@@ -53,7 +53,8 @@ fun InventoryNavHost(
                 }
             )
         }
-        composable(route = ItemEntryDestination.route) {
+
+       composable(route = ItemEntryDestination.route) {
             ItemEntryScreen(
                 navigateBack = { navController.popBackStack() },
                 onNavigateUp = { navController.navigateUp() }

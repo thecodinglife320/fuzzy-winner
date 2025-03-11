@@ -1,5 +1,6 @@
 package com.ad.monngonmoingay.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,6 +35,7 @@ object HomeDestination {
 @Composable
 fun HomeScreen(
    viewModel: HomeViewModel = hiltViewModel(),
+   navigateToRecipesScreen: (String, String) -> Unit = { _, _ -> },
 ) {
 
    val isLoadingUser by viewModel.isLoadingUser.collectAsStateWithLifecycle()
@@ -49,6 +51,7 @@ fun HomeScreen(
       HomeScreenContent(
          origins = origins,
          mainIngredients = mainIngredients,
+         navigateToRecipesScreen = navigateToRecipesScreen
       )
    }
 
@@ -61,27 +64,39 @@ fun HomeScreen(
 fun HomeScreenContent(
    origins: List<Origin>,
    mainIngredients: List<MainIngredient>,
+   navigateToRecipesScreen: (String, String) -> Unit = { _, _ -> },
 ) {
    Column {
       Text(
          stringResource(R.string.main_ingredient),
          modifier = Modifier.padding(start = dimensionResource(R.dimen.small_pading))
       )
-      CategoryRow(categories = mainIngredients)
+      CategoryRow(
+         categories = mainIngredients,
+         navigateToRecipesScreen = navigateToRecipesScreen
+      )
       Text(
          stringResource(R.string.origin_category), modifier = Modifier.padding(
             start = dimensionResource(R.dimen.small_pading),
             top = dimensionResource(R.dimen.small_pading)
          )
       )
-      CategoryRow(categories = origins)
+      CategoryRow(
+         categories = origins,
+         navigateToRecipesScreen = navigateToRecipesScreen
+      )
    }
 }
 
 @Composable
-fun CategoryCard(category: Category) {
+fun CategoryCard(
+   category: Category,
+   navigateToRecipesScreen: (String, String) -> Unit = { _, _ -> }
+) {
    Card(
-      Modifier.padding(dimensionResource(R.dimen.small_pading))
+      Modifier
+         .padding(dimensionResource(R.dimen.small_pading))
+         .clickable { navigateToRecipesScreen(category.categoryId, category.name) }
    ) {
       Column {
          AsyncImage(
@@ -102,10 +117,19 @@ fun CategoryCard(category: Category) {
 
 
 @Composable
-fun CategoryRow(categories: List<Category>) {
+fun CategoryRow(
+   categories: List<Category>,
+   navigateToRecipesScreen: (String, String) -> Unit = { _, _ -> }
+) {
    LazyRow {
-      items(items = categories, key = { category -> category.categoryId }) { category ->
-         CategoryCard(category = category)
+      items(
+         items = categories,
+         key = { category -> category.categoryId }
+      ) { category ->
+         CategoryCard(
+            category = category,
+            navigateToRecipesScreen = navigateToRecipesScreen
+         )
       }
    }
 }

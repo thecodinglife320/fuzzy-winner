@@ -9,4 +9,7 @@ class RecipeRepository @Inject constructor(
    //val recipes = recipeRemoteDataSource.getRecipes()
    val origins = recipeRemoteDataSource.getOrigins()
    val mainIngredients = recipeRemoteDataSource.getMainIngredients()
+   fun getRecipesByOrigin(origin: String) = recipeRemoteDataSource.getRecipesByOrigin(origin)
+   fun getRecipesByMainIngredient(mainIngredient: String) =
+      recipeRemoteDataSource.getRecipesByMainIngredient(mainIngredient)
 }

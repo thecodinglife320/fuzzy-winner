@@ -9,7 +9,6 @@ data class Recipe(
    val image_url: String = "",
    val cook_time: Int = 0,
    val instructions: List<String> = emptyList(),
-   val origin: String = ""
 )
 
 interface Category {

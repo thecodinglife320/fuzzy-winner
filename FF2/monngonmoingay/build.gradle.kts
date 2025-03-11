@@ -58,6 +58,7 @@ dependencies {
    implementation(libs.androidx.constraintlayout.compose)
    implementation(libs.kotlinx.serialization.json)
    implementation(libs.androidx.ui.text.google.fonts)
+   implementation(libs.androidx.material.icons.extended)
 
    testImplementation(libs.junit.junit)
    testImplementation(libs.mockk)

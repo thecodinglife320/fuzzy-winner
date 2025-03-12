@@ -38,14 +38,6 @@ import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.Recipe
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
-@Suppress("ConstPropertyName")
-object RecipesDestination {
-   const val route = "RecipesScreen"
-   const val categoryIdArg = "categoryId"
-   const val categoryNameArg = "categoryName"
-   const val routeWithArgs = "$route/{$categoryIdArg}/{$categoryNameArg}"
-}
-
 @Composable
 fun RecipesScreen(
    viewModel: RecipesViewModel = hiltViewModel(),

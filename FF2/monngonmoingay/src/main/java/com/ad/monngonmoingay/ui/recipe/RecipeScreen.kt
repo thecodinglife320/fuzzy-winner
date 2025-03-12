@@ -8,14 +8,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.data.model.RecipeDetails
 
-@Suppress("ConstPropertyName")
-object RecipeDestination {
-   const val route = "RecipeScreen"
-   const val recipeIdArg = "recipeId"
-   const val recipeTitleArg = "recipeName"
-   const val routeWithArgs = "$route/{$recipeIdArg}/{$recipeTitleArg}"
-}
-
 @Composable
 fun RecipeScreen(
    viewModel: RecipeViewModel = hiltViewModel()

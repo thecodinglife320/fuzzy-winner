@@ -35,11 +35,6 @@ import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.shared.StandardButton
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
-@Suppress("ConstPropertyName")
-object SignUpDestination {
-   const val route = "SignUpScreen"
-}
-
 @Composable
 fun SignUpScreen(
    restartApp: () -> Unit,

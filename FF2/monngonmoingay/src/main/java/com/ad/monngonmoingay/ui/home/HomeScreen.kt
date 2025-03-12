@@ -28,11 +28,6 @@ import com.ad.monngonmoingay.data.model.Origin
 import com.ad.monngonmoingay.ui.shared.LoadingIndicator
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
-@Suppress("ConstPropertyName")
-object HomeDestination {
-   const val route = "HomeScreen"
-}
-
 @Composable
 fun HomeScreen(
    viewModel: HomeViewModel = hiltViewModel(),

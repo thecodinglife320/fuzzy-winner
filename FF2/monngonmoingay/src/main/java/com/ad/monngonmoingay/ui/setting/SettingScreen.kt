@@ -23,12 +23,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.R
+import com.ad.monngonmoingay.ui.navigation.NavigationDestination
 import com.ad.monngonmoingay.ui.shared.StandardButton
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
-@Suppress("ConstPropertyName")
-object SettingDestination {
-   const val route = "settings"
+object SettingDestination : NavigationDestination {
+   override val route = "settings"
+   override val title: String
+      get() = "Settings"
 }
 
 @Composable

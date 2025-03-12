@@ -27,17 +27,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ad.monngonmoingay.data.model.ErrorMessage
-import com.ad.monngonmoingay.ui.home.HomeDestination
 import com.ad.monngonmoingay.ui.home.HomeScreen
-import com.ad.monngonmoingay.ui.login.SignInDestination
 import com.ad.monngonmoingay.ui.login.SignInScreen
-import com.ad.monngonmoingay.ui.recipe.RecipeDestination
+import com.ad.monngonmoingay.ui.navigation.HomeDestination
+import com.ad.monngonmoingay.ui.navigation.RecipeDestination
+import com.ad.monngonmoingay.ui.navigation.RecipesDestination
+import com.ad.monngonmoingay.ui.navigation.SignInDestination
+import com.ad.monngonmoingay.ui.navigation.SignUpDestination
 import com.ad.monngonmoingay.ui.recipe.RecipeScreen
-import com.ad.monngonmoingay.ui.recipes.RecipesDestination
 import com.ad.monngonmoingay.ui.recipes.RecipesScreen
 import com.ad.monngonmoingay.ui.setting.SettingDestination
 import com.ad.monngonmoingay.ui.setting.SettingsScreen
-import com.ad.monngonmoingay.ui.signup.SignUpDestination
 import com.ad.monngonmoingay.ui.signup.SignUpScreen
 import kotlinx.coroutines.launch
 
@@ -48,19 +48,10 @@ fun MonNgonApp() {
    val snackBarHostState = remember { SnackbarHostState() }
    val navController = rememberNavController()
    val navBackStackEntry by navController.currentBackStackEntryAsState()
-//   val categoryName =
-//      navBackStackEntry?.arguments?.getString(RecipesDestination.categoryNameArg) ?: "Unknown"
-//
-//   val currentScreen: String = if (categoryName != "Unknown") {
-//      "$categoryName food"
-//   } else {
-//      navBackStackEntry?.destination?.route ?: HomeDestination.routec
-//   }
-
    var titleAppBar = ""
 
    when (navBackStackEntry?.destination?.route) {
-      HomeDestination.route -> titleAppBar = "Home"
+      HomeDestination.route -> titleAppBar = HomeDestination.title
       RecipesDestination.routeWithArgs -> {
          val categoryName =
             navBackStackEntry?.arguments?.getString(RecipesDestination.categoryNameArg) ?: "Unknown"
@@ -73,9 +64,9 @@ fun MonNgonApp() {
          titleAppBar = recipeTitle
       }
 
-      SettingDestination.route -> titleAppBar = "Settings"
-      SignInDestination.route -> titleAppBar = "Sign In"
-      SignUpDestination.route -> titleAppBar = "Sign Up"
+      SettingDestination.route -> titleAppBar = SettingDestination.title
+      SignInDestination.route -> titleAppBar = SignInDestination.title
+      SignUpDestination.route -> titleAppBar = SignUpDestination.title
    }
 
    val shouldShowSettings = !(titleAppBar == "Sign In" ||

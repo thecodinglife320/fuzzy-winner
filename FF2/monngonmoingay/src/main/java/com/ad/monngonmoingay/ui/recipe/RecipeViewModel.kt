@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.ad.monngonmoingay.data.model.RecipeDetails
 import com.ad.monngonmoingay.data.model.toRecipeDetails
 import com.ad.monngonmoingay.data.repository.RecipeRepository
+import com.ad.monngonmoingay.ui.navigation.RecipeDestination
 import com.ad.monngonmoingay.ui.shared.MainViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

@@ -2,6 +2,7 @@ package com.ad.monngonmoingay.ui.recipes
 
 import androidx.lifecycle.SavedStateHandle
 import com.ad.monngonmoingay.data.repository.RecipeRepository
+import com.ad.monngonmoingay.ui.navigation.RecipesDestination
 import com.ad.monngonmoingay.ui.shared.MainViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

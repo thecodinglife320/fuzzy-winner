@@ -26,8 +26,9 @@ import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.ui.shared.StandardButton
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
+@Suppress("ConstPropertyName")
 object SettingDestination {
-   const val ROUTE = "settings"
+   const val route = "settings"
 }
 
 @Composable

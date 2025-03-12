@@ -38,6 +38,7 @@ import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.Recipe
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
+@Suppress("ConstPropertyName")
 object RecipesDestination {
    const val route = "RecipesScreen"
    const val categoryIdArg = "categoryId"
@@ -48,18 +49,24 @@ object RecipesDestination {
 @Composable
 fun RecipesScreen(
    viewModel: RecipesViewModel = hiltViewModel(),
+   navigateToRecipeScreen: (String, String) -> Unit
 ) {
-
    val recipesByOrigin by viewModel.recipeByOrigin.collectAsStateWithLifecycle(emptyList())
    val recipesByMainIngredient by viewModel.recipeByMainIngredient.collectAsStateWithLifecycle(
       emptyList()
    )
    val recipes = recipesByOrigin + recipesByMainIngredient
-   RecipesScreenContent(recipes = recipes)
+   RecipesScreenContent(
+      recipes = recipes,
+      navigateToRecipeScreen = navigateToRecipeScreen
+   )
 }
 
 @Composable
-fun RecipesScreenContent(recipes: List<Recipe>) {
+fun RecipesScreenContent(
+   recipes: List<Recipe>,
+   navigateToRecipeScreen: (String, String) -> Unit
+) {
    LazyColumn {
       items(
          items = recipes,
@@ -69,7 +76,8 @@ fun RecipesScreenContent(recipes: List<Recipe>) {
             recipe = it,
             modifier = Modifier
                .fillMaxWidth()
-               .padding(dimensionResource(R.dimen.padding_small))
+               .padding(dimensionResource(R.dimen.padding_small)),
+            navigateToRecipeScreen = navigateToRecipeScreen
          )
       }
    }
@@ -78,11 +86,15 @@ fun RecipesScreenContent(recipes: List<Recipe>) {
 @Composable
 fun RecipeCard(
    recipe: Recipe,
-   modifier: Modifier = Modifier
+   modifier: Modifier = Modifier,
+   navigateToRecipeScreen: (String, String) -> Unit
 ) {
    var expanded by remember { mutableStateOf(false) }
    Card(
-      modifier = modifier,
+      modifier = modifier
+         .clickable {
+            navigateToRecipeScreen(recipe.recipeId, recipe.title)
+         },
       elevation = CardDefaults.cardElevation(8.dp)
    ) {
       Row(
@@ -114,7 +126,6 @@ fun RecipeCard(
             )
             if (expanded) {
                RecipeInfo(
-                  cookTime = "${recipe.cook_time} minute",
                   description = recipe.description,
                   textStyle = MaterialTheme.typography.bodySmall
                )
@@ -127,7 +138,6 @@ fun RecipeCard(
 @Composable
 fun RecipeInfo(
    description: String,
-   cookTime: String,
    modifier: Modifier = Modifier,
    textStyle: TextStyle
 ) {
@@ -140,10 +150,6 @@ fun RecipeInfo(
       Column(
          modifier = Modifier.padding(start = 8.dp)
       ) {
-         Text(
-            "⏰ $cookTime",
-            style = textStyle
-         )
          Text(
             "📖 $description",
             maxLines = 2,
@@ -168,7 +174,8 @@ fun RecipeCardPreview() {
          ),
          modifier = Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.padding_small))
+            .padding(dimensionResource(R.dimen.padding_small)),
+         navigateToRecipeScreen = { _, _ -> }
       )
 //      RecipeInfo(
 //         cookTime = "10 minute",

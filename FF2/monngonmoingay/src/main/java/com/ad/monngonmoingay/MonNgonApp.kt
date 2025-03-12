@@ -1,6 +1,5 @@
 package com.ad.monngonmoingay
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -32,6 +31,8 @@ import com.ad.monngonmoingay.ui.home.HomeDestination
 import com.ad.monngonmoingay.ui.home.HomeScreen
 import com.ad.monngonmoingay.ui.login.SignInDestination
 import com.ad.monngonmoingay.ui.login.SignInScreen
+import com.ad.monngonmoingay.ui.recipe.RecipeDestination
+import com.ad.monngonmoingay.ui.recipe.RecipeScreen
 import com.ad.monngonmoingay.ui.recipes.RecipesDestination
 import com.ad.monngonmoingay.ui.recipes.RecipesScreen
 import com.ad.monngonmoingay.ui.setting.SettingDestination
@@ -47,26 +48,47 @@ fun MonNgonApp() {
    val snackBarHostState = remember { SnackbarHostState() }
    val navController = rememberNavController()
    val navBackStackEntry by navController.currentBackStackEntryAsState()
-   val categoryName =
-      navBackStackEntry?.arguments?.getString(RecipesDestination.categoryNameArg) ?: "Unknown"
+//   val categoryName =
+//      navBackStackEntry?.arguments?.getString(RecipesDestination.categoryNameArg) ?: "Unknown"
+//
+//   val currentScreen: String = if (categoryName != "Unknown") {
+//      "$categoryName food"
+//   } else {
+//      navBackStackEntry?.destination?.route ?: HomeDestination.routec
+//   }
 
-   val currentScreen: String = if (categoryName != "Unknown") {
-      "$categoryName food"
-   } else {
-      navBackStackEntry?.destination?.route ?: HomeDestination.ROUTE
+   var titleAppBar = ""
+
+   when (navBackStackEntry?.destination?.route) {
+      HomeDestination.route -> titleAppBar = "Home"
+      RecipesDestination.routeWithArgs -> {
+         val categoryName =
+            navBackStackEntry?.arguments?.getString(RecipesDestination.categoryNameArg) ?: "Unknown"
+         titleAppBar = "$categoryName food"
+      }
+
+      RecipeDestination.routeWithArgs -> {
+         val recipeTitle =
+            navBackStackEntry?.arguments?.getString(RecipeDestination.recipeTitleArg) ?: "Unknown"
+         titleAppBar = recipeTitle
+      }
+
+      SettingDestination.route -> titleAppBar = "Settings"
+      SignInDestination.route -> titleAppBar = "Sign In"
+      SignUpDestination.route -> titleAppBar = "Sign Up"
    }
 
-   val shouldShowSettings = !(currentScreen == SignInDestination.ROUTE ||
-        currentScreen == SignUpDestination.ROUTE)
+   val shouldShowSettings = !(titleAppBar == "Sign In" ||
+        titleAppBar == "Sign Up")
 
    Scaffold(
       topBar = {
          MonNgonAppBar(
-            currentScreen = currentScreen,
+            titleAppBar = titleAppBar,
             canNavigateBack = navController.previousBackStackEntry != null,
             navigateUp = { navController.navigateUp() },
             actionSettingIcon = {
-               navController.navigate(SettingDestination.ROUTE) {
+               navController.navigate(SettingDestination.route) {
                   launchSingleTop = true
                }
             },
@@ -78,19 +100,19 @@ fun MonNgonApp() {
    ) { innerPadding ->
       NavHost(
          navController = navController,
-         startDestination = HomeDestination.ROUTE,
+         startDestination = HomeDestination.route,
          modifier = Modifier.padding(innerPadding)
       ) {
 
          //sign in screen
-         composable(SignInDestination.ROUTE) {
+         composable(SignInDestination.route) {
             val context = LocalContext.current
             SignInScreen(
                restartApp = {
-                  navController.popBackStack(HomeDestination.ROUTE, false)
+                  navController.popBackStack(HomeDestination.route, false)
                },
                openSignUpScreen = {
-                  navController.navigate(SignUpDestination.ROUTE) {
+                  navController.navigate(SignUpDestination.route) {
                      launchSingleTop = true
                   }
                },
@@ -105,11 +127,11 @@ fun MonNgonApp() {
          }
 
          //sign up screen
-         composable(SignUpDestination.ROUTE) {
+         composable(SignUpDestination.route) {
             val context = LocalContext.current
             SignUpScreen(
                restartApp = {
-                  navController.popBackStack(HomeDestination.ROUTE, false)
+                  navController.popBackStack(HomeDestination.route, false)
                },
                showErrorSnackBar = { errorMessage ->
                   val message = when (errorMessage) {
@@ -124,10 +146,9 @@ fun MonNgonApp() {
          }
 
          //home screen
-         composable(HomeDestination.ROUTE) {
+         composable(HomeDestination.route) {
             HomeScreen(
                navigateToRecipesScreen = { categoryId, categoryName ->
-                  Log.d("HomeScreen", "navigateToRecipesScreenWithCategoryId: $categoryId")
                   navController.navigate("${RecipesDestination.route}/$categoryId/$categoryName")
                }
             )
@@ -141,19 +162,36 @@ fun MonNgonApp() {
                   RecipesDestination.categoryIdArg,
                   builder = { type = NavType.StringType }
                )
-            ),
+            )
          ) {
-            RecipesScreen()
+            RecipesScreen(
+               navigateToRecipeScreen = { recipeId, recipeTitle ->
+                  navController.navigate("${RecipeDestination.route}/$recipeId/$recipeTitle")
+               }
+            )
+         }
+
+         //recipe screen
+         composable(
+            route = RecipeDestination.routeWithArgs,
+            arguments = listOf(
+               navArgument(
+                  RecipeDestination.recipeIdArg,
+                  builder = { type = NavType.StringType }
+               )
+            )
+         ) {
+            RecipeScreen()
          }
 
          //setting screen
-         composable(SettingDestination.ROUTE) {
+         composable(SettingDestination.route) {
             SettingsScreen(
                openHomeScreen = {
-                  navController.popBackStack(HomeDestination.ROUTE, false)
+                  navController.popBackStack(HomeDestination.route, false)
                },
                openSignInScreen = {
-                  navController.navigate(SignInDestination.ROUTE) {
+                  navController.navigate(SignInDestination.route) {
                      launchSingleTop = true
                   }
                },
@@ -166,7 +204,7 @@ fun MonNgonApp() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MonNgonAppBar(
-   currentScreen: String,
+   titleAppBar: String,
    canNavigateBack: Boolean,
    navigateUp: () -> Unit,
    actionSettingIcon: () -> Unit,
@@ -174,7 +212,7 @@ private fun MonNgonAppBar(
    modifier: Modifier = Modifier
 ) {
    TopAppBar(
-      title = { Text(text = currentScreen) },
+      title = { Text(text = titleAppBar) },
       modifier = modifier,
       navigationIcon = {
          if (canNavigateBack) {

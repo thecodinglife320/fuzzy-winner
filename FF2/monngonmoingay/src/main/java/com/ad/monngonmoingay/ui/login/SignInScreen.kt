@@ -39,8 +39,9 @@ import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.shared.StandardButton
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
+@Suppress("ConstPropertyName")
 object SignInDestination {
-   const val ROUTE = "LoginScreen"
+   const val route = "LoginScreen"
 }
 
 @Composable

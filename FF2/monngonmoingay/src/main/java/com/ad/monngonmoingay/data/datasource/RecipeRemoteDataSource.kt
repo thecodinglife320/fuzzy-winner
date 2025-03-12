@@ -30,6 +30,12 @@ class RecipeRemoteDataSource @Inject constructor(
          .dataObjects()
    }
 
+   fun getRecipeById(recipeId: String): Flow<Recipe?> {
+      return firestore.collection(RECIPE_COLLECTION)
+         .document(recipeId)
+         .dataObjects()
+   }
+
    fun getMainIngredients(): Flow<List<MainIngredient>> {
       return firestore.collection(MAIN_INGREDIENTS_COLLECTION)
          .dataObjects()

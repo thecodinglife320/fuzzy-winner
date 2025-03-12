@@ -2,31 +2,50 @@ package com.ad.monngonmoingay.data.model
 
 import com.google.firebase.firestore.DocumentId
 
+//data transfer object
+@Suppress("PropertyName")
 data class Recipe(
    @DocumentId val recipeId: String = "",
    val title: String = "",
    val description: String = "",
    val image_url: String = "",
+   val prep_time: Int = 0,
    val cook_time: Int = 0,
+   val additional_time: Int = 0,
+   val servings: Int = 0,
    val instructions: List<String> = emptyList(),
 )
 
-interface Category {
-   val categoryId: String
-   val name: String
-   val img_url: String
+data class RecipeDetails(
+   val recipeId: String = "",
+   val title: String = "",
+   val description: String = "",
+   val imageUrl: String = "",
+   val prepTime: String = "",
+   val cookTime: String = "",
+   val additionalTime: String = "",
+   val servings: String = "",
+   val instructions: List<String> = emptyList(),
+)
+
+//extension function
+fun Recipe.toRecipeDetails(): RecipeDetails = RecipeDetails(
+   recipeId = recipeId,
+   title = title,
+   description = description,
+   imageUrl = image_url,
+   prepTime = prep_time.toHoursAndMinutes(),
+   cookTime = cook_time.toHoursAndMinutes(),
+   additionalTime = additional_time.toHoursAndMinutes(),
+   servings = "$servings servings",
+   instructions = instructions
+)
+
+//helper function
+fun Int.toHoursAndMinutes(): String {
+   val hours = this / 60
+   val minutes = this % 60
+   return if (hours > 0) "${hours}h${minutes}m" else "${minutes}m"
 }
-
-data class MainIngredient(
-   @DocumentId override val categoryId: String = "",
-   override val name: String = "",
-   override val img_url: String = ""
-) : Category
-
-data class Origin(
-   @DocumentId override val categoryId: String = "",
-   override val name: String = "",
-   override val img_url: String = ""
-) : Category
 
 

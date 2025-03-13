@@ -72,7 +72,7 @@ fun SettingsScreenContent(
    Column(
       modifier = Modifier
          .fillMaxSize()
-         .padding(dimensionResource(R.dimen.small_pading))
+         .padding(dimensionResource(R.dimen.padding_small))
    ) {
       Spacer(Modifier.size(24.dp))
 

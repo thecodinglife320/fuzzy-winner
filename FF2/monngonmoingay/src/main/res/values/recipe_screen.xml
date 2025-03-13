@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="prep_time">Prep Time:</string>
+    <string name="cook_time">Cook Time:</string>
+    <string name="additional_time">Additional Time:</string>
+    <string name="servings">Servings:</string>
+</resources>

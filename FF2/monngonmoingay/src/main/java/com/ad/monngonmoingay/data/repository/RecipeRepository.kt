@@ -1,6 +1,7 @@
 package com.ad.monngonmoingay.data.repository
 
 import com.ad.monngonmoingay.data.datasource.RecipeRemoteDataSource
+import com.ad.monngonmoingay.data.model.Recipe
 import javax.inject.Inject
 
 class RecipeRepository @Inject constructor(
@@ -17,4 +18,6 @@ class RecipeRepository @Inject constructor(
       recipeRemoteDataSource.getRecipesByMainIngredient(mainIngredient)
 
    fun getRecipeById(recipeId: String) = recipeRemoteDataSource.getRecipeById(recipeId)
+
+   suspend fun createRecipe(recipe: Recipe) = recipeRemoteDataSource.createRecipe(recipe)
 }

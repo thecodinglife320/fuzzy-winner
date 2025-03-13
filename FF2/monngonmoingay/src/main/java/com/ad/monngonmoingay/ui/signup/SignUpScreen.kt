@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -115,7 +116,7 @@ fun SignUpScreenContent(
                )
             )
 
-            Spacer(Modifier.size(16.dp))
+            Spacer(Modifier.size(dimensionResource(R.dimen.padding_medium)))
 
             OutlinedTextField(
                modifier = Modifier

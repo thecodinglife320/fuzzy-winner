@@ -1,5 +1,6 @@
 package com.ad.monngonmoingay.ui.home
 
+import com.ad.monngonmoingay.data.model.DataSource
 import com.ad.monngonmoingay.data.model.MainIngredient
 import com.ad.monngonmoingay.data.model.Origin
 import com.ad.monngonmoingay.data.repository.AuthRepository
@@ -36,6 +37,15 @@ class HomeViewModel @Inject constructor(
       launchCatching {
          if (authRepository.currentUser == null) authRepository.createGuestAccount()
          _isLoadingUser.value = false
+      }
+   }
+
+   fun createRecipes() {
+      launchCatching {
+         DataSource.recipes.forEach {
+            recipeRepository.createRecipe(it)
+         }
+         //recipeRepository.createRecipe(DataSource.recipe)
       }
    }
 }

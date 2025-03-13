@@ -12,8 +12,11 @@ data class Recipe(
    val prep_time: Int = 0,
    val cook_time: Int = 0,
    val additional_time: Int = 0,
+   val total_time: Int = 0,
    val servings: Int = 0,
    val instructions: List<String> = emptyList(),
+   val main_ingredient_id: String = "",
+   val origin_id: String = ""
 )
 
 data class RecipeDetails(

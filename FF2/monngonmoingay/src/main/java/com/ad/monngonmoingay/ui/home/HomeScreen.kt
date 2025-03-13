@@ -12,19 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.Category
 import com.ad.monngonmoingay.data.model.MainIngredient
 import com.ad.monngonmoingay.data.model.Origin
+import com.ad.monngonmoingay.ui.shared.CoilImage
 import com.ad.monngonmoingay.ui.shared.LoadingIndicator
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
@@ -65,7 +63,7 @@ fun HomeScreenContent(
    Column {
       Text(
          stringResource(R.string.main_ingredient),
-         modifier = Modifier.padding(start = dimensionResource(R.dimen.small_pading))
+         modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_small))
       )
       CategoryRow(
          categories = mainIngredients,
@@ -73,8 +71,8 @@ fun HomeScreenContent(
       )
       Text(
          stringResource(R.string.origin_category), modifier = Modifier.padding(
-            start = dimensionResource(R.dimen.small_pading),
-            top = dimensionResource(R.dimen.small_pading)
+            start = dimensionResource(R.dimen.padding_small),
+            top = dimensionResource(R.dimen.padding_small)
          )
       )
       CategoryRow(
@@ -91,18 +89,14 @@ fun CategoryCard(
 ) {
    Card(
       Modifier
-         .padding(dimensionResource(R.dimen.small_pading))
+         .padding(dimensionResource(R.dimen.padding_small))
          .clickable { navigateToRecipesScreen(category.categoryId, category.name) }
    ) {
       Column {
-         AsyncImage(
-            model = category.img_url,
-            error = painterResource(R.drawable.ic_broken_image),
-            placeholder = painterResource(R.drawable.loading_img),
-            contentScale = ContentScale.Crop,
-            contentDescription = stringResource(R.string.category_photo),
+         CoilImage(
             modifier = Modifier
-               .size(height = 100.dp, width = 150.dp)
+               .size(height = 100.dp, width = 150.dp),
+            imageUrl = category.img_url
          )
          Text(
             text = category.name,

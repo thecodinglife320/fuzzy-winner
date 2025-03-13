@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,17 +26,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.Recipe
+import com.ad.monngonmoingay.ui.shared.CoilImage
 import com.ad.monngonmoingay.ui.theme.AppTheme
 
 @Composable
@@ -81,7 +80,7 @@ fun RecipeCard(
    modifier: Modifier = Modifier,
    navigateToRecipeScreen: (String, String) -> Unit
 ) {
-   var expanded by remember { mutableStateOf(false) }
+   var expanded by remember { mutableStateOf(true) }
    Card(
       modifier = modifier
          .clickable {
@@ -92,11 +91,12 @@ fun RecipeCard(
       Row(
          verticalAlignment = Alignment.CenterVertically,
       ) {
-         RecipeImage(
+         CoilImage(
             imageUrl = recipe.image_url,
             modifier = Modifier
                .width(150.dp)
                .height(100.dp)
+               .fillMaxWidth()
          )
          Column(
             Modifier
@@ -139,15 +139,12 @@ fun RecipeInfo(
       VerticalDivider(
          thickness = 5.dp,
       )
-      Column(
-         modifier = Modifier.padding(start = 8.dp)
-      ) {
-         Text(
-            "📖 $description",
-            maxLines = 2,
-            style = textStyle
-         )
-      }
+      Spacer(modifier = Modifier.width(dimensionResource(R.dimen.padding_small)))
+      Text(
+         "📖 $description",
+         maxLines = 2,
+         style = textStyle
+      )
    }
 }
 
@@ -175,20 +172,5 @@ fun RecipeCardPreview() {
 //         modifier =Modifier
 //      )
    }
-}
-
-@Composable
-fun RecipeImage(
-   imageUrl: String,
-   modifier: Modifier = Modifier
-) {
-   AsyncImage(
-      model = imageUrl,
-      error = painterResource(R.drawable.ic_broken_image),
-      placeholder = painterResource(R.drawable.loading_img),
-      contentDescription = null,
-      contentScale = ContentScale.Crop,
-      modifier = modifier
-   )
 }
 

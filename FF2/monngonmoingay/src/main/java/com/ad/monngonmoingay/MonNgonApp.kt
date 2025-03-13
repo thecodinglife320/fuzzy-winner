@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -20,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -28,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.ui.home.HomeScreen
+import com.ad.monngonmoingay.ui.home.HomeViewModel
 import com.ad.monngonmoingay.ui.login.SignInScreen
 import com.ad.monngonmoingay.ui.navigation.HomeDestination
 import com.ad.monngonmoingay.ui.navigation.RecipeDestination
@@ -85,6 +89,14 @@ fun MonNgonApp() {
             },
             shouldShowSettings = shouldShowSettings,
          )
+      },
+      floatingActionButton = {
+         if (titleAppBar == HomeDestination.title) {
+            val viewModel: HomeViewModel? = navBackStackEntry?.let { hiltViewModel(it) }
+            FloatingActionButton(onClick = { viewModel?.createRecipes() }) {
+               Icon(Icons.Outlined.Add, "Add")
+            }
+         }
       },
       modifier = Modifier.fillMaxSize(),
       snackbarHost = { SnackbarHost(hostState = snackBarHostState) }

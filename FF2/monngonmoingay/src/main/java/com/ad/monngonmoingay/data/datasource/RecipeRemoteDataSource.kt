@@ -6,6 +6,7 @@ import com.ad.monngonmoingay.data.model.Recipe
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.dataObjects
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 
@@ -39,6 +40,10 @@ class RecipeRemoteDataSource @Inject constructor(
    fun getMainIngredients(): Flow<List<MainIngredient>> {
       return firestore.collection(MAIN_INGREDIENTS_COLLECTION)
          .dataObjects()
+   }
+
+   suspend fun createRecipe(recipe: Recipe): String {
+      return firestore.collection(RECIPE_COLLECTION).add(recipe).await().id
    }
 
    companion object {

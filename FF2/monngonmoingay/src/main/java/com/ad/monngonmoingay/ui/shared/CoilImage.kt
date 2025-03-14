@@ -14,7 +14,7 @@ fun CoilImage(
 ) {
    AsyncImage(
       model = imageUrl,
-      error = painterResource(R.drawable.ic_broken_image),
+      error = painterResource(R.drawable.ic_broken_image1),
       placeholder = painterResource(R.drawable.loading_img),
       contentDescription = null,
       contentScale = ContentScale.FillBounds,

@@ -40,6 +40,7 @@ import com.ad.monngonmoingay.ui.navigation.SignInDestination
 import com.ad.monngonmoingay.ui.navigation.SignUpDestination
 import com.ad.monngonmoingay.ui.recipe.RecipeScreen
 import com.ad.monngonmoingay.ui.recipes.RecipesScreen
+import com.ad.monngonmoingay.ui.recipes.RecipesViewModel
 import com.ad.monngonmoingay.ui.setting.SettingDestination
 import com.ad.monngonmoingay.ui.setting.SettingsScreen
 import com.ad.monngonmoingay.ui.signup.SignUpScreen
@@ -167,10 +168,16 @@ fun MonNgonApp() {
                )
             )
          ) {
+            val parentEntry = remember { navController.getBackStackEntry(HomeDestination.route) }
+
+            val recipesViewModel = hiltViewModel<RecipesViewModel>(parentEntry)
+            recipesViewModel.categoryId = it.arguments?.getString(RecipesDestination.categoryIdArg)
+            recipesViewModel.fetchRecipes()
             RecipesScreen(
                navigateToRecipeScreen = { recipeId, recipeTitle ->
                   navController.navigate("${RecipeDestination.route}/$recipeId/$recipeTitle")
-               }
+               },
+               viewModel = recipesViewModel
             )
          }
 
@@ -184,7 +191,7 @@ fun MonNgonApp() {
                )
             )
          ) {
-            RecipeScreen()
+            RecipeScreen(hiltViewModel(it))
          }
 
          //setting screen

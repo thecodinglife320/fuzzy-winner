@@ -31,7 +31,6 @@ fun HomeScreen(
    viewModel: HomeViewModel = hiltViewModel(),
    navigateToRecipesScreen: (String, String) -> Unit = { _, _ -> },
 ) {
-
    val isLoadingUser by viewModel.isLoadingUser.collectAsStateWithLifecycle()
 
    if (isLoadingUser) {

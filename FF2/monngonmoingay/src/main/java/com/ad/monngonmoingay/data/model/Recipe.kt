@@ -15,6 +15,7 @@ data class Recipe(
    val total_time: Int = 0,
    val servings: Int = 0,
    val instructions: List<String> = emptyList(),
+   val images_per_steps: List<String> = emptyList(),
    val main_ingredient_id: String = "",
    val origin_id: String = ""
 )
@@ -27,8 +28,10 @@ data class RecipeDetails(
    val prepTime: String = "",
    val cookTime: String = "",
    val additionalTime: String = "",
+   val totalTime: String = "",
    val servings: String = "",
    val instructions: List<String> = emptyList(),
+   val imagesPerSteps: List<String> = emptyList(),
 )
 
 //extension function
@@ -40,8 +43,10 @@ fun Recipe.toRecipeDetails(): RecipeDetails = RecipeDetails(
    prepTime = prep_time.toHoursAndMinutes(),
    cookTime = cook_time.toHoursAndMinutes(),
    additionalTime = additional_time.toHoursAndMinutes(),
+   totalTime = total_time.toHoursAndMinutes(),
    servings = "$servings servings",
-   instructions = instructions
+   instructions = instructions,
+   imagesPerSteps = if (images_per_steps.isEmpty()) instructions.map { "" } else images_per_steps
 )
 
 //helper function

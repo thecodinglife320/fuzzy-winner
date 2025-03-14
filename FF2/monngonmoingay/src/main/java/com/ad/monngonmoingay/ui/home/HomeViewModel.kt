@@ -42,10 +42,10 @@ class HomeViewModel @Inject constructor(
 
    fun createRecipes() {
       launchCatching {
-         DataSource.recipes.forEach {
-            recipeRepository.createRecipe(it)
-         }
-         //recipeRepository.createRecipe(DataSource.recipe)
+//         DataSource.recipes.forEach {
+//            recipeRepository.createRecipe(it)
+//         }
+         recipeRepository.createRecipe(DataSource.recipe)
       }
    }
 }

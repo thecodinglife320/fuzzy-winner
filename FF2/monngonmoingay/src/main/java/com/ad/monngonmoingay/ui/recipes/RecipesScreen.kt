@@ -30,7 +30,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ad.monngonmoingay.R
 import com.ad.monngonmoingay.data.model.Recipe
@@ -39,9 +38,10 @@ import com.ad.monngonmoingay.ui.theme.AppTheme
 
 @Composable
 fun RecipesScreen(
-   viewModel: RecipesViewModel = hiltViewModel(),
+   viewModel: RecipesViewModel,
    navigateToRecipeScreen: (String, String) -> Unit
 ) {
+
    val recipesByOrigin by viewModel.recipeByOrigin.collectAsStateWithLifecycle(emptyList())
    val recipesByMainIngredient by viewModel.recipeByMainIngredient.collectAsStateWithLifecycle(
       emptyList()

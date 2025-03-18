@@ -1,5 +1,6 @@
 package com.ad.monngonmoingay.ui.login
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -53,6 +55,7 @@ fun SignInScreen(
    else SignInScreenContent(
       openSignUpScreen = openSignUpScreen,
       signIn = viewModel::signIn,
+      signInWithGoogle = viewModel::signInWithGoogle,
       showErrorSnackBar = showErrorSnackBar
    )
 }
@@ -62,12 +65,14 @@ fun SignInScreen(
 fun SignInScreenContent(
    openSignUpScreen: () -> Unit,
    signIn: (String, String, (ErrorMessage) -> Unit) -> Unit,
+   signInWithGoogle: ((ErrorMessage) -> Unit, context: Activity) -> Unit,
    showErrorSnackBar: (ErrorMessage) -> Unit
 ) {
 
    var email by remember { mutableStateOf("") }
    var password by remember { mutableStateOf("") }
    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+   val context = LocalContext.current
 
    Scaffold(
       modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
@@ -153,8 +158,13 @@ fun SignInScreenContent(
 
             Spacer(Modifier.size(16.dp))
 
-            //TODO: Uncomment line below when Google Authentication is implemented
-            //AuthWithGoogleButton(R.string.sign_in_with_google) { }
+            StandardButton(
+               label = R.string.sign_in_with_google,
+               onButtonClick = {
+                  signInWithGoogle(showErrorSnackBar, context as Activity)
+               }
+            )
+
          }
 
          //sign up
@@ -182,12 +192,13 @@ fun SignInScreenContent(
 }
 
 @Composable
-@Preview(showSystemUi = true)
+@Preview(showSystemUi = true, device = "id:4.7in WXGA")
 fun SignInScreenPreview() {
    AppTheme(darkTheme = false) {
       SignInScreenContent(
          openSignUpScreen = {},
          signIn = { _, _, _ -> },
+         signInWithGoogle = { _, _ -> },
          showErrorSnackBar = {}
       )
    }

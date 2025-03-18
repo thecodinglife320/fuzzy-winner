@@ -1,5 +1,6 @@
 package com.ad.monngonmoingay.ui.login
 
+import android.app.Activity
 import com.ad.monngonmoingay.data.model.ErrorMessage
 import com.ad.monngonmoingay.data.repository.AuthRepository
 import com.ad.monngonmoingay.ui.shared.MainViewModel
@@ -30,6 +31,18 @@ class SignInViewModel @Inject constructor(
             authRepository.signIn(email, password)
             _shouldRestartApp.value = true
          }
+      )
+   }
+
+   fun signInWithGoogle(
+      showErrorSnackBar: (ErrorMessage) -> Unit,
+      context: Activity
+   ) {
+      launchCatching(
+         block = {
+            if (authRepository.signInWithGoogle(context = context)) _shouldRestartApp.value = true
+         },
+         showErrorSnackBar = showErrorSnackBar,
       )
    }
 }

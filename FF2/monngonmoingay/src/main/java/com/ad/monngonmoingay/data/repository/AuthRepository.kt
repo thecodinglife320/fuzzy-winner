@@ -1,13 +1,16 @@
 package com.ad.monngonmoingay.data.repository
 
+import android.app.Activity
 import com.ad.monngonmoingay.data.datasource.AuthRemoteDataSource
+import com.ad.monngonmoingay.data.datasource.GoogleAuthClient
 import javax.inject.Inject
 
 /**
  * Tiêm authRemoteDataSource vào constructor
  */
 class AuthRepository @Inject constructor(
-   private val authRemoteDataSource: AuthRemoteDataSource
+   private val authRemoteDataSource: AuthRemoteDataSource,
+   private val googleAuthClient: GoogleAuthClient
 ) {
    val currentUserIdFlow = authRemoteDataSource.currentUserId
    val currentUser
@@ -18,6 +21,8 @@ class AuthRepository @Inject constructor(
    suspend fun signIn(email: String, password: String) {
       authRemoteDataSource.signIn(email, password)
    }
+
+   suspend fun signInWithGoogle(context: Activity) = googleAuthClient.signIn(context = context)
 
    fun signOut() = authRemoteDataSource.signOut()
 

@@ -59,6 +59,9 @@ dependencies {
    implementation(libs.kotlinx.serialization.json)
    implementation(libs.androidx.ui.text.google.fonts)
    implementation(libs.androidx.material.icons.extended)
+   implementation(libs.androidx.credentials)
+   implementation(libs.androidx.credentials.play.services.auth)
+   implementation(libs.googleid)
 
    testImplementation(libs.junit.junit)
    testImplementation(libs.mockk)

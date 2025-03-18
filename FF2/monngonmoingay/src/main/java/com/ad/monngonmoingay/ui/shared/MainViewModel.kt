@@ -22,6 +22,7 @@ open class MainViewModel : ViewModel() {
             val error = if (throwable.message.isNullOrBlank())
                ErrorMessage.IdError(R.string.generic_error) else
                ErrorMessage.StringError(throwable.message!!)
+
             showErrorSnackBar(error)
          },
          block = block

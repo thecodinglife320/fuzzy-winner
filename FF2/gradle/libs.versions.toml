@@ -4,6 +4,7 @@ coilComposeVersion = "2.7.0"
 converterGson = "2.9.0"
 core = "12.1.1"
 customUi = "12.1.1"
+facebookAndroidSdk = "latest.release"
 firebaseBom = "33.10.0"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
@@ -68,6 +69,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 core = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:core", version.ref = "core" }
 custom-ui = { module = "com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui", version.ref = "customUi" }
+facebook-android-sdk = { module = "com.facebook.android:facebook-android-sdk", version.ref = "facebookAndroidSdk" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }

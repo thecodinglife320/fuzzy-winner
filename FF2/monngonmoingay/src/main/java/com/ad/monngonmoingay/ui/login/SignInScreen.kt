@@ -2,7 +2,9 @@ package com.ad.monngonmoingay.ui.login
 
 import android.app.Activity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -97,7 +99,6 @@ fun SignInScreenContent(
                },
             horizontalAlignment = Alignment.CenterHorizontally
          ) {
-            Spacer(Modifier.size(24.dp))
 
             Image(
                modifier = Modifier.size(100.dp),
@@ -105,7 +106,6 @@ fun SignInScreenContent(
                contentDescription = "App logo"
             )
 
-            Spacer(Modifier.size(24.dp))
          }
 
          //form
@@ -143,7 +143,7 @@ fun SignInScreenContent(
                label = { Text(stringResource(R.string.password)) },
                visualTransformation = PasswordVisualTransformation(),
                keyboardOptions = KeyboardOptions.Default.copy(
-                  imeAction = ImeAction.Done
+                  imeAction = ImeAction.Go
                )
             )
 
@@ -158,12 +158,32 @@ fun SignInScreenContent(
 
             Spacer(Modifier.size(16.dp))
 
-            StandardButton(
-               label = R.string.sign_in_with_google,
-               onButtonClick = {
-                  signInWithGoogle(showErrorSnackBar, context as Activity)
-               }
-            )
+            Text("or sign in with")
+
+            Spacer(Modifier.size(8.dp))
+
+            Row {
+               Image(
+                  painter = painterResource(id = R.drawable.google_icon),
+                  contentDescription = "google icon",
+                  modifier = Modifier
+                     .size(40.dp)
+                     .clickable {
+                        signInWithGoogle(showErrorSnackBar, context as Activity)
+                     }
+               )
+               Spacer(Modifier.size(16.dp))
+               Image(
+                  painter = painterResource(id = R.drawable.facebook_icon),
+                  contentDescription = "facebook icon",
+                  modifier = Modifier
+                     .size(40.dp)
+                     .clickable {
+
+                     }
+               )
+
+            }
 
          }
 

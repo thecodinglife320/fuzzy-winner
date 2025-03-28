@@ -1,109 +1,54 @@
 package com.ad.restaurant.ui.restaurants
 
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ad.restaurant.RestaurantsApplication
-import com.ad.restaurant.data.local.RestaurantsDb
-import com.ad.restaurant.data.model.PartialRestaurant
-import com.ad.restaurant.data.model.Restaurant
-import com.ad.restaurant.data.network.RestaurantsApi
+import com.ad.restaurant.data.RestaurantsRepo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.net.ConnectException
-import java.net.UnknownHostException
 
 class RestaurantsViewModel() : ViewModel(
 ) {
 
-   var uiState by mutableStateOf(
-      emptyList<Restaurant>()
+   private val _uiState = mutableStateOf(
+      RestaurantsScreenState(
+         restaurants = listOf(),
+         isLoading = true
+      )
    )
 
-   private var restApi: RestaurantsApi
-   private var restaurantsDao = RestaurantsDb
-      .getDaoInstance(
-         RestaurantsApplication.getAppContext()
-      )
+   val uiState: State<RestaurantsScreenState> get() = _uiState
+
+   private val restaurantsRepo = RestaurantsRepo()
 
    private val coroutineExceptionHandler =
       CoroutineExceptionHandler { _, ex ->
          ex.printStackTrace()
+         _uiState.value = _uiState.value.copy(
+            isLoading = false,
+            error = ex.message
+         )
       }
 
    init {
-      val retrofit = Retrofit.Builder()
-         .addConverterFactory(GsonConverterFactory.create())
-         .baseUrl("https://ff11-a857c-default-rtdb.asia-southeast1.firebasedatabase.app")
-         .build()
-
-      restApi = retrofit.create(RestaurantsApi::class.java)
-
       viewModelScope.launch(coroutineExceptionHandler) {
-         uiState = getSSOTRestaurants()
+         _uiState.value = _uiState.value.copy(
+            restaurants = restaurantsRepo.getSSOTRestaurants(),
+            isLoading = false
+         )
       }
    }
-
-   private suspend fun getSSOTRestaurants() =
-      withContext(Dispatchers.IO) {
-         try {
-
-            //refresh cache
-            val remoteRestaurants = restApi
-               .getRestaurants()
-
-            //du lieu yeu thich
-            val favoriteRestaurants = restaurantsDao.getAllFavorite()
-
-            //cache
-            restaurantsDao.addAll(remoteRestaurants)
-
-            //update du lieu yeu thich
-            restaurantsDao.updateAll(
-               favoriteRestaurants.map {
-                  PartialRestaurant(it, true)
-               }
-            )
-
-         } catch (e: Exception) {
-            when (e) {
-               is UnknownHostException,
-               is ConnectException,
-               is HttpException,
-                  -> {
-                  if (restaurantsDao.getAll().isEmpty())
-                     throw Exception("Something went wrong.")
-               }
-
-               else -> throw e
-            }
-         }
-
-         restaurantsDao.getAll()
-      }
 
    fun toggleFavoriteRestaurant(
       id: Int,
       oldValue: Boolean,
    ) {
-      viewModelScope.launch(Dispatchers.IO) {
-         restaurantsDao.update(
-            PartialRestaurant(
-               id = id,
-               isFavorite = !oldValue
-            )
+      viewModelScope.launch(Dispatchers.Main) {
+         _uiState.value = uiState.value.copy(
+            restaurants = restaurantsRepo.toggleFavoriteRestaurant(id, oldValue)
          )
-         val restaurants = restaurantsDao.getAll()
-         withContext(Dispatchers.Main) {
-            uiState = restaurants
-         }
       }
    }
 }

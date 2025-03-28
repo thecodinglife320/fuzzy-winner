@@ -1,4 +1,4 @@
-package com.ad.restaurant.restaurants
+package com.ad.restaurant.ui.restaurants
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,15 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ad.restaurant.model.Restaurant
-import com.ad.restaurant.shared.RestaurantDetails
-import com.ad.restaurant.shared.RestaurantIcon
+import com.ad.restaurant.data.model.Restaurant
+import com.ad.restaurant.ui.shared.RestaurantDetails
+import com.ad.restaurant.ui.shared.RestaurantIcon
 
 @Composable
 fun RestaurantsScreen(onItemClick: (id: Int) -> Unit) {
 
    val vm: RestaurantsViewModel = viewModel()
-
    LazyColumn(
       contentPadding = PaddingValues(8.dp),
    ) {
@@ -35,7 +34,7 @@ fun RestaurantsScreen(onItemClick: (id: Int) -> Unit) {
             item = it,
             modifier = Modifier.padding(8.dp),
             onFavouriteClick = {
-               vm.toggleFavourite(it)
+               vm.toggleFavoriteRestaurant(it.id, it.isFavourite)
             },
             onItemClick = onItemClick
          )

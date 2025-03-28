@@ -1,4 +1,4 @@
-package com.ad.restaurant.shared
+package com.ad.restaurant.ui.shared
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme

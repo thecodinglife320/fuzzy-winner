@@ -1,4 +1,4 @@
-package com.ad.restaurant.restaurant
+package com.ad.restaurant.ui.restaurant
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,20 +6,29 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ad.restaurant.model.Restaurant
-import com.ad.restaurant.network.RestaurantsApi
+import com.ad.restaurant.RestaurantsApplication
+import com.ad.restaurant.data.local.RestaurantsDb
+import com.ad.restaurant.data.model.Restaurant
+import com.ad.restaurant.data.network.RestaurantsApi
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 class RestaurantViewModel(
    stateHandle: SavedStateHandle,
 ) : ViewModel() {
 
    private var restApi: RestaurantsApi
+   private var restaurantsDao = RestaurantsDb
+      .getDaoInstance(
+         RestaurantsApplication.getAppContext()
+      )
 
    var uiState: Restaurant? by mutableStateOf(
       null
@@ -40,19 +49,29 @@ class RestaurantViewModel(
 
       val id = stateHandle.get<Int>("restaurant_id") ?: 0
 
-      getRestaurant(id)
-   }
-
-   private fun getRestaurant(id: Int) {
       viewModelScope.launch(coroutineExceptionHandler) {
-         val restaurant = getRemoteRestaurant(id)
-         uiState = restaurant
+         uiState = getRestaurant(id)
       }
    }
 
-   private suspend fun getRemoteRestaurant(id: Int) =
+   private suspend fun getRestaurant(id: Int) =
       withContext(Dispatchers.IO) {
-         val responseMap = restApi.getRestaurant(id)
-         responseMap.values.first()
+         try {
+            val responseMap = restApi.getRestaurant(id)
+            return@withContext responseMap.values.first()
+         } catch (e: Exception) {
+            when (e) {
+               is UnknownHostException,
+               is ConnectException,
+               is HttpException,
+                  -> {
+                  return@withContext restaurantsDao.getById(id)
+                     ?: throw Exception("Something went wrong.")
+               }
+
+               else -> throw e
+            }
+         }
+         return@withContext null
       }
 }

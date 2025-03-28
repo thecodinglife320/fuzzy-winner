@@ -8,8 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.ad.restaurant.restaurant.RestaurantScreen
-import com.ad.restaurant.restaurants.RestaurantsScreen
+import androidx.navigation.navDeepLink
+import com.ad.restaurant.ui.restaurant.RestaurantScreen
+import com.ad.restaurant.ui.restaurants.RestaurantsScreen
 
 @Composable
 fun RestaurantsApp() {
@@ -29,6 +30,11 @@ fun RestaurantsApp() {
             arguments = listOf(
                navArgument("restaurant_id") {
                   type = NavType.IntType
+               }
+            ),
+            deepLinks = listOf(
+               navDeepLink {
+                  uriPattern = "www.restaurantsapp.details.com/{restaurant_id}"
                }
             )
          ) {

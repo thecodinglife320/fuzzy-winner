@@ -1,6 +1,6 @@
-package com.ad.restaurant.network
+package com.ad.restaurant.data.network
 
-import com.ad.restaurant.model.Restaurant
+import com.ad.restaurant.data.model.Restaurant
 import retrofit2.http.GET
 import retrofit2.http.Query
 

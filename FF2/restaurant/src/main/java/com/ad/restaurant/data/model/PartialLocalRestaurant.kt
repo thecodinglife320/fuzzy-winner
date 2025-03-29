@@ -2,7 +2,7 @@ package com.ad.restaurant.data.model
 
 import androidx.room.ColumnInfo
 
-data class PartialRestaurant(
+data class PartialLocalRestaurant(
 
    @ColumnInfo(name = "r_id")
    val id: Int,

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ad.restaurant.data.RestaurantsRepo
+import com.ad.restaurant.domain.GetRestaurantUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
@@ -25,7 +25,7 @@ class RestaurantViewModel(
    val uiState: State<RestaurantScreenState>
       get() = _uiState
 
-   private val restaurantsRepo = RestaurantsRepo()
+   private val getRestaurantUseCase = GetRestaurantUseCase()
 
    private val coroutineExceptionHandler =
       CoroutineExceptionHandler { _, ex ->
@@ -41,7 +41,7 @@ class RestaurantViewModel(
 
       viewModelScope.launch(coroutineExceptionHandler) {
          _uiState.value = _uiState.value.copy(
-            restaurant = restaurantsRepo.getRestaurant(id),
+            restaurant = getRestaurantUseCase(id),
             isLoading = false,
          )
       }

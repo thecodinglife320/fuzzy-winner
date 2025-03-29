@@ -1,4 +1,4 @@
-package com.ad.restaurant.ui.restaurant
+package com.ad.restaurant.ui.details
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

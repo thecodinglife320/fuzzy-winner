@@ -1,10 +1,11 @@
-package com.ad.restaurant.ui.restaurants
+package com.ad.restaurant.ui.list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ad.restaurant.data.RestaurantsRepo
+import com.ad.restaurant.domain.GetRestaurantsUseCase
+import com.ad.restaurant.domain.ToggleRestaurantUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +22,9 @@ class RestaurantsViewModel() : ViewModel(
 
    val uiState: State<RestaurantsScreenState> get() = _uiState
 
-   private val restaurantsRepo = RestaurantsRepo()
+   private val toggleRestaurantUseCase = ToggleRestaurantUseCase()
+   private val getRestaurantsUseCase = GetRestaurantsUseCase()
+
 
    private val coroutineExceptionHandler =
       CoroutineExceptionHandler { _, ex ->
@@ -35,7 +38,7 @@ class RestaurantsViewModel() : ViewModel(
    init {
       viewModelScope.launch(coroutineExceptionHandler) {
          _uiState.value = _uiState.value.copy(
-            restaurants = restaurantsRepo.getSSOTRestaurants(),
+            restaurants = getRestaurantsUseCase(),
             isLoading = false
          )
       }
@@ -47,7 +50,10 @@ class RestaurantsViewModel() : ViewModel(
    ) {
       viewModelScope.launch(Dispatchers.Main) {
          _uiState.value = uiState.value.copy(
-            restaurants = restaurantsRepo.toggleFavoriteRestaurant(id, oldValue)
+            restaurants = toggleRestaurantUseCase(
+               id = id,
+               oldValue = oldValue
+            )
          )
       }
    }

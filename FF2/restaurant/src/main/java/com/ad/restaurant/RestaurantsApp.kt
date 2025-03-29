@@ -9,8 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.ad.restaurant.ui.restaurant.RestaurantScreen
-import com.ad.restaurant.ui.restaurants.RestaurantsScreen
+import com.ad.restaurant.ui.details.RestaurantScreen
+import com.ad.restaurant.ui.list.RestaurantsScreen
 
 @Composable
 fun RestaurantsApp() {

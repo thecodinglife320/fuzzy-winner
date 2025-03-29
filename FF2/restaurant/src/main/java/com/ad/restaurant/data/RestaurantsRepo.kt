@@ -25,18 +25,17 @@ class RestaurantsRepo {
          RestaurantsApplication.getAppContext()
       )
 
-   suspend fun getSSOTRestaurants() =
+   suspend fun cacheRestaurants() =
       withContext(Dispatchers.IO) {
          try {
 
             //refresh cache
-            val remoteRestaurants = restApi
-               .getRestaurants()
+            val remoteRestaurants = restApi.getRestaurants()
 
             //du lieu yeu thich
             val favoriteRestaurants = restaurantsDao.getAllFavorite()
 
-            //cache
+            //cache data
             restaurantsDao.cacheRestaurants(remoteRestaurants)
 
             //update du lieu yeu thich
@@ -58,18 +57,20 @@ class RestaurantsRepo {
                else -> throw e
             }
          }
+      }
 
+   suspend fun getLocalRestaurants() =
+      withContext(Dispatchers.IO) {
          restaurantsDao.getAll()
       }
 
    suspend fun toggleFavoriteRestaurant(
       id: Int,
-      oldValue: Boolean,
+      value: Boolean,
    ) = withContext(Dispatchers.IO) {
       restaurantsDao.update(
-         PartialRestaurant(id = id, isFavorite = !oldValue)
+         PartialRestaurant(id = id, isFavorite = value)
       )
-      restaurantsDao.getAll()
    }
 
    suspend fun getRestaurant(id: Int) =
@@ -93,3 +94,4 @@ class RestaurantsRepo {
          return@withContext null
       }
 }
+

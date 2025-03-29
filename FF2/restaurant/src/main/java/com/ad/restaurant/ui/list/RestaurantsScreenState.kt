@@ -1,4 +1,4 @@
-package com.ad.restaurant.ui.restaurants
+package com.ad.restaurant.ui.list
 
 import com.ad.restaurant.data.model.Restaurant
 

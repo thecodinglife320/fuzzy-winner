@@ -1,6 +1,5 @@
-package com.ad.restaurant.data.remote
+package com.ad.restaurant.restaurants.data.remote
 
-import com.ad.restaurant.data.model.RemoteRestaurant
 import retrofit2.http.GET
 import retrofit2.http.Query
 

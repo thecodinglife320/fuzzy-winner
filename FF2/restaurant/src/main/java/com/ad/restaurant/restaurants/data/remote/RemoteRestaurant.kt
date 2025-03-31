@@ -1,4 +1,4 @@
-package com.ad.restaurant.data.model
+package com.ad.restaurant.restaurants.data.remote
 
 import com.google.gson.annotations.SerializedName
 

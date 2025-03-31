@@ -1,4 +1,4 @@
-package com.ad.restaurant.ui.list
+package com.ad.restaurant.restaurants.presentation.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -18,17 +18,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ad.restaurant.data.model.Restaurant
+import com.ad.restaurant.restaurants.domain.Restaurant
+import com.ad.restaurant.restaurants.domain.RestaurantsSample
+import com.ad.restaurant.restaurants.domain.RestaurantsSample.restaurant
 import com.ad.restaurant.ui.shared.RestaurantDetails
 import com.ad.restaurant.ui.shared.RestaurantIcon
 
+@Preview
 @Composable
-fun RestaurantsScreen(onItemClick: (id: Int) -> Unit) {
-
-   val vm: RestaurantsViewModel = viewModel()
-   val uiState = vm.uiState.value
+fun RestaurantsScreen(
+   uiState: RestaurantsScreenState = RestaurantsScreenState(
+      restaurants = RestaurantsSample.restaurants,
+      isLoading = false,
+      error = null
+   ),
+   onItemClick: (id: Int) -> Unit = {},
+   onFavoriteClick: (id: Int, oldValue: Boolean) -> Unit = { _, _ -> },
+) {
 
    Box(
       contentAlignment = Alignment.Center,
@@ -52,7 +60,7 @@ fun RestaurantsScreen(onItemClick: (id: Int) -> Unit) {
                item = it,
                modifier = Modifier.padding(8.dp),
                onFavouriteClick = {
-                  vm.toggleFavoriteRestaurant(it.id, it.isFavourite)
+                  onFavoriteClick(it.id, it.isFavourite)
                },
                onItemClick = onItemClick
             )
@@ -61,12 +69,13 @@ fun RestaurantsScreen(onItemClick: (id: Int) -> Unit) {
    }
 }
 
+@Preview
 @Composable
 fun RestaurantItem(
    modifier: Modifier = Modifier,
-   item: Restaurant = Restaurant(0, "", "", false),
+   item: Restaurant = restaurant,
    onFavouriteClick: (restaurant: Restaurant) -> Unit = {},
-   onItemClick: (id: Int) -> Unit,
+   onItemClick: (id: Int) -> Unit = { _ -> },
 ) {
 
    val icon =

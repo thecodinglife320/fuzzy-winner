@@ -1,17 +1,22 @@
-package com.ad.restaurant.ui.list
+package com.ad.restaurant.restaurants.presentation.list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ad.restaurant.domain.GetRestaurantsUseCase
-import com.ad.restaurant.domain.ToggleRestaurantUseCase
+import com.ad.restaurant.restaurants.domain.GetRestaurantsUseCase
+import com.ad.restaurant.restaurants.domain.ToggleRestaurantUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RestaurantsViewModel() : ViewModel(
-) {
+@HiltViewModel
+class RestaurantsViewModel @Inject constructor(
+   private val toggleRestaurantUseCase: ToggleRestaurantUseCase,
+   private val getRestaurantsUseCase: GetRestaurantsUseCase,
+) : ViewModel() {
 
    private val _uiState = mutableStateOf(
       RestaurantsScreenState(
@@ -21,10 +26,6 @@ class RestaurantsViewModel() : ViewModel(
    )
 
    val uiState: State<RestaurantsScreenState> get() = _uiState
-
-   private val toggleRestaurantUseCase = ToggleRestaurantUseCase()
-   private val getRestaurantsUseCase = GetRestaurantsUseCase()
-
 
    private val coroutineExceptionHandler =
       CoroutineExceptionHandler { _, ex ->

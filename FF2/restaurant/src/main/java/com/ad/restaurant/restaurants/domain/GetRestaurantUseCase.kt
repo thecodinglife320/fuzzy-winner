@@ -1,6 +1,7 @@
-package com.ad.restaurant.domain
+package com.ad.restaurant.restaurants.domain
 
-import com.ad.restaurant.data.RestaurantsRepo
+import com.ad.restaurant.restaurants.data.RestaurantsRepo
+import javax.inject.Inject
 
 /**
  * Use case for retrieving a specific restaurant by its ID.
@@ -9,9 +10,9 @@ import com.ad.restaurant.data.RestaurantsRepo
  * based on the provided restaurant ID. It interacts with the [RestaurantsRepo] to
  * retrieve the restaurant data.
  */
-class GetRestaurantUseCase {
-
-   private val restaurantsRepo = RestaurantsRepo()
+class GetRestaurantUseCase @Inject constructor(
+   private val restaurantsRepo: RestaurantsRepo,
+) {
 
    suspend operator fun invoke(id: Int) =
       let {

@@ -1,6 +1,7 @@
-package com.ad.restaurant.domain
+package com.ad.restaurant.restaurants.domain
 
-import com.ad.restaurant.data.RestaurantsRepo
+import com.ad.restaurant.restaurants.data.RestaurantsRepo
+import javax.inject.Inject
 
 /**
  * Use case responsible for toggling the favorite status of a restaurant.
@@ -9,11 +10,10 @@ import com.ad.restaurant.data.RestaurantsRepo
  * It interacts with the [RestaurantsRepo] to update the restaurant's favorite status and
  * then retrieves the updated list of sorted restaurants using [GetSortedRestaurantsUseCase].
  */
-class ToggleRestaurantUseCase {
-   private val repository = RestaurantsRepo()
-
-   private val getSortedRestaurantsUseCase = GetSortedRestaurantsUseCase()
-
+class ToggleRestaurantUseCase @Inject constructor(
+   private val repository: RestaurantsRepo,
+   private val getSortedRestaurantsUseCase: GetSortedRestaurantsUseCase,
+) {
    suspend operator fun invoke(
       id: Int,
       oldValue: Boolean,

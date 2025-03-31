@@ -1,15 +1,17 @@
-package com.ad.restaurant.ui.details
+package com.ad.restaurant.restaurants.presentation.details
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ad.restaurant.domain.GetRestaurantUseCase
+import com.ad.restaurant.restaurants.domain.GetRestaurantUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RestaurantViewModel(
+class RestaurantViewModel @Inject constructor(
+   private val getRestaurantUseCase: GetRestaurantUseCase,
    stateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -25,7 +27,6 @@ class RestaurantViewModel(
    val uiState: State<RestaurantScreenState>
       get() = _uiState
 
-   private val getRestaurantUseCase = GetRestaurantUseCase()
 
    private val coroutineExceptionHandler =
       CoroutineExceptionHandler { _, ex ->

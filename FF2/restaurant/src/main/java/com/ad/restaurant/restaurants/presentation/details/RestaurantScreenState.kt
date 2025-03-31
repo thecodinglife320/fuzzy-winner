@@ -1,6 +1,6 @@
-package com.ad.restaurant.ui.details
+package com.ad.restaurant.restaurants.presentation.details
 
-import com.ad.restaurant.data.model.Restaurant
+import com.ad.restaurant.restaurants.domain.Restaurant
 
 data class RestaurantScreenState(
    val restaurant: Restaurant? = null,

@@ -1,32 +1,23 @@
-package com.ad.restaurant.data
+package com.ad.restaurant.restaurants.data
 
-import com.ad.restaurant.RestaurantsApplication
-import com.ad.restaurant.data.local.RestaurantsDb
-import com.ad.restaurant.data.model.LocalRestaurant
-import com.ad.restaurant.data.model.PartialLocalRestaurant
-import com.ad.restaurant.data.model.Restaurant
-import com.ad.restaurant.data.remote.RestaurantsApi
+import com.ad.restaurant.restaurants.data.local.LocalRestaurant
+import com.ad.restaurant.restaurants.data.local.PartialLocalRestaurant
+import com.ad.restaurant.restaurants.data.local.RestaurantsDao
+import com.ad.restaurant.restaurants.data.remote.RestaurantsApi
+import com.ad.restaurant.restaurants.domain.Restaurant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.net.ConnectException
 import java.net.UnknownHostException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RestaurantsRepo {
-
-   private var restApi = Retrofit.Builder()
-      .addConverterFactory(GsonConverterFactory.create())
-      .baseUrl("https://ff11-a857c-default-rtdb.asia-southeast1.firebasedatabase.app")
-      .build()
-      .create(RestaurantsApi::class.java)
-
-   private var restaurantsDao = RestaurantsDb
-      .getDaoInstance(
-         RestaurantsApplication.getAppContext()
-      )
-
+@Singleton
+class RestaurantsRepo @Inject constructor(
+   private var restApi: RestaurantsApi,
+   private var restaurantsDao: RestaurantsDao,
+) {
    /**
     * Caches restaurant data retrieved from a remote API into a local database.
     *
@@ -75,7 +66,7 @@ class RestaurantsRepo {
                is HttpException,
                   -> {
                   if (restaurantsDao.getAll().isEmpty())
-                     throw Exception("Something went wrong.")
+                     throw Exception("Kết nối Internet khi dùng app lần đầu")
                }
 
                else -> throw e

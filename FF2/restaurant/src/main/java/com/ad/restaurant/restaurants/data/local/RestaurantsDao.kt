@@ -1,12 +1,10 @@
-package com.ad.restaurant.data.local
+package com.ad.restaurant.restaurants.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.ad.restaurant.data.model.LocalRestaurant
-import com.ad.restaurant.data.model.PartialLocalRestaurant
 
 @Dao
 interface RestaurantsDao {

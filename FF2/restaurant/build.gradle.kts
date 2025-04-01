@@ -52,7 +52,10 @@ dependencies {
    implementation(libs.androidx.ui.graphics)
    implementation(libs.androidx.compose.ui.ui.tooling.preview)
    implementation(libs.androidx.compose.material3.material3)
+
    testImplementation(libs.junit.junit)
+   testImplementation(libs.kotlinx.coroutines.test)
+
    androidTestImplementation(libs.androidx.junit)
    androidTestImplementation(libs.androidx.espresso.core)
    androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -73,7 +76,6 @@ dependencies {
    implementation(libs.androidx.room.ktx)
    implementation(libs.androidx.room.runtime)
    ksp(libs.androidx.room.compiler)
-   testImplementation(kotlin("test"))
 
    //hilt
    implementation(libs.hilt.android)

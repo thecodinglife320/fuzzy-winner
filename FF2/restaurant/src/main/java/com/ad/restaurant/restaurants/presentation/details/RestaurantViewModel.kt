@@ -6,10 +6,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ad.restaurant.restaurants.domain.GetRestaurantUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class RestaurantViewModel @Inject constructor(
    private val getRestaurantUseCase: GetRestaurantUseCase,
    stateHandle: SavedStateHandle,

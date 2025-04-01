@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ad.restaurant.restaurants.domain.RestaurantsSample
+import com.ad.restaurant.restaurants.domain.DummyRestaurants
 import com.ad.restaurant.ui.shared.RestaurantDetails
 import com.ad.restaurant.ui.shared.RestaurantIcon
 
@@ -21,7 +21,7 @@ import com.ad.restaurant.ui.shared.RestaurantIcon
 @Composable
 fun RestaurantScreen(
    uiState: RestaurantScreenState = RestaurantScreenState(
-      restaurant = RestaurantsSample.restaurant,
+      restaurant = DummyRestaurants.restaurant,
       isLoading = false,
       error = null
    ),

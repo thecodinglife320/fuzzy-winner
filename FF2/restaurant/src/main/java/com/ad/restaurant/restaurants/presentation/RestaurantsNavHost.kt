@@ -1,4 +1,4 @@
-package com.ad.restaurant.restaurants
+package com.ad.restaurant.restaurants.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -56,3 +56,4 @@ fun RestaurantsNavHost(
       }
    }
 }
+

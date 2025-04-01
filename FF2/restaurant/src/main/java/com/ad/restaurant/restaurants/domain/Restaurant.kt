@@ -1,5 +1,7 @@
 package com.ad.restaurant.restaurants.domain
 
+import com.ad.restaurant.restaurants.data.remote.RemoteRestaurant
+
 data class Restaurant(
 
    val id: Int,
@@ -8,7 +10,7 @@ data class Restaurant(
    val isFavourite: Boolean = false,
 )
 
-object RestaurantsSample {
+object DummyRestaurants {
    val restaurant = Restaurant(
       id = 1,
       title = "anh duong",
@@ -25,4 +27,12 @@ object RestaurantsSample {
       ),
       restaurant
    )
+
+   fun getRemoteRestaurants() = restaurants.map {
+      RemoteRestaurant(
+         id = it.id,
+         title = it.title,
+         description = it.description
+      )
+   }
 }

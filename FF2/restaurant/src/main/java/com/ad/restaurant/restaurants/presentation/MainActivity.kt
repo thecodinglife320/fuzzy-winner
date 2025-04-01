@@ -1,4 +1,4 @@
-package com.ad.restaurant.restaurants
+package com.ad.restaurant.restaurants.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle

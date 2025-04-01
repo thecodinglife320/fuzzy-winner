@@ -4,11 +4,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ad.restaurant.restaurants.data.di.MainDispatcher
 import com.ad.restaurant.restaurants.domain.GetRestaurantsUseCase
 import com.ad.restaurant.restaurants.domain.ToggleRestaurantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class RestaurantsViewModel @Inject constructor(
    private val toggleRestaurantUseCase: ToggleRestaurantUseCase,
    private val getRestaurantsUseCase: GetRestaurantsUseCase,
+   @MainDispatcher private val dispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 
    private val _uiState = mutableStateOf(
@@ -37,7 +39,7 @@ class RestaurantsViewModel @Inject constructor(
       }
 
    init {
-      viewModelScope.launch(coroutineExceptionHandler) {
+      viewModelScope.launch(coroutineExceptionHandler + dispatcher) {
          _uiState.value = _uiState.value.copy(
             restaurants = getRestaurantsUseCase(),
             isLoading = false
@@ -49,7 +51,7 @@ class RestaurantsViewModel @Inject constructor(
       id: Int,
       oldValue: Boolean,
    ) {
-      viewModelScope.launch(Dispatchers.Main) {
+      viewModelScope.launch(dispatcher) {
          _uiState.value = uiState.value.copy(
             restaurants = toggleRestaurantUseCase(
                id = id,

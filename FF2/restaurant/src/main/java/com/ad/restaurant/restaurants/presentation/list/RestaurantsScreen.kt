@@ -18,11 +18,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ad.restaurant.restaurants.domain.DummyRestaurants
+import com.ad.restaurant.restaurants.domain.DummyRestaurants.restaurant
 import com.ad.restaurant.restaurants.domain.Restaurant
-import com.ad.restaurant.restaurants.domain.RestaurantsSample
-import com.ad.restaurant.restaurants.domain.RestaurantsSample.restaurant
+import com.ad.restaurant.restaurants.presentation.Description
 import com.ad.restaurant.ui.shared.RestaurantDetails
 import com.ad.restaurant.ui.shared.RestaurantIcon
 
@@ -30,7 +33,7 @@ import com.ad.restaurant.ui.shared.RestaurantIcon
 @Composable
 fun RestaurantsScreen(
    uiState: RestaurantsScreenState = RestaurantsScreenState(
-      restaurants = RestaurantsSample.restaurants,
+      restaurants = DummyRestaurants.restaurants,
       isLoading = false,
       error = null
    ),
@@ -44,7 +47,11 @@ fun RestaurantsScreen(
    ) {
 
       //loading
-      if (uiState.isLoading) CircularProgressIndicator()
+      if (uiState.isLoading) CircularProgressIndicator(
+         Modifier.semantics {
+            this.contentDescription = Description.RESTAURANTS_LOADING
+         }
+      )
 
       //loi
       uiState.error?.let { Text(it) }

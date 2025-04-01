@@ -1,11 +1,12 @@
 package com.ad.restaurant.restaurants.data
 
+import com.ad.restaurant.restaurants.data.di.IoDispatcher
 import com.ad.restaurant.restaurants.data.local.LocalRestaurant
 import com.ad.restaurant.restaurants.data.local.PartialLocalRestaurant
 import com.ad.restaurant.restaurants.data.local.RestaurantsDao
 import com.ad.restaurant.restaurants.data.remote.RestaurantsApi
 import com.ad.restaurant.restaurants.domain.Restaurant
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.net.ConnectException
@@ -17,6 +18,7 @@ import javax.inject.Singleton
 class RestaurantsRepo @Inject constructor(
    private var restApi: RestaurantsApi,
    private var restaurantsDao: RestaurantsDao,
+   @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) {
    /**
     * Caches restaurant data retrieved from a remote API into a local database.
@@ -39,7 +41,7 @@ class RestaurantsRepo @Inject constructor(
     * @throws Exception Re-throws any other encountered exception that is not a handled network error.
     */
    suspend fun cacheRestaurants() =
-      withContext(Dispatchers.IO) {
+      withContext(dispatcher) {
          try {
 
             //refresh cache
@@ -78,7 +80,7 @@ class RestaurantsRepo @Inject constructor(
     * Get local restaurants
     */
    suspend fun getLocalRestaurants() =
-      withContext(Dispatchers.IO) {
+      withContext(dispatcher) {
          restaurantsDao.getAll().map {
             Restaurant(it.id, it.title, it.description, it.isFavourite)
          }
@@ -99,7 +101,7 @@ class RestaurantsRepo @Inject constructor(
    suspend fun toggleFavoriteRestaurant(
       id: Int,
       value: Boolean,
-   ) = withContext(Dispatchers.IO) {
+   ) = withContext(dispatcher) {
       restaurantsDao.update(
          PartialLocalRestaurant(id = id, isFavorite = value)
       )
@@ -120,7 +122,7 @@ class RestaurantsRepo @Inject constructor(
     *         otherwise null.
     */
    suspend fun getLocalRestaurant(id: Int) =
-      withContext(Dispatchers.IO) {
+      withContext(dispatcher) {
          restaurantsDao.getById(id)?.let {
             Restaurant(
                it.id, it.title, it.description, it.isFavourite
